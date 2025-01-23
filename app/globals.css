@@ -2,20 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: white;
+  background: #192626;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.loader {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  background: radial-gradient(circle closest-side,#000 94%,#0000) right/calc(200% - 1em) 100%;
+  animation: l24 1s infinite alternate linear;
+}
+.loader::before {
+  content: "";
+  line-height: 1em;
+  color: #0000;
+  background: inherit;
+  background-image: radial-gradient(circle closest-side,#fff 94%,#000);
+  -webkit-background-clip:text;
+          background-clip:text;
+}
+
+@keyframes l24{
+  100%{background-position: left}
+}
+
+.input-group {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.input {
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  padding-left: 15px; /* Make space for the label */
+}
+
+.user-label {
+  position: absolute;
+  left: 15px;
+  color: #080808;
+  pointer-events: none;
+  transform: translateY(0.7rem); /* Adjust label's vertical position */
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), 
+              color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus,
+.input:not(:placeholder-shown) {
+  outline: none;
+  border: 1.5px solid #1a73e8;
+}
+
+.input:focus ~ .user-label,
+.input:not(:placeholder-shown) ~ .user-label {
+  transform: translateY(-50%) scale(0.8);
+  background-color: #ffffff;
+  padding: 0 .4em;
+  color: #2196f3;
+}
+
+
+.select-group {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.select {
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  padding-left: 15px; /* Adjust space for label */
+  background-color: white;
+  width: 100%;
+  border-radius: 8px;
+  border: 1.5px solid #dcdcdc;
+  appearance: none; /* Removes default styling */
+}
+
+.select:focus,
+.select:not([value=""]) {  /* Trigger when select has a value */
+  outline: none;
+  border: 1.5px solid #1a73e8;
+}
+
+
