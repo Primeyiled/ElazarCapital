@@ -38,7 +38,9 @@ const Hero = () => {
         </div>
 
         <div className="mt-6 xl:mt-0 w-full flex lg:justify-end justify-center">
-          <img
+          <Image
+            width={500}
+            height={500}
             src="/hand.png"
             alt="hero-image"
             className="w-full xl:w-[600px]"

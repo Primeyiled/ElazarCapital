@@ -13,6 +13,7 @@ import {
 } from "@/lib/features/messageSlice";
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
 import Loader from "@/components/Loader";
+import Image from "next/image";
 
 const Register = () => {
   const [userInfo, setUserInfo] = useState({
@@ -55,6 +56,9 @@ const Register = () => {
       userInfo.password === ""
     ) {
       dispatch(setError("All fields are required"));
+      dispatch(setLoading(false));
+    } else if (userInfo.reTypePassword !== userInfo.password) {
+      dispatch(setError("Passwords do not match"));
       dispatch(setLoading(false));
     } else {
       const userData = {
@@ -111,7 +115,9 @@ const Register = () => {
       <div className="grid lg:grid-cols-2 w-full mx-auto max-w-7xl px-4 overflow-hidden gap-20 pb-10">
         <div className="col-span-1 hidden lg:flex bg-redColor w-full rounded-2xl h-[80vh] p-10 justify-center items-center text-center">
           <div className="grid place-items-center gap-6">
-            <img
+            <Image
+              width={500}
+              height={500}
               src="/computer.gif"
               alt="computer-image"
               className="w-[250px]"

@@ -21,9 +21,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setWithdrawalData } from "@/lib/features/withdrawalSlice";
 import { setDepositData } from "@/lib/features/depositSlice";
-import { clearMessages, setError, setLoading, toggleModal } from "@/lib/features/messageSlice";
+import {
+  clearMessages,
+  setError,
+  setLoading,
+  toggleModal,
+} from "@/lib/features/messageSlice";
 import Loader from "@/components/Loader";
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
+import Image from "next/image";
 
 const investmentPlans = {
   "Real Estate": EstatePlans,
@@ -66,24 +72,22 @@ const Page = () => {
 
     const amount = selectedAmount;
     const type = selectedDepositType;
-    console.log();
-    
 
     if (!amount || !type || !selectedInvestment || !selectedPlan) {
       dispatch(setError("All fields are required"));
       dispatch(setLoading(false));
-    }else{
-
-      dispatch(setDepositData({ amount, type, selectedInvestment, selectedPlan }));
+    } else {
+      dispatch(
+        setDepositData({ amount, type, selectedInvestment, selectedPlan })
+      );
+      dispatch(setLoading(false));
       router.push("/dashboard/deposit/details");
     }
-
-
   };
 
   const handleModalClose = () => {
-      dispatch(toggleModal());
-    };
+    dispatch(toggleModal());
+  };
 
   return (
     <div className="w-full lg:h-[100vh] flex flex-1">
@@ -115,7 +119,9 @@ const Page = () => {
                 DepositData.map((data, index) => (
                   <div className="grid gap-2" key={index}>
                     <div className="w-full h-[250px] rounded-3xl overflow-hidden">
-                      <img
+                      <Image
+                        width={500}
+                        height={500}
                         src={data.img}
                         alt="usdt"
                         className="object-cover w-full h-full"

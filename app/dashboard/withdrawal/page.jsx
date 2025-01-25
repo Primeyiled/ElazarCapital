@@ -10,33 +10,69 @@ import {
   ModalFooter,
   ModalTrigger,
 } from "@/components/ui/AnimatedModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setWithdrawalData } from "@/lib/features/withdrawalSlice";
-import { SuccessMessages } from "@/components/Messages";
+import { ErrorMessages, SuccessMessages } from "@/components/Messages";
+import {
+  clearMessages,
+  setError,
+  setLoading,
+  toggleModal,
+} from "@/lib/features/messageSlice";
+import Loader from "@/components/Loader";
+import Image from "next/image";
 
 const Withdrawal = () => {
   const [selectedAmount, setSelectedAmount] = useState("");
   const [selectedWallet, setSelectedWallet] = useState("");
   const [selectedDepositType, setSelectedDepositType] = useState("");
-  
+  const { success, error, loading, modalOpen } = useSelector(
+    (state) => state.message
+  );
 
   const dispatch = useDispatch();
   const router = useRouter();
 
   const handleWithdraw = () => {
+    dispatch(setLoading(true));
+    dispatch(clearMessages());
+
     const amount = selectedAmount;
     const walletAddress = selectedWallet;
     const type = selectedDepositType;
 
-    dispatch(setWithdrawalData({ amount, walletAddress, type }));
+    if (!amount || !type || !walletAddress) {
+      dispatch(setError("All fields are required"));
+      dispatch(setLoading(false));
+    } else {
+      dispatch(setWithdrawalData({ amount, walletAddress, type }));
+      router.push("/dashboard/withdrawal/details");
+    }
+  };
 
-    // Redirect to the details page
-    router.push("/dashboard/withdrawal/details");
+  const handleModalClose = () => {
+    dispatch(toggleModal());
   };
 
   return (
-    <div className="w-full lg:h-[100vh]  flex flex-1 ">
+    <div className="w-full lg:h-[100vh] flex flex-1">
+      {success && modalOpen && (
+        <SuccessMessages
+          data={success}
+          isOpen={handleModalClose}
+          status={modalOpen}
+        />
+      )}
+      {error && modalOpen && (
+        <ErrorMessages
+          data={error}
+          isOpen={handleModalClose}
+          status={modalOpen}
+        />
+      )}
+      {loading && <Loader />}
+
       <UserSidebar>
         <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full lg:overflow-y-scroll">
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
@@ -49,7 +85,9 @@ const Withdrawal = () => {
                 DepositData.map((data, index) => (
                   <div className="grid gap-2" key={index}>
                     <div className="w-full h-[250px] rounded-3xl overflow-hidden">
-                      <img
+                      <Image
+                        width={500}
+                        height={500}
                         src={data.img}
                         alt="usdt"
                         className="object-cover w-full h-full"
@@ -84,11 +122,13 @@ const Withdrawal = () => {
                                 }
                                 autoComplete="off"
                                 type="number"
-                                className="border border-[#9e9e9e] rounded-xl w-full p-3 text-sm text-darkColor"
+                                className="border border-[#9e9e9e] rounded-xl w-full p-3 text-sm text-darkColor input"
                                 minLength={2}
-                                placeholder="eg. 1000"
+                                placeholder=" "
                               />
-                              <label className="user-label">Enter Amount</label>
+                              <label className="user-label text-sm">
+                                Enter Amount:
+                              </label>
                             </div>
                             <div className="input-group">
                               <input
@@ -98,10 +138,10 @@ const Withdrawal = () => {
                                 }
                                 autoComplete="off"
                                 type="text"
-                                className="border border-[#9e9e9e] rounded-xl w-full p-3 text-sm text-darkColor"
-                                placeholder="eg. btrwetuyvyq..."
+                                className="border border-[#9e9e9e] rounded-xl w-full p-3 text-sm text-darkColor input"
+                                placeholder=" "
                               />
-                              <label className="user-label">
+                              <label className="user-label text-sm">
                                 Enter Wallet Address
                               </label>
                             </div>

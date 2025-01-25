@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import {
   MdAdd,
   MdCopyAll,
-  MdDashboardCustomize,
   MdDownload,
   MdInventory,
   MdLink,
@@ -15,14 +14,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setUserData } from "@/lib/features/userSlice";
 import useSWR from "swr";
+import Image from "next/image";
 
-// SWR fetcher function
+
 const fetcher = async (url) => {
-  const res = await fetch(url, { credentials: "include" });
-  if (!res.ok) {
-    throw new Error("Failed to fetch profile");
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000); 
+
+  try {
+    const res = await fetch(url, { credentials: "include", signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch profile");
+    }
+
+    return res.json();
+  } catch (error) {
+    clearTimeout(timeout);
+    throw error;
   }
-  return res.json();
 };
 
 const MainBody = () => {
@@ -32,35 +43,45 @@ const MainBody = () => {
   const { userData } = useSelector((state) => state.user);
 
   const { data, error, isLoading } = useSWR("/api/user/profile", fetcher, {
-    revalidateOnFocus: false, 
-    revalidateOnReconnect: true, 
-    refreshInterval: 0, 
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+    refreshInterval: 0,
+    shouldRetryOnError: true,
+    retryCount: 3, 
+    fallbackData: {}, 
   });
+
+
+  // console.log("Profile Data:", data);
+  // console.log("Profile Error:", error);
+  // console.log("Is Loading:", isLoading);
 
 
   useEffect(() => {
     if (data) {
       dispatch(setUserData(data.profile));
     }
+  }, [data, dispatch]);
+
   
+  useEffect(() => {
     if (error || messageError) {
       console.error("Error fetching profile:", error || messageError);
-      router.push("/login"); // Redirect to login page on error
+      router.push("/login");
     }
-  
+
     if (userData?.role === 1) {
       router.push("/admin"); // Redirect to the admin page
     }
-  }, [data, dispatch, error, messageError, router, userData]);
+  }, [error, messageError, router, userData]);
 
+  // Calculate accumulated balance and total profit
   const accumulatedBalance =
     (userData?.totalProfit || 0) +
     (userData?.refBonus || 0) +
     (userData?.totalInvest || 0);
 
-  const totalProfit =
-    (userData?.totalProfit || 0) +
-    (userData?.refBonus || 0);
+  const totalProfit = (userData?.totalProfit || 0) + (userData?.refBonus || 0);
 
   // Show loader while data is being fetched
   if (isLoading) {
@@ -69,12 +90,16 @@ const MainBody = () => {
 
   // Show error message if there's an error
   if (error || messageError) {
-    return <div className="text-red-500 text-center mt-8">Error loading dashboard data</div>;
+    return (
+      <div className="text-red-500 text-center mt-8">
+        Error loading dashboard data
+      </div>
+    );
   }
 
   return (
     <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
-      <Header page="Dashboard" userName={userData?.userName} />
+      <Header page="Dashboard" />
       <div className="grid md:grid-cols-2 xl:gap-6 gap-4">
         {/* Balance Card */}
         <div className="bg-[#6C5AD4] p-4 rounded-3xl flex justify-between md:items-start">
@@ -93,7 +118,7 @@ const MainBody = () => {
             </p>
           </div>
           <div className="size-10 flex justify-center items-center bg-gray-100 rounded-full p-2">
-            <img src="/dd.png" alt="icon" />
+            <Image width={500} height={500} src="/dd.png" alt="icon" />
           </div>
         </div>
 
@@ -126,8 +151,7 @@ const MainBody = () => {
           <div className="flex-col gap-2 flex justify-center items-start">
             {totalProfit != null ? (
               <h1 className="font-bold text-xl md:text-4xl text-darkColor">
-                ${totalProfit}.
-                <span className="text-lg text-gray-300">00</span>
+                ${totalProfit}.<span className="text-lg text-gray-300">00</span>
               </h1>
             ) : (
               <p className="text-darkColor">Loading...</p>

@@ -4,34 +4,67 @@ import { UserSidebar } from "../../UserSidebar";
 import Header from "../../Header";
 import { IconNotebook } from "@tabler/icons-react";
 import Loader from "@/components/Loader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSuccess,
+  setError,
+  setLoading,
+  clearMessages,
+  toggleModal,
+} from "@/lib/features/messageSlice";
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
+
 
 const Page = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [amount, setAmount] = useState(null);
   const [type, setType] = useState(null);
-  const [message, setMessage] = useState({
-    success: "",
-    error: "",
-  });
-  const [messageModal, setMessageModal] = useState(false);
-
-  const handleModal = () => {
-    setMessageModal((prev) => !prev);
-  };
-
+  const { success, error, loading, modalOpen } = useSelector(
+    (state) => state.message
+  );
+  const dispatch = useDispatch();
   const withdrawalData = useSelector((state) => state.withdrawal);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
+    dispatch(clearMessages());
 
-    setMessage(prev => ({
-      ...prev,
-      error: `Withdrawal Transation of ${amount} was successful`,
-    }));
-    setMessageModal((prev) => !prev);
+    const data = {
+      type,
+      amount,
+      wallet: walletAddress,
+    };
 
+    try {
+      const response = await fetch("/api/user/withdrawal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Include cookies in the request
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        // setMessage({ success: result.message, error: "" });
+        dispatch(setSuccess(result.message));
+        dispatch(setLoading(false));
+      } else {
+        dispatch(setError(result.message));
+        dispatch(setLoading(false));
+        // setMessage({ success: "", error: result.message });
+      }
+    } catch (error) {
+      console.error("Error submitting deposit:", error);
+      dispatch(setError(result.message));
+      dispatch(setLoading(false));
+    }
+  };
+
+  const handleModalClose = () => {
+    dispatch(toggleModal());
   };
 
   useEffect(() => {
@@ -52,8 +85,21 @@ const Page = () => {
 
   return (
     <div className="w-full h-[100vh] flex flex-1 bg-neutral-800">
-      {message.success !== "" && <SuccessMessages data={message.success} isOpen={handleModal} status={messageModal}/>}
-      {message.error !== "" && <ErrorMessages data={message.error} isOpen={handleModal} status={messageModal}/>}
+      {success && modalOpen && (
+        <SuccessMessages
+          data={success}
+          isOpen={handleModalClose}
+          status={modalOpen}
+        />
+      )}
+      {error && modalOpen && (
+        <ErrorMessages
+          data={error}
+          isOpen={handleModalClose}
+          status={modalOpen}
+        />
+      )}
+      {loading && <Loader />}
 
       <UserSidebar>
         <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">

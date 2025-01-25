@@ -1,6 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import Heading from "@/components/Heading";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import CountUp from "react-countup";
@@ -46,7 +47,13 @@ const page = () => {
             </div>
           </div>
           <div className="w-full">
-            <img src="/about.png" alt="about-asset" className="" />
+            <Image
+              width={500}
+              height={500}
+              src="/about.png"
+              alt="about-asset"
+              className=""
+            />
           </div>
         </div>
 
@@ -120,7 +127,13 @@ const page = () => {
         <div className="bg-[#f2fafa]">
           <div className="flex max-w-7xl mx-auto px-8 gap-10 lg:gap-32 py-20 items-center ">
             <div className="w-full">
-              <img src="/about2.png" alt="about-asset" className="" />
+              <Image
+                width={500}
+                height={500}
+                src="/about2.png"
+                alt="about-asset"
+                className=""
+              />
             </div>
 
             <div className="w-full ">
@@ -168,27 +181,39 @@ const page = () => {
           </div>
         </div>
 
-        <div style={{ backgroundImage: "url(/bgBlue.png)" }} className="py-28 px-8">
-        <div className="max-w-7xl mx-auto">
-
-          <h1 className="font-bold text-3xl lg:text-6xl">
-          "At Plax, transparency is not just a promise; It is the cornerstone of our relationship with you. We believe that trust is built with clear policies and coherent actions."
-          </h1>
-          <br />
-          <p>- Plax Team</p>
+        <div
+          style={{ backgroundImage: "url(/bgBlue.png)" }}
+          className="py-28 px-8"
+        >
+          <div className="max-w-7xl mx-auto">
+            <h1 className="font-bold text-3xl lg:text-6xl">
+              "At Plax, transparency is not just a promise; It is the
+              cornerstone of our relationship with you. We believe that trust is
+              built with clear policies and coherent actions."
+            </h1>
+            <br />
+            <p>- Plax Team</p>
+          </div>
         </div>
-        </div>
 
-        <div style={{ backgroundImage: "url(/bgAbout.png)" }} className="py-28 lg:py-48 px-8 bg-center bg-cover my-20">
-            <div>
-                <h2 className="font-bold text-3xl lg:text-5xl max-w-2xl">Discover the freedom
-                of Total Financial Control</h2>
-                <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">Join Plax and take the first step towards a more
-                balanced and hassle-free financial life.</p>
-                <div className="mt-8">
-                    <Link href="" className="bg-redColor py-4 px-6 rounded-lg">Get Started</Link>
-                </div>
+        <div
+          style={{ backgroundImage: "url(/bgAbout.png)" }}
+          className="py-28 lg:py-48 px-8 bg-center bg-cover my-20"
+        >
+          <div>
+            <h2 className="font-bold text-3xl lg:text-5xl max-w-2xl">
+              Discover the freedom of Total Financial Control
+            </h2>
+            <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">
+              Join Plax and take the first step towards a more balanced and
+              hassle-free financial life.
+            </p>
+            <div className="mt-8">
+              <Link href="" className="bg-redColor py-4 px-6 rounded-lg">
+                Get Started
+              </Link>
             </div>
+          </div>
         </div>
       </div>
 

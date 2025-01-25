@@ -20,11 +20,11 @@ const Loader = () => {
   }, []);
   return (
     <div className="bg-redColor h-screen fixed inset-0 z-[100] grid place-items-center">
-      <div className="">
+      <div className="flex justify-center items-center flex-col">
         <h1 className="text-3xl xl:text-[5rem] flex font-bold text-white">
           {progress}%
         </h1>
-        <p className="text-white pt-10">Please Wait...</p>
+        <p className="text-white md:pt-10 pt-4">Please Wait...</p>
       </div>
     </div>
   );

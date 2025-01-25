@@ -17,8 +17,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
-    const router = useRouter();
-  
+  const router = useRouter();
+
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -51,7 +51,6 @@ const Login = () => {
       dispatch(setLoading(false));
     } else {
       try {
-        // Make an API call to the backend to authenticate the user
         const response = await fetch("/api/auth/login", {
           method: "POST",
           headers: {
@@ -63,11 +62,9 @@ const Login = () => {
         const data = await response.json();
 
         if (response.ok) {
-          // Dispatch success message on successful login
-          dispatch(setSuccess("Login successful!"));
+          // dispatch(setSuccess("Login successful!"));
           router.push("/dashboard");
         } else {
-          // Dispatch error message based on backend response
           dispatch(setError(data.message || "Invalid credentials"));
         }
       } catch (error) {
@@ -104,7 +101,14 @@ const Login = () => {
       <div className="grid lg:grid-cols-2 h-screen w-full mx-auto max-w-7xl px-4 overflow-hidden gap-20 pb-10">
         <div className="col-span-1 hidden lg:flex bg-white w-full rounded-2xl h-[80vh] p-10 justify-center items-center text-center">
           <div className="grid place-items-center gap-6">
-            <Image width={500} height={500} src="/key.gif" alt="key-image" className="w-[250px]" />
+            <Image
+            unoptimized
+              width={500}
+              height={500}
+              src="/key.gif"
+              alt="key-image"
+              className="w-[250px]"
+            />
             <h1 className="text-4xl font-bold text-darkColor">
               Login safely, stay protected. Your account is our top priority.
             </h1>
@@ -153,7 +157,10 @@ const Login = () => {
               <input type="checkbox" />
               <span className="text-sm"> Remember me</span>
             </div>
-            <Link href="/forgot-password" className="text-sm font-bold"> Forgot Password</Link>
+            <Link href="/forgot-password" className="text-sm font-bold">
+              {" "}
+              Forgot Password
+            </Link>
           </div>
           <div className="w-full">
             <button className="mt-6 md:mt-6 bg-redColor text-white py-3 md:py-4 px-10 text-sm rounded-lg w-full md:text-[16px]">
