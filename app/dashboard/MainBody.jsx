@@ -39,11 +39,10 @@ const fetcher = async (url) => {
 const MainBody = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { error: messageError } = useSelector((state) => state.message);
-  const { userData, isAuthenticated } = useSelector((state) => state.user);
+  const { userData } = useSelector((state) => state.user);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
-  const { data, error, isLoading } = useSWR("/api/user/profile", fetcher, {
+  const { data, error } = useSWR("/api/user/profile", fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
     refreshInterval: 0,
@@ -60,34 +59,20 @@ const MainBody = () => {
   }, [data, dispatch]);
 
   useEffect(() => {
-    if (error || messageError) {
-      console.error("Error fetching profile:", error || messageError);
+    if (error) {
+      console.error("Error fetching profile:", error);
       dispatch(clearUserData()); // Clear user data on error
       router.push("/login"); // Redirect to login page
     }
-  }, [error, messageError, router, dispatch]);
+  }, [error, router, dispatch]);
 
   useEffect(() => {
     if (userData?.role === 1) {
-      router.push("/admin"); // Redirect to the admin page
+      router.push("/admin");
     }
   }, [userData, router]);
 
-  // Show loader while checking authentication or fetching data
-  if (isCheckingAuth || isLoading || !isAuthenticated) {
-    return <Loader />;
-  }
 
-  // Show error message if there's an error
-  if (error || messageError) {
-    return (
-      <div className="text-red-500 text-center mt-8">
-        Error loading dashboard data
-      </div>
-    );
-  }
-
-  // Calculate accumulated balance and total profit
   const accumulatedBalance =
     (userData?.totalProfit || 0) +
     (userData?.refBonus || 0) +
