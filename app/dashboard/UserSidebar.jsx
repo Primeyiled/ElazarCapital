@@ -1,10 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Sidebar,
-  SidebarBody,
-  SidebarLink,
-} from "../../components/ui/Sidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/Sidebar";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -12,27 +8,28 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import MainBody from "./MainBody";
 import { Dashinks } from "@/constants/data";
+import AuthCheck from "../AuthCheck";
 
 export function UserSidebar({ children }) {
-
   const [open, setOpen] = useState(false);
   return (
-    <div
-      className={cn(
-        "rounded-md flex flex-col md:flex-row bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700 md:overflow-hidden pb-20 md:pb-0"
-      )}
-    >
-      <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between gap-10 md:h-screen">
-          <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-            {open ? <Logo /> : <LogoIcon />}
-            <div className="mt-8 flex flex-col gap-2">
-              {Dashinks.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
+    <AuthCheck>
+      <div
+        className={cn(
+          "rounded-md flex flex-col md:flex-row bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700 md:overflow-hidden pb-20 md:pb-0"
+        )}
+      >
+        <Sidebar open={open} setOpen={setOpen}>
+          <SidebarBody className="justify-between gap-10 md:h-screen">
+            <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+              {open ? <Logo /> : <LogoIcon />}
+              <div className="mt-8 flex flex-col gap-2">
+                {Dashinks.map((link, idx) => (
+                  <SidebarLink key={idx} link={link} />
+                ))}
+              </div>
             </div>
-          </div>
-          {/* <div>
+            {/* <div>
             <SidebarLink
               link={{
                 label: "Manu Arora",
@@ -49,10 +46,11 @@ export function UserSidebar({ children }) {
               }}
             />
           </div> */}
-        </SidebarBody>
-      </Sidebar>
-      <div className="flex-1 p-4">{children}</div>
-    </div>
+          </SidebarBody>
+        </Sidebar>
+        <div className="flex-1 p-4">{children}</div>
+      </div>
+    </AuthCheck>
   );
 }
 export const Logo = () => {
@@ -82,4 +80,3 @@ export const LogoIcon = () => {
     </Link>
   );
 };
-

@@ -15,7 +15,7 @@ export async function GET(req) {
     }
 
     // Fetch the user data from the database
-    const user = await User.findById(userId).select('-password'); // Exclude password field
+    const user = await User.findById(userId).select('-password');
 
     if (!user) {
       return NextResponse.json(

@@ -10,6 +10,7 @@ import {
   clearMessages,
   toggleModal,
 } from "@/lib/features/messageSlice";
+import { setUserData } from "@/lib/features/userSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -63,7 +64,10 @@ const Login = () => {
 
         if (response.ok) {
           // dispatch(setSuccess("Login successful!"));
+          dispatch(setUserData(data.profile));
           router.push("/dashboard");
+          console.log("success");
+          
         } else {
           dispatch(setError(data.message || "Invalid credentials"));
         }

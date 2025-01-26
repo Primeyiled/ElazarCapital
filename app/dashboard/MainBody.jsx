@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MdAdd,
   MdCopyAll,
@@ -12,14 +12,14 @@ import Header from "./Header";
 import Loader from "@/components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { setUserData } from "@/lib/features/userSlice";
+import { clearUserData, setUserData } from "@/lib/features/userSlice";
 import useSWR from "swr";
 import Image from "next/image";
-
+import CryptoChart from "@/components/CryptoChart";
 
 const fetcher = async (url) => {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 5000); 
+  const timeout = setTimeout(() => controller.abort(), 10000);
 
   try {
     const res = await fetch(url, { credentials: "include", signal: controller.signal });
@@ -40,51 +40,41 @@ const MainBody = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { error: messageError } = useSelector((state) => state.message);
-  const { userData } = useSelector((state) => state.user);
+  const { userData, isAuthenticated } = useSelector((state) => state.user);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   const { data, error, isLoading } = useSWR("/api/user/profile", fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
     refreshInterval: 0,
     shouldRetryOnError: true,
-    retryCount: 3, 
-    fallbackData: {}, 
+    retryCount: 3,
+    fallbackData: {},
   });
-
-
-  // console.log("Profile Data:", data);
-  // console.log("Profile Error:", error);
-  // console.log("Is Loading:", isLoading);
-
 
   useEffect(() => {
     if (data) {
-      dispatch(setUserData(data.profile));
+      dispatch(setUserData(data.profile)); // Update Redux state with user data
+      setIsCheckingAuth(false); // Mark authentication check as complete
     }
   }, [data, dispatch]);
 
-  
   useEffect(() => {
     if (error || messageError) {
       console.error("Error fetching profile:", error || messageError);
-      router.push("/login");
+      dispatch(clearUserData()); // Clear user data on error
+      router.push("/login"); // Redirect to login page
     }
+  }, [error, messageError, router, dispatch]);
 
+  useEffect(() => {
     if (userData?.role === 1) {
       router.push("/admin"); // Redirect to the admin page
     }
-  }, [error, messageError, router, userData]);
+  }, [userData, router]);
 
-  // Calculate accumulated balance and total profit
-  const accumulatedBalance =
-    (userData?.totalProfit || 0) +
-    (userData?.refBonus || 0) +
-    (userData?.totalInvest || 0);
-
-  const totalProfit = (userData?.totalProfit || 0) + (userData?.refBonus || 0);
-
-  // Show loader while data is being fetched
-  if (isLoading) {
+  // Show loader while checking authentication or fetching data
+  if (isCheckingAuth || isLoading || !isAuthenticated) {
     return <Loader />;
   }
 
@@ -96,6 +86,14 @@ const MainBody = () => {
       </div>
     );
   }
+
+  // Calculate accumulated balance and total profit
+  const accumulatedBalance =
+    (userData?.totalProfit || 0) +
+    (userData?.refBonus || 0) +
+    (userData?.totalInvest || 0);
+
+  const totalProfit = (userData?.totalProfit || 0) + (userData?.refBonus || 0);
 
   return (
     <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
@@ -230,6 +228,9 @@ const MainBody = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mt-14 h-[400px]">
+        <CryptoChart/>
       </div>
     </div>
   );

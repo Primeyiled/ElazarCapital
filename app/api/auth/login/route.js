@@ -42,7 +42,7 @@ export async function POST(req) {
 
     // Respond with success and set the token in the cookies
     const response = NextResponse.json(
-      { message: 'Login successful' },
+      { message: 'Login successful', profile: user  },
       { status: 200 }
     );
 
