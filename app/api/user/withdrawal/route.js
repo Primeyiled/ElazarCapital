@@ -34,8 +34,9 @@ export async function POST(request) {
         { status: 404 }
       );
     }
+    
 
-    if (amount > user.totalAmount) {
+    if (amount > user.totalProfit) {
       return NextResponse.json(
         { success: false, message: "Insufficient funds." },
         { status: 400 }
