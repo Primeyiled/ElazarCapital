@@ -16,7 +16,7 @@ export function UserSidebar({ children }) {
     <AuthCheck>
       <div
         className={cn(
-          "rounded-md flex flex-col md:flex-row bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700 md:overflow-hidden pb-20 md:pb-0"
+          "rounded-md flex flex-col md:flex-row bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700 overflow-auto pb-20 md:pb-0"
         )}
       >
         <Sidebar open={open} setOpen={setOpen}>
@@ -48,7 +48,7 @@ export function UserSidebar({ children }) {
           </div> */}
           </SidebarBody>
         </Sidebar>
-        <div className="flex-1 p-4">{children}</div>
+        <div className="flex-1 p-4 h-full">{children}</div>
       </div>
     </AuthCheck>
   );

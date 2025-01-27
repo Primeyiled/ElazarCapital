@@ -47,8 +47,10 @@ const Withdrawal = () => {
       dispatch(setLoading(false));
     } else {
       dispatch(setWithdrawalData({ amount, walletAddress, type }));
-      router.push("/dashboard/withdrawal/details");
     }
+          dispatch(setLoading(false));
+    
+    router.push("/dashboard/withdrawal/details");
   };
 
   const handleModalClose = () => {

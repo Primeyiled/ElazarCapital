@@ -13,6 +13,7 @@ import {
   toggleModal,
 } from "@/lib/features/messageSlice";
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -22,7 +23,11 @@ const Page = () => {
     (state) => state.message
   );
   const dispatch = useDispatch();
+    const router = useRouter();
+  
   const withdrawalData = useSelector((state) => state.withdrawal);
+  console.log(withdrawalData);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,20 +72,21 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (
-      withdrawalData.amount &&
-      withdrawalData.walletAddress &&
-      withdrawalData.type
-    ) {
+    if(!withdrawalData.amount ||
+      !withdrawalData.walletAddress ||
+      !withdrawalData.type){
+
+    }
+    else  {
       setAmount(withdrawalData.amount);
       setWalletAddress(withdrawalData.walletAddress);
       setType(withdrawalData.type);
     }
-  }, [withdrawalData]);
+  }, [withdrawalData, router]);
 
-  if (amount === null || type === null || walletAddress === "") {
-    return <Loader />;
-  }
+  // if (amount === null || type === null || walletAddress === null) {
+  //   return <Loader />;
+  // }
 
   return (
     <div className="w-full h-[100vh] flex flex-1 bg-neutral-800">

@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <OnlineChecker />
+        {/* <OnlineChecker /> */}
         <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
