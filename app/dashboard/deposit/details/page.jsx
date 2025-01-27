@@ -52,13 +52,15 @@ const Page = () => {
   }, [depositData, router]);
 
   const handleCopyAddress = async () => {
-    try {
-      if (!walletAddress) throw new Error("Wallet address is not available.");
-      await navigator.clipboard.writeText(walletAddress);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      dispatch(setError("Error copying wallet address"));
+    if (typeof window !== "undefined" && navigator.clipboard) {
+      try {
+        if (!walletAddress) throw new Error("Wallet address is not available.");
+        await navigator.clipboard.writeText(walletAddress);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        dispatch(setError("Error copying wallet address"));
+      }
     }
   };
 
@@ -175,7 +177,7 @@ const Page = () => {
                 </h2>
                 <button
                   onClick={handleCopyAddress}
-                  className="bg-[#6C5AD4] text-sm text-white rounded-xl py-3 px-8 mt-4"
+                  className="bg-purpleColor text-sm text-white rounded-xl py-3 px-8 mt-4"
                 >
                   {copied ? "Copied!" : "Copy"}
                 </button>
@@ -192,6 +194,8 @@ const Page = () => {
             <div className="flex justify-center items-center my-10 flex-col px-4">
               <div className="mb-6 w-full">
                 <h3 className="font-bold pb-4">Requirement</h3>
+
+                <p className="text-gray-300 text-md py-4">Upload yor payment slip here</p>
                 <div
                   className="w-full py-9 bg-gray-50 rounded-2xl border border-gray-300 gap-3 grid border-dashed"
                   onDragOver={handleDragOver}
@@ -244,7 +248,7 @@ const Page = () => {
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className="bg-[#6C5AD4] text-sm py-4 lg:py-5 lg:text-lg px-10 text-white rounded-2xl flex items-center justify-center gap-2"
+                className="bg-purpleColor text-sm py-4 lg:py-5 lg:text-md px-10 text-white rounded-2xl flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <>

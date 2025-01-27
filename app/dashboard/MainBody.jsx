@@ -22,7 +22,10 @@ const fetcher = async (url) => {
   const timeout = setTimeout(() => controller.abort(), 10000);
 
   try {
-    const res = await fetch(url, { credentials: "include", signal: controller.signal });
+    const res = await fetch(url, {
+      credentials: "include",
+      signal: controller.signal,
+    });
     clearTimeout(timeout);
 
     if (!res.ok) {
@@ -40,9 +43,8 @@ const MainBody = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
-  const { data, error } = useSWR("/api/user/profile", fetcher, {
+  const { data, error, isLoading } = useSWR("/api/user/profile", fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
     refreshInterval: 0,
@@ -54,24 +56,22 @@ const MainBody = () => {
   useEffect(() => {
     if (data) {
       dispatch(setUserData(data.profile)); // Update Redux state with user data
-      setIsCheckingAuth(false); // Mark authentication check as complete
     }
   }, [data, dispatch]);
 
-  useEffect(() => {
-    if (error) {
-      console.error("Error fetching profile:", error);
-      dispatch(clearUserData()); // Clear user data on error
-      router.push("/login"); // Redirect to login page
-    }
-  }, [error, router, dispatch]);
+  // Show loader while fetching data
+  if (isLoading) {
+    return <Loader />;
+  }
 
-  useEffect(() => {
-    if (userData?.role === 1) {
-      router.push("/admin");
-    }
-  }, [userData, router]);
-
+  // Show error message if there's an error
+  if (error) {
+    return (
+      <div className="text-red-500 text-center mt-8 h-screen">
+        Error loading dashboard data
+      </div>
+    );
+  }
 
   const accumulatedBalance =
     (userData?.totalProfit || 0) +
@@ -85,7 +85,7 @@ const MainBody = () => {
       <Header page="Dashboard" />
       <div className="grid md:grid-cols-2 xl:gap-6 gap-4">
         {/* Balance Card */}
-        <div className="bg-[#6C5AD4] p-4 rounded-3xl flex justify-between md:items-start">
+        <div className="bg-purpleColor p-4 rounded-3xl flex justify-between md:items-start">
           <div className="flex-col gap-2 flex justify-center items-start">
             {accumulatedBalance != null ? (
               <h1 className="font-bold text-xl md:text-4xl">
@@ -177,7 +177,7 @@ const MainBody = () => {
         </div>
 
         {/* Current Investment Plan Card */}
-        <div className="bg-[#6C5AD4] p-4 rounded-3xl flex justify-between md:items-start">
+        <div className="bg-purpleColor p-4 rounded-3xl flex justify-between md:items-start">
           <div className="flex-col gap-2 flex justify-center items-start">
             <h1 className="font-bold text-xl text-white capitalize">
               {userData?.investment ? userData?.investment : "Loading..."}
@@ -201,7 +201,7 @@ const MainBody = () => {
                 </h1>
                 <p className="text-xs">Use the link to invite your friends</p>
               </div>
-              <div className="size-10 flex justify-center items-center bg-[#6C5AD4] rounded-full p-2">
+              <div className="size-10 flex justify-center items-center bg-purpleColor rounded-full p-2">
                 <MdLink className="text-4xl text-white" />
               </div>
             </div>
@@ -215,7 +215,7 @@ const MainBody = () => {
         </div>
       </div>
       <div className="mt-14 h-[400px]">
-        <CryptoChart/>
+        <CryptoChart />
       </div>
     </div>
   );

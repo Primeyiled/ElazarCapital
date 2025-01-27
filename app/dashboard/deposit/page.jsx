@@ -134,7 +134,7 @@ const Page = () => {
                     <Modal>
                       <ModalTrigger>
                         <span
-                          className="w-full bg-[#6C5AD4] text-white hover:bg-white hover:text-darkColor duration-300 rounded-full grid py-2 md:py-3 text-sm"
+                          className="w-full bg-purpleColor text-white hover:bg-white hover:text-darkColor duration-300 rounded-full grid py-2 md:py-3 text-sm"
                           onClick={() => setSelectedDepositType(data.name)}
                         >
                           Pay Now
@@ -215,7 +215,7 @@ const Page = () => {
                         <ModalFooter className="gap-4">
                           <button
                             onClick={handleDeposit}
-                            className="bg-[#6C5AD4] text-white text-sm px-6 py-2 rounded-m w-50"
+                            className="bg-purpleColor text-white text-sm px-6 py-2 rounded-m w-50"
                           >
                             Deposit Now
                           </button>

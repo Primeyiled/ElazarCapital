@@ -33,7 +33,7 @@ export async function POST(request) {
     const paymentSlip = formData.get("paymentSlip");
 
 
-    if (!type || !investment || !plan || !amount || !wallet) {
+    if (!type || !investment || !plan || !amount || !wallet || !paymentSlip) {
       return NextResponse.json(
         { success: false, message: "All fields are required." },
         { status: 400 }

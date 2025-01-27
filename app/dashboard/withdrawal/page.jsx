@@ -100,7 +100,7 @@ const Withdrawal = () => {
                     <Modal>
                       <ModalTrigger>
                         <span
-                          className="w-full bg-[#6C5AD4] text-white hover:bg-white hover:text-darkColor duration-300  rounded-full grid py-2 md:py-3 text-sm"
+                          className="w-full bg-purpleColor text-white hover:bg-white hover:text-darkColor duration-300  rounded-full grid py-2 md:py-3 text-sm"
                           onClick={() => setSelectedDepositType(data.name)}
                         >
                           {" "}
@@ -150,7 +150,7 @@ const Withdrawal = () => {
                         <ModalFooter className="gap-4">
                           <button
                             onClick={handleWithdraw}
-                            className="bg-[#6C5AD4] text-white text-sm px-6 py-2 rounded-md border border-black w-50"
+                            className="bg-purpleColor text-white text-sm px-6 py-2 rounded-md border border-black w-50"
                           >
                             Withdraw Now
                           </button>
@@ -164,7 +164,7 @@ const Withdrawal = () => {
                                   wallet: selectedWallet
                                 },
                               }}
-                              className="bg-[#6C5AD4] text-white text-sm px-6 py-2 rounded-md border border-black w-50"
+                              className="bg-purpleColor text-white text-sm px-6 py-2 rounded-md border border-black w-50"
                             >
                               Withdraw Now
                             </Link>

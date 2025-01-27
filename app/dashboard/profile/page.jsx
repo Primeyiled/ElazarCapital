@@ -18,12 +18,14 @@ import { useRouter } from "next/navigation";
 const Profile = () => {
   const { userData } = useSelector((state) => state.user);
   const [isEditting, setIsEditting] = useState(false);
+  const [selectedInvestment, setSelectedInvestment] = useState("");
+
   const { success, error, loading, modalOpen } = useSelector(
     (state) => state.message
   );
 
   const dispatch = useDispatch();
-    const router = useRouter();
+  const router = useRouter();
 
   const [userInfo, setUserInfo] = useState({
     name: userData?.userName || "",
@@ -135,7 +137,7 @@ const Profile = () => {
                 </span>
               ) : (
                 <span
-                  className="flex gap-2 hover:bg-[#6C5AD4] cursor-pointer p-2 rounded-xl"
+                  className="flex gap-2 hover:bg-purpleColor cursor-pointer p-2 rounded-xl"
                   onClick={EditProfile}
                 >
                   Edit <MdEdit className="text-xl" />
@@ -152,7 +154,7 @@ const Profile = () => {
                       onChange={handleChange}
                       name="name"
                       value={userInfo.name}
-                      className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
+                      className="bg-gray-100 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
                     />
                   ) : (
                     <p className="bg-gray-300 rounded-xl py-2 px-3 mt-2 text-darkColor">
@@ -168,7 +170,7 @@ const Profile = () => {
                       onChange={handleChange}
                       name="email"
                       value={userInfo.email}
-                      className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
+                      className="bg-gray-100 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
                     />
                   ) : (
                     <p className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor">
@@ -179,13 +181,18 @@ const Profile = () => {
                 <div>
                   <h2 className="text-sm font-bold">Investment plan:</h2>
                   {isEditting ? (
-                    <input
-                      type="text"
-                      onChange={handleChange}
+                    <select
                       name="investment"
                       value={userInfo.investment}
-                      className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
-                    />
+                      onChange={handleChange}
+                      className="select w-full rounded-lg p-3 text-darkColor text-sm"
+                    >
+                      <option value="">Choose an option</option>
+                      <option value="Real Estate">Real Estate</option>
+                      <option value="Crypto currency">Crypto Currency</option>
+                      <option value="Forex Investment">Forex Investment</option>
+                      <option value="Stock Investment">Stock Investment</option>
+                    </select>
                   ) : (
                     <p className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor">
                       {userInfo.investment}
@@ -205,7 +212,7 @@ const Profile = () => {
                         onChange={handleChange}
                         name="address"
                         value={userInfo.address}
-                        className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
+                        className="bg-gray-100 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
                       />
                     ) : (
                       <p className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor">
@@ -225,7 +232,7 @@ const Profile = () => {
                         onChange={handleChange}
                         name="phoneNo"
                         value={userInfo.phoneNo}
-                        className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
+                        className="bg-gray-100 rounded-xl py-2 px-3 mt-2  text-darkColor w-full border-none outline-none"
                       />
                     ) : (
                       <p className="bg-gray-300 rounded-xl py-2 px-3 mt-2  text-darkColor">
@@ -244,7 +251,7 @@ const Profile = () => {
             {isEditting && (
               <button
                 onClick={handleSubmit}
-                className="bg-[#6C5AD4] text-white text-sm px-6 py-2 rounded-md  w-50"
+                className="bg-purpleColor text-white text-sm px-6 py-2 rounded-md  w-50"
               >
                 Save Changes
               </button>

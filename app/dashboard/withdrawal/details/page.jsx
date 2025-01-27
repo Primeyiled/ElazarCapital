@@ -14,7 +14,6 @@ import {
 } from "@/lib/features/messageSlice";
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
 
-
 const Page = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [amount, setAmount] = useState(null);
@@ -132,7 +131,7 @@ const Page = () => {
                 </p>
                 <div className="flex justify-center items-center mt-10">
                   <button
-                    className="bg-[#6C5AD4] text-sm py-4 lg:py-5 lg:text-lg px-10 text-white rounded-2xl"
+                    className="bg-purpleColor text-sm py-4 lg:py-5 lg:text-lg px-10 text-white rounded-2xl"
                     onClick={handleSubmit}
                   >
                     Confirm Transaction
