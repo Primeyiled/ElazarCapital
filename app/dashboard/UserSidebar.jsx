@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/Sidebar";
-
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -16,12 +15,12 @@ export function UserSidebar({ children }) {
     <AuthCheck>
       <div
         className={cn(
-          "rounded-md flex flex-col md:flex-row bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700 overflow-auto pb-20 md:pb-0"
+          "rounded-md flex flex-col md:flex-row bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700"
         )}
       >
         <Sidebar open={open} setOpen={setOpen}>
-          <SidebarBody className="justify-between gap-10 md:h-screen">
-            <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+          <SidebarBody className="justify-between gap-10 h-full md:h-screen">
+            <div className="flex flex-col flex-1">
               {open ? <Logo /> : <LogoIcon />}
               <div className="mt-8 flex flex-col gap-2">
                 {Dashinks.map((link, idx) => (
@@ -29,30 +28,14 @@ export function UserSidebar({ children }) {
                 ))}
               </div>
             </div>
-            {/* <div>
-            <SidebarLink
-              link={{
-                label: "Manu Arora",
-                href: "#",
-                icon: (
-                  <Image
-                    src="/half.png"
-                    className="h-7 w-7 flex-shrink-0 rounded-full"
-                    width={50}
-                    height={50}
-                    alt="Avatar"
-                  />
-                ),
-              }}
-            />
-          </div> */}
           </SidebarBody>
         </Sidebar>
-        <div className="flex-1 p-4 h-full">{children}</div>
+        <div className="flex-1 p-4 h-full overflow-y-auto">{children}</div>
       </div>
     </AuthCheck>
   );
 }
+
 export const Logo = () => {
   return (
     <Link
@@ -70,6 +53,7 @@ export const Logo = () => {
     </Link>
   );
 };
+
 export const LogoIcon = () => {
   return (
     <Link

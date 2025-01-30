@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react"; // Import useState
 import { UserSidebar } from "../UserSidebar";
 import Header from "../Header";
 import useSWR from "swr";
@@ -18,6 +18,10 @@ const fetcher = async (url) => {
 
 const History = () => {
   const { data, error, isLoading } = useSWR("/api/user/history", fetcher);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [transactionsPerPage] = useState(5);
 
   if (isLoading) {
     return <Loader />;
@@ -61,8 +65,17 @@ const History = () => {
   ];
 
   combinedTransactions.sort(
-    (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
+
+  const indexOfLastTransaction = currentPage * transactionsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
+  const currentTransactions = combinedTransactions.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="w-full lg:h-[100vh] flex flex-1 ">
@@ -99,8 +112,8 @@ const History = () => {
           </div>
 
           <div className="rounded-xl pb-8 px-4 md:px-8 bg-neutral-800 w-full h-full">
-            {combinedTransactions.length > 0 ? (
-              combinedTransactions.map((transaction) => {
+            {currentTransactions.length > 0 ? (
+              currentTransactions.map((transaction) => {
                 const { formattedDate, formattedTime } = formatDateTime(
                   transaction.createdAt
                 );
@@ -110,15 +123,20 @@ const History = () => {
                     ? "/deposit.png"
                     : "/withdrawal.png";
 
-                    const transStatus =
-                    transaction.status === "Pending"
-                      ? "Pending"
-                      : transaction.status === "Approved" ? "Approved" : "Declined";
+                const transStatus =
+                  transaction.status === "Pending"
+                    ? "Pending"
+                    : transaction.status === "Approved"
+                    ? "Approved"
+                    : "Declined";
 
-                    const transStatusColor =
-                    transaction.status === "Pending"
-                      ? "text-yellow-500"
-                      : transaction.status === "Approved" ? "text-green-500" : "text-red-500";
+                const transStatusColor =
+                  transaction.status === "Pending"
+                    ? "text-yellow-500"
+                    : transaction.status === "Approved"
+                    ? "text-green-500"
+                    : "text-red-500";
+                    
 
                 return (
                   <div
@@ -162,7 +180,31 @@ const History = () => {
             ) : (
               <p>No transactions found.</p>
             )}
-           
+
+            {/* Pagination Controls */}
+            <div className="flex justify-center items-center gap-4 mt-8">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-4 py-2 bg-purpleColor rounded-lg disabled:opacity-50"
+              >
+                Previous
+              </button>
+              <span className="text-sm">
+                Page {currentPage} of{" "}
+                {Math.ceil(combinedTransactions.length / transactionsPerPage)}
+              </span>
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={
+                  currentPage ===
+                  Math.ceil(combinedTransactions.length / transactionsPerPage)
+                }
+                className="px-4 py-2 bg-purpleColor rounded-lg disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </UserSidebar>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react"; // Add useEffect
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import { UserSidebar } from "../UserSidebar";
 import {
@@ -36,8 +36,6 @@ const investmentPlans = {
   "Crypto currency": CryptoPlans,
   "Forex Investment": ForexPlans,
   "Stock Investment": StockPlans,
-  // "Gold Investment": GoldPlans,
-  // "Silver Investment": SilverPlans,
 };
 
 const Page = () => {
@@ -53,7 +51,6 @@ const Page = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // Initialize selectedInvestment with userData.investment
   useEffect(() => {
     if (userData?.investment) {
       setSelectedInvestment(userData.investment);
@@ -61,12 +58,12 @@ const Page = () => {
       setSelectedInvestment("");
     }
   }, [userData]);
+
   useEffect(() => {
     setSelectedPlan("");
   }, [selectedInvestment]);
 
   const handleDeposit = (e) => {
-    // e.preventDefault()
     dispatch(setLoading(true));
     dispatch(clearMessages());
 
@@ -82,6 +79,9 @@ const Page = () => {
       );
       dispatch(setLoading(false));
       router.push("/dashboard/deposit/details");
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
     }
   };
 
@@ -90,7 +90,7 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full lg:h-[100vh] flex flex-1">
+    <div className="w-full min-h-screen flex flex-1 bg-neutral-800">
       {success && modalOpen && (
         <SuccessMessages
           data={success}
@@ -108,8 +108,8 @@ const Page = () => {
 
       {loading && <Loader />}
       <UserSidebar>
-        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full lg:overflow-y-scroll">
-          <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
+        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full overflow-y-auto">
+          <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto w-full">
             <Header page="Deposit" />
             <p className="font-medium md:text-lg py-4">
               Select Payment Gateway
@@ -134,7 +134,7 @@ const Page = () => {
                     <Modal>
                       <ModalTrigger>
                         <span
-                          className="w-full bg-purpleColor text-white hover:bg-white hover:text-darkColor duration-300 rounded-full grid py-2 md:py-3 text-sm"
+                          className="w-full bg-[#6C5AD4] text-white hover:bg-white hover:text-darkColor duration-300 rounded-full grid py-2 md:py-3 text-sm"
                           onClick={() => setSelectedDepositType(data.name)}
                         >
                           Pay Now
@@ -160,15 +160,12 @@ const Page = () => {
                               </label>
                             </div>
                             <div className="mt-4">
-                              {/* <p className="text-sm pb-1">
-                                Default Investment plan:
-                              </p> */}
                               <select
                                 name="investment"
-                                value={selectedInvestment} // Use the state variable
+                                value={selectedInvestment}
                                 onChange={(e) =>
                                   setSelectedInvestment(e.target.value)
-                                } // Update state on change
+                                }
                                 className="select w-full rounded-lg p-3 text-darkColor text-sm"
                               >
                                 <option value="">Choose an option</option>
@@ -215,7 +212,7 @@ const Page = () => {
                         <ModalFooter className="gap-4">
                           <button
                             onClick={handleDeposit}
-                            className="bg-purpleColor text-white text-sm px-6 py-2 rounded-m w-50"
+                            className="bg-[#6C5AD4] text-white text-sm px-6 py-2 rounded-m w-50"
                           >
                             Deposit Now
                           </button>

@@ -103,6 +103,7 @@ const Page = () => {
       if (response.ok) {
         dispatch(setSuccess(result.message));
         dispatch(setLoading(false));
+        router.push("/dashboard/deposit");
       } else {
         dispatch(setError(result.message));
         dispatch(setLoading(false));
@@ -146,7 +147,7 @@ const Page = () => {
         />
       )}
       <UserSidebar>
-        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full  overflow-hidden">
+        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full  overflow-y-auto">
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-full 2xl:h-[90vh] w-full">
             <Header page=" Details" />
             <div className="grid md:grid-cols-2 gap-10">
@@ -195,7 +196,9 @@ const Page = () => {
               <div className="mb-6 w-full">
                 <h3 className="font-bold pb-4">Requirement</h3>
 
-                <p className="text-gray-300 text-md py-4">Upload yor payment slip here</p>
+                <p className="text-gray-300 text-md py-4">
+                  Upload yor payment slip here
+                </p>
                 <div
                   className="w-full py-9 bg-gray-50 rounded-2xl border border-gray-300 gap-3 grid border-dashed"
                   onDragOver={handleDragOver}

@@ -17,7 +17,7 @@ export const SuccessMessages = ({data, isOpen, status}) => {
                 <h2 className="text-green-600 font-bold text-xl py-4 md:text-2xl">Success</h2>
                 <p className="text-center pt-4">{data}</p>
 
-                <button className="mt-20 bg-darkColor text-white py-2 px-8 rounded-lg text-sm">Home</button>
+                <button className="mt-20 bg-darkColor text-white py-2 px-8 rounded-lg text-sm" onClick={isOpen}>Ok</button>
         </div>
       </div>
     </div>

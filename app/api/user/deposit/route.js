@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import { authenticate } from "@/lib/middleware/auth"; // Adjust the import path as needed
 import dbConnect from "@/lib/dbConnect"; // Import your database connection utility
 import Deposit from "@/lib/model/deposit";
-import fs from "fs";
-import path from "path";
+import cloudinary from "@/lib/cloudinary"; // Import Cloudinary configuration
 
 export const config = {
   api: {
@@ -32,7 +31,6 @@ export async function POST(request) {
     const wallet = formData.get("wallet");
     const paymentSlip = formData.get("paymentSlip");
 
-
     if (!type || !investment || !plan || !amount || !wallet || !paymentSlip) {
       return NextResponse.json(
         { success: false, message: "All fields are required." },
@@ -40,15 +38,31 @@ export async function POST(request) {
       );
     }
 
-    let filePath = null;
+    let paymentSlipUrl = null;
     if (paymentSlip) {
-      const uploadDir = path.join(process.cwd(), "uploads");
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-      }
-      filePath = path.join(uploadDir, paymentSlip.name);
+      // Convert the file to a buffer
       const fileBuffer = await paymentSlip.arrayBuffer();
-      fs.writeFileSync(filePath, Buffer.from(fileBuffer));
+
+      // Upload the file to Cloudinary
+      const result = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            {
+              resource_type: "auto", // Automatically detect the file type
+              folder: "deposit_slips", // Optional: Organize files in a folder
+            },
+            (error, result) => {
+              if (error) {
+                reject(error);
+              } else {
+                resolve(result);
+              }
+            }
+          )
+          .end(Buffer.from(fileBuffer));
+      });
+
+      paymentSlipUrl = result.secure_url; // Get the URL of the uploaded file
     }
 
     const deposit = new Deposit({
@@ -57,7 +71,7 @@ export async function POST(request) {
       plan,
       amount,
       wallet,
-      paymentSlip: filePath,
+      paymentSlip: paymentSlipUrl, // Store the Cloudinary URL
       user: authResult.userId,
     });
 
