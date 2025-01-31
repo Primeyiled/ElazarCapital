@@ -1,10 +1,14 @@
 "use client";
-import React, { useState } from "react"; // Import useState
-import { UserSidebar } from "../UserSidebar";
+import React, { useState } from "react";
 import Header from "../Header";
 import useSWR from "swr";
 import Loader from "@/components/Loader";
 import Image from "next/image";
+import Layout from "../Layout";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import { clearMessages, setError, setLoading } from "@/lib/features/messageSlice";
+import { setHistoryData } from "@/lib/features/historySlice";
 
 const fetcher = async (url) => {
   const res = await fetch(url, { credentials: "include" });
@@ -19,9 +23,15 @@ const fetcher = async (url) => {
 const History = () => {
   const { data, error, isLoading } = useSWR("/api/user/history", fetcher);
 
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [transactionsPerPage] = useState(5);
+
+  const { userData } = useSelector((state) => state.user);
+  // const { success, error, loading, modalOpen } = useSelector(
+  //   (state) => state.message
+  // );
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   if (isLoading) {
     return <Loader />;
@@ -40,7 +50,29 @@ const History = () => {
     withdrawals: [],
   };
 
-  // Helper function to format the date and time
+  const handleTransactionClick = (transaction) => {
+    
+    dispatch(setLoading(true));
+        dispatch(clearMessages());
+    
+    
+        if (!transaction) {
+          dispatch(setError("No transaction information"));
+          dispatch(setLoading(false));
+        } else {
+          console.log("dispatched");
+          
+          dispatch(
+            setHistoryData(transaction)
+          );
+          dispatch(setLoading(false));
+          router.push("/dashboard/history/details");
+          setTimeout(() => {
+            window.scrollTo(0, 0);
+          }, 100);
+        }
+  };
+
   const formatDateTime = (dateString) => {
     const date = new Date(dateString);
 
@@ -79,10 +111,9 @@ const History = () => {
 
   return (
     <div className="w-full lg:h-[100vh] flex flex-1 ">
-      <UserSidebar>
-        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full lg:overflow-y-scroll">
-          <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 w-full">
-            <Header page="History" />
+      <Layout>
+        <div className="grid gap-4">
+          <div className="rounded-xl pb-10 pt-2 px-4 md:px-8 bg-neutral-800 w-full">
             <p className="font-bold md:text-lg py-4">Transactions</p>
 
             <div>
@@ -141,7 +172,8 @@ const History = () => {
                 return (
                   <div
                     key={transaction._id}
-                    className="mt-10 flex gap-4 items-center w-full"
+                    className="mt-10 flex gap-4 items-center w-full cursor-pointer hover:scale-95 duration-200"
+                    onClick={() => handleTransactionClick(transaction)}
                   >
                     <div className="w-fit">
                       <span className="w-[3rem] h-[3rem] bg-orange-300 rounded-full flex justify-center items-center">
@@ -186,7 +218,7 @@ const History = () => {
               <button
                 onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 bg-purpleColor rounded-lg disabled:opacity-50"
+                className="px-4 py-2 text-xs bg-purpleColor rounded-lg disabled:opacity-50"
               >
                 Previous
               </button>
@@ -200,14 +232,14 @@ const History = () => {
                   currentPage ===
                   Math.ceil(combinedTransactions.length / transactionsPerPage)
                 }
-                className="px-4 py-2 bg-purpleColor rounded-lg disabled:opacity-50"
+                className="px-4 py-2  text-xs bg-purpleColor rounded-lg disabled:opacity-50"
               >
                 Next
               </button>
             </div>
           </div>
         </div>
-      </UserSidebar>
+      </Layout>
     </div>
   );
 };

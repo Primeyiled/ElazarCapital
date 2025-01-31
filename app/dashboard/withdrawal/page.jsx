@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Header from "../Header";
-import { UserSidebar } from "../UserSidebar";
 import { DepositData } from "@/constants/data";
 import {
   Modal,
@@ -22,6 +21,7 @@ import {
 } from "@/lib/features/messageSlice";
 import Loader from "@/components/Loader";
 import Image from "next/image";
+import Layout from "../Layout";
 
 const Withdrawal = () => {
   const [selectedAmount, setSelectedAmount] = useState("");
@@ -75,11 +75,10 @@ const Withdrawal = () => {
       )}
       {loading && <Loader />}
 
-      <UserSidebar>
-        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full lg:overflow-y-scroll">
+      <Layout>
+        <div >
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
-            <Header page="Wthdrawal" />
-            <p className="font-medium md:text-lg py-4">
+            <p className="font-semibold md:text-lg pb-10">
               Select Payment Gateway
             </p>
             <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-3 pb-20 md:pb-0">
@@ -186,7 +185,7 @@ const Withdrawal = () => {
             </div>
           </div>
         </div>
-      </UserSidebar>
+      </Layout>
     </div>
   );
 };

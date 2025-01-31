@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { UserSidebar } from "../../UserSidebar";
 import Header from "../../Header";
 import { IconNotebook } from "@tabler/icons-react";
 import Loader from "@/components/Loader";
@@ -14,6 +13,7 @@ import {
 } from "@/lib/features/messageSlice";
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
 import { useRouter } from "next/navigation";
+import Layout from "../../Layout";
 
 const Page = () => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -106,23 +106,22 @@ const Page = () => {
       )}
       {loading && <Loader />}
 
-      <UserSidebar>
-        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">
+      <Layout>
+        <div >
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
-            <Header page=" Details" />
 
             <div className="grid place-items-center gap-10">
               <div className="px-4 md:p-10 lg:bg-neutral-800 rounded-2xl  overflow-hidden">
                 <h3 className="text-lg font-bold pt-4 pb-10 flex items-center gap-2">
                   <IconNotebook className="text-4xl" />
-                  Payment Information
+                  Withdrawal Information
                 </h3>
 
                 <p className="flex justify-between items-center text-sm md:text-lg ">
                   Payment Gateway: <span className="font-bold">{type}</span>
                 </p>
                 <p className="flex justify-between items-center text-sm md:text-lg py-6 ">
-                  Amount: <span className="font-bold">{amount}</span>
+                  Amount: <span className="font-bold">${amount}</span>
                 </p>
                 <div className="grid gap-2">
                   <h2 className=" text-sm md:text-lg whitespace-nowrap">
@@ -147,7 +146,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-      </UserSidebar>
+      </Layout>
     </div>
   );
 };

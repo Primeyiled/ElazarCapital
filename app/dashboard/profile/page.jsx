@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { UserSidebar } from "../UserSidebar";
 import Header from "../Header";
 import { MdClose, MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +13,7 @@ import {
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
+import Layout from "../Layout";
 
 const Profile = () => {
   const { userData } = useSelector((state) => state.user);
@@ -89,7 +89,7 @@ const Profile = () => {
         setTimeout(() => {
           router.push("/dashboard");
           dispatch(clearMessages());
-        }, 1000);
+        }, 100);
       } else {
         dispatch(setError(data.message || "Failed to update profile."));
       }
@@ -105,7 +105,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="w-full lg:h-[100vh]  flex flex-1 ">
+    <div className="w-full  flex flex-1 ">
       {success && modalOpen && (
         <SuccessMessages
           data={success}
@@ -121,12 +121,11 @@ const Profile = () => {
         />
       )}
       {loading && <Loader />}
-      <UserSidebar>
-        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full lg:overflow-y-scroll">
-          <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-full 2xl:h-[90vh] w-full">
-            <Header page="Profile" />
+      <Layout>
+        <div >
+          <div className="rounded-xl pb-8 pt-4 px-4 md:px-8 bg-neutral-800 h-full 2xl:h-[90vh] w-full">
             <div className="flex justify-between items-center">
-              <p className="font-medium md:text-lg py-4">My Profile</p>
+              <p className=" md:text-lg py-4 font-bold">My Profile</p>
 
               {isEditting ? (
                 <span
@@ -261,7 +260,7 @@ const Profile = () => {
             <br />
           </div>
         </div>
-      </UserSidebar>
+      </Layout>
     </div>
   );
 };

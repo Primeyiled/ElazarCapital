@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
-import { UserSidebar } from "../UserSidebar";
 import {
   CryptoPlans,
   DepositData,
@@ -30,6 +29,7 @@ import {
 import Loader from "@/components/Loader";
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
 import Image from "next/image";
+import Layout from "../Layout";
 
 const investmentPlans = {
   "Real Estate": EstatePlans,
@@ -107,11 +107,10 @@ const Page = () => {
       )}
 
       {loading && <Loader />}
-      <UserSidebar>
-        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full overflow-y-auto">
+      <Layout>
+        <div>
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto w-full">
-            <Header page="Deposit" />
-            <p className="font-medium md:text-lg py-4">
+            <p className="font-semibold md:text-lg pb-10">
               Select Payment Gateway
             </p>
             <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-3 pb-20 md:pb-0">
@@ -224,7 +223,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-      </UserSidebar>
+      </Layout>
     </div>
   );
 };

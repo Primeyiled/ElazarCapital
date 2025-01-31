@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { UserSidebar } from "../../UserSidebar";
 import Header from "../../Header";
 import { IconNotebook } from "@tabler/icons-react";
 import WalletQRCode from "../QRCode";
@@ -15,6 +14,7 @@ import {
 } from "@/lib/features/messageSlice";
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
 import { useRouter } from "next/navigation";
+import Layout from "../../Layout";
 
 const WALLET_ADDRESSES = {
   USDT: "0x6c311B7D17F5C39f71603ABaDA2971b6d6187Eee",
@@ -146,21 +146,20 @@ const Page = () => {
           status={modalOpen}
         />
       )}
-      <UserSidebar>
-        <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full  overflow-y-auto">
+      <Layout>
+        <div>
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-full 2xl:h-[90vh] w-full">
-            <Header page=" Details" />
             <div className="grid md:grid-cols-2 gap-10">
               <div className="px-4 md:px-0 rounded-2xl lg:p-6 overflow-hidden">
                 <h3 className="text-lg font-bold pt-4 pb-10 flex items-center gap-2">
                   <IconNotebook className="text-4xl" />
-                  Payment Information
+                  Deposit Information
                 </h3>
                 <p className="flex justify-between items-center text-sm md:text-md font-bold py-2">
                   Payment Gateway <span className="font-normal">{type}</span>
                 </p>
                 <p className="flex justify-between items-center text-sm md:text-md py-2 font-bold">
-                  Amount <span className="font-normal">{amount}</span>
+                  Amount <span className="font-normal">${amount}</span>
                 </p>
                 <p className="flex justify-between items-center text-sm md:text-md py-2 font-bold">
                   Investment Plan{" "}
@@ -265,7 +264,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-      </UserSidebar>
+      </Layout>
     </div>
   );
 };
