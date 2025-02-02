@@ -14,6 +14,7 @@ import {
 import { ErrorMessages, SuccessMessages } from "@/components/Messages";
 import Loader from "@/components/Loader";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const [userInfo, setUserInfo] = useState({
@@ -31,6 +32,8 @@ const Register = () => {
   const { success, error, loading, modalOpen } = useSelector(
     (state) => state.message
   );
+    const router = useRouter();
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,7 +70,7 @@ const Register = () => {
         email: userInfo.email,
         investment: userInfo.investment,
         address: userInfo.address,
-        referral: userInfo.referral,
+        referralCode: userInfo.referral,
         phoneNo: userInfo.phoneNo,
         password: userInfo.password,
       };
@@ -82,6 +85,7 @@ const Register = () => {
       const data = await response.json();
       if (response.ok) {
         dispatch(setSuccess(data.message));
+        router.push("/login");
       } else {
         dispatch(setError(data.message));
       }
@@ -213,12 +217,12 @@ const Register = () => {
                   onChange={handleChange}
                   value={userInfo.referral}
                   type="text"
-                  name="referrer"
+                  name="referral"
                   placeholder=" "
                   className="input w-full rounded-lg p-2 text-darkColor"
                 />
                 <label className="user-label text-sm">
-                  Referral Code (Optional)
+                  Referrer Code (Optional)
                 </label>
               </div>
               <div className="input-group">

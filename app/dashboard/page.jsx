@@ -17,6 +17,7 @@ import useSWR from "swr";
 import Image from "next/image";
 import CryptoChart from "@/components/CryptoChart";
 import Layout from "./Layout";
+import { setError } from "@/lib/features/messageSlice";
 
 const fetcher = async (url) => {
   const controller = new AbortController();
@@ -44,6 +45,7 @@ const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
+  const [copied, setCopied] = useState(false)
 
   const { data, error, isLoading } = useSWR("/api/user/profile", fetcher, {
     revalidateOnFocus: false,
@@ -56,18 +58,28 @@ const Page = () => {
 
   useEffect(() => {
    if (error && error.status === 401) {
-    // Redirect to login if unauthorized
     router.push("/login");
   } else if (data && data.profile) {
-    // Set user data only if the profile is returned
     dispatch(setUserData(data.profile));
   }
   }, [data, error, dispatch, router]);
 
-  // Show loader while fetching data
   if (isLoading) {
     return <Loader />;
   }
+
+  const handleCopy = async (code) => {
+      if (typeof window !== "undefined" && navigator.clipboard) {
+        try {
+          if (!code) throw new Error("Referrer code is not available.");
+          await navigator.clipboard.writeText(code);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+          dispatch(setError("Error copying wallet address"));
+        }
+      }
+    };
 
 
   const accumulatedBalance =
@@ -199,7 +211,7 @@ const Page = () => {
                       Refer us & Earn
                     </h1>
                     <p className="text-xs">
-                      Use the link to invite your friends
+                      Use your unique referrer code to invite your friends
                     </p>
                   </div>
                   <div className="size-10 flex justify-center items-center bg-purpleColor rounded-full p-2">
@@ -208,9 +220,18 @@ const Page = () => {
                 </div>
                 <div className="py-2 px-4 bg-gray-100 rounded-full w-full flex justify-between items-center">
                   <p className="text-darkColor text-sm">
-                    https://www.mywebsite.com...
+                  {userData?.referralCode ? userData.referralCode : "Loading..."}
                   </p>
-                  <MdCopyAll className="text-darkColor text-2xl" />
+                  {
+                    copied ? <p className="text-green-500 text-sm">Copied</p> : 
+                  <MdCopyAll className="text-darkColor text-2xl cursor-pointer"  onClick={()=>handleCopy(userData.referralCode)}/>
+                  }
+                </div>
+                <div className="py-2 px-4 w-full flex justify-end items-center">
+                  <p className="text-white text-sm font-semibold flex gap-2">
+                  Your Referrals:  <span>{userData?.referralCount ? userData.referralCount : "Loading..."}</span>
+                  </p>
+                  
                 </div>
               </div>
             </div>

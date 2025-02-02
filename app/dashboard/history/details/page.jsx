@@ -93,9 +93,9 @@ const Page = () => {
         />
       )}
       {loading && <Loader />}
-      <div className="rounded-xl pb-8 pt-4 px-2 md:px-8 bg-neutral-800 min-h-screen 2xl:h-[90vh] w-full ">
-        <div className="max-w-xl mx-auto">
-          <div className="px-4 md:px-0 rounded-2xl lg:p-6">
+      <div className="rounded-xl pb-20 pt-4 px-2 md:px-8 bg-neutral-800 w-full h-full gird">
+        <div className="max-w-xl mx-auto h-full">
+          <div className="px-4 md:px-0 rounded-2xl lg:p-6 h-full">
             <h3 className="text-lg font-bold pt-4 pb-10 flex items-center gap-2">
               <IconNotebook className="text-4xl" />
               Transaction Information
@@ -165,19 +165,19 @@ const Page = () => {
               </p>
             )}
             {historyData?.paymentSlip && (
-              <div className="flex justify-between items-center text-sm md:text-md py-2 font-bold flex-col gap-4 mt-6">
+              <div className="flex justify-between items-center text-sm md:text-md py-2 font-bold flex-col gap-4 mt-2">
                 Payment Slip:{" "}
                   <Image width={200} height={200} src={historyData.paymentSlip} alt="payment-slip" className="rounded-xl"/>
                 
               </div>
             )}
-          </div>
           <button
             onClick={handleDeleteTransaction}
-            className="flex gap-2 text-xs mt-6 bg-purpleColor p-3 rounded-xl items-center hover:bg-neutral-900 cursor-pointer duration-150 text-white float-end"
+            className="flex gap-2 text-xs mt-2 bg-purpleColor p-3 rounded-xl items-center hover:bg-neutral-900 cursor-pointer duration-150 text-white float-end"
           >
             <IconTrash className="text-4xl" /> Delete
           </button>
+          </div>
         </div>
       </div>
     </Layout>

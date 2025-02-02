@@ -238,6 +238,52 @@ export const Dashinks = [
   // },
 ];
 
+export const AdminDashinks = [
+  {
+    label: "Dashboard",
+    href: "/admin",
+    icon: (
+      <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    ),
+  },
+  {
+    label: "Deposits",
+    href: "/admin/deposits",
+    icon: (
+      <IconCreditCardPay className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    ),
+  },
+  {
+    label: "Withdrawals",
+    href: "/admin/withdrawals",
+    icon: (
+      <IconCreditCardRefund className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    ),
+  },
+  // {
+  //   label: "History",
+  //   href: "/dashboard/history",
+  //   icon: (
+  //     <IconHistory className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+  //   ),
+  // },
+  // {
+  //   label: "Profile",
+  //   href: "/dashboard/profile",
+  //   icon: (
+  //     <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+  //   ),
+  // },
+ 
+  // {
+  //   label: "Logout",
+  //   href: "#",
+  //   icon: (
+  //     <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+  //   ),
+  // },
+];
+
 export const DepositData = [
   {
     name: "USDT",
