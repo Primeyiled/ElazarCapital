@@ -55,7 +55,7 @@ export default function Sidebar({ sidebarOpen, closeSidebar }) {
           <Fragment key={idx}>
             <Link
               href={link.href}
-              className="py-2.5 px-4 rounded transition duration-200  flex gap-2 group"
+              className="py-4 px-4 rounded transition duration-200  flex gap-2 group"
               onClick={closeSidebar}
             >
               <span>{link.icon}</span>

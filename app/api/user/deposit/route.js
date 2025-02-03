@@ -13,15 +13,16 @@ export const config = {
 
 export async function POST(request) {
   try {
+    
+        await dbConnect();
+
     const authResult = await authenticate(request);
     if (!authResult.isAuthenticated) {
       return NextResponse.json(
-        { success: false, message: "Unauthorized." },
+        { success: false, message: "Unauthorized. Please log in to continue." },
         { status: 401 }
       );
     }
-
-    await dbConnect();
 
     const user = await User.findById(authResult.userId).select("userName");
     

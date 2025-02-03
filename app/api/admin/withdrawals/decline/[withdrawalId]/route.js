@@ -1,8 +1,8 @@
 import { authenticate } from '@/lib/middleware/auth';
-import Deposit from '@/lib/model/deposit';
 import User from '@/lib/model/user';
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
+import Withdraw from '@/lib/model/withdraw';
 
 export async function PUT(req, { params }) {
   try {
@@ -26,33 +26,33 @@ export async function PUT(req, { params }) {
       );
     }
 
-    const { depositId } = await params;
+    const { withdrawalId } = await params;
 
-    if (!depositId) {
+    if (!withdrawalId) {
       return NextResponse.json(
-        { message: 'Deposit ID is required' },
+        { message: 'Withdrawal ID is required' },
         { status: 400 }
       );
     }
 
-    // Find the deposit
-    const deposit = await Deposit.findById(depositId);
+    // Find the withdrawal
+    const withdrawal = await Withdraw.findById(withdrawalId);
 
-    if (!deposit) {
+    if (!withdrawal) {
       return NextResponse.json(
-        { message: 'Deposit not found' },
+        { message: 'Withdrawal not found' },
         { status: 404 }
       );
     }
 
-    if (deposit.status === 'Declined') {
+    if (withdrawal.status === 'Declined') {
       return NextResponse.json(
-        { message: 'Deposit is already Declined' },
+        { message: 'Withdrawal is already Declined' },
         { status: 400 }
       );
     }
 
-    const user = await User.findById(deposit.user);
+    const user = await User.findById(withdrawal.user);
 
     if (!user) {
       return NextResponse.json(
@@ -61,23 +61,24 @@ export async function PUT(req, { params }) {
       );
     }
 
-    if (deposit.status === 'Approved') {
-      user.totalInvest -= deposit.amount;
-    }   
+    if (withdrawal.status === 'Approved') {
+      user.totalInvest -= withdrawal.amount;
+    }
+    
 
-    deposit.status = 'Declined';
-    await deposit.save();
+    withdrawal.status = 'Declined';
+    await withdrawal.save();
 
     await user.save();
 
     return NextResponse.json(
-      { message: 'Deposit declined successfully', deposit },
+      { message: 'Withdrawal declined successfully', withdrawal },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Decline deposit error:', error);
+    console.error('Decline withdrawal error:', error);
     return NextResponse.json(
-      { message: 'An error occurred while declining the deposit' },
+      { message: 'An error occurred while declining the withdrawal' },
       { status: 500 }
     );
   }

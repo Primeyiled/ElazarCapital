@@ -6,7 +6,7 @@ import User from "@/lib/model/user";
 
 export async function POST(request) {
   try {
-    // Authenticate the user
+    await dbConnect();
     const authResult = await authenticate(request);
     if (!authResult.isAuthenticated) {
       return NextResponse.json(
@@ -15,7 +15,6 @@ export async function POST(request) {
       );
     }
 
-    await dbConnect();
 
     const { type, amount, wallet } = await request.json();
     
@@ -49,6 +48,7 @@ export async function POST(request) {
       amount,
       wallet,
       user: authResult.userId,
+      userName: user.userName,
     });
 
     // Save the withdrawal to the database

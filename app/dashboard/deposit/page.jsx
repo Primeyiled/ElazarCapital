@@ -15,10 +15,8 @@ import {
   ModalFooter,
   ModalTrigger,
 } from "@/components/ui/AnimatedModal";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { setWithdrawalData } from "@/lib/features/withdrawalSlice";
 import { setDepositData } from "@/lib/features/depositSlice";
 import {
   clearMessages,

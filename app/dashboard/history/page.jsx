@@ -38,11 +38,7 @@ const History = () => {
   }
 
   if (error) {
-    return (
-      <div className="text-red-500 text-center mt-8">
-        Error loading history data
-      </div>
-    );
+   dispatch(setError("Error loading history"))
   }
 
   const { deposits, withdrawals } = data?.history || {
@@ -113,7 +109,7 @@ const History = () => {
     <div className="w-full lg:h-[100vh] flex flex-1 ">
       <Layout>
         <div className="grid gap-4">
-          <div className="rounded-xl pb-10 pt-2 px-4 md:px-8 bg-neutral-800 w-full">
+          <div className="rounded-xl pb-8 pt-2 px-4 md:px-8 bg-neutral-800 w-full">
             <p className="font-bold md:text-lg py-4">Transactions</p>
 
             <div>

@@ -45,15 +45,12 @@ export async function PUT(req, { params }) {
       );
     }
 
-    else if (deposit.status !== 'Pending') {
+    if (deposit.status === 'Approved') {
       return NextResponse.json(
-        { message: `Deposit is already ${deposit.status}` },
+        { message: 'Deposit is already Approved' },
         { status: 400 }
       );
     }    
-
-    deposit.status = 'Approved';
-    await deposit.save();
 
     const user = await User.findById(deposit.user);
 
@@ -63,9 +60,17 @@ export async function PUT(req, { params }) {
         { status: 404 }
       );
     }
-    
 
-    user.totalInvest += deposit.amount;
+    if (deposit.status === 'Declined') {
+      user.totalInvest += deposit.amount;
+    }
+    
+    if (deposit.status === 'Pending') {
+      user.totalInvest += deposit.amount;
+    }
+
+    deposit.status = 'Approved';
+    await deposit.save();
     await user.save();
 
     return NextResponse.json(

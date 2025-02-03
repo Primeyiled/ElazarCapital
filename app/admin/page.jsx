@@ -21,50 +21,39 @@ const fetcher = async (url) => {
 };
 
 const Page = () => {
-  // Fetch all users using useSWR
   const { data, error, isLoading } = useSWR("/api/admin/users/", fetcher);
 
-  // Redux state and dispatch
   const { userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(10); // Number of users per page
+  const [usersPerPage] = useState(10); 
 
-  // Update Redux state when data is fetched
   useEffect(() => {
     if (error) {
-      console.error("Error fetching users:", error);
       if (error.status === 401) {
-        router.push("/login"); // Redirect to login if unauthorized
+        router.push("/login");
       }
     } else if (data && data.users) {
-      console.log("Fetched users:", data.users); // Debugging
-      dispatch(setUserData(data.users)); // Update Redux state with fetched users
+      const sortedUsers = [...data.users].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      dispatch(setUserData(sortedUsers));
     }
   }, [data, error, dispatch, router]);
 
-  // Show loader while data is being fetched
   if (isLoading) {
     return <Loader />;
   }
 
-  // Ensure userData is an array
   const users = Array.isArray(userData) ? userData : [];
 
-  // Pagination logic
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleUserClick = (user) => {
-    console.log(user);
-
     dispatch(setLoading(true));
     dispatch(clearMessages());
 
@@ -119,7 +108,7 @@ const Page = () => {
           <div className="rounded-xl pb-8 lg:px-8 bg-neutral-800 w-full h-full mt-4">
             {currentUsers.length > 0 ? (
               currentUsers.map((user) => {
-                const { formattedDate, formattedTime } = formatDateTime(
+                const { formattedDate } = formatDateTime(
                   user.createdAt
                 );
 
@@ -151,7 +140,7 @@ const Page = () => {
                       </div>
                       <div className="flex flex-col gap-2 w-fit items-end">
                         <h2 className="text-sm font-bold">
-                          {user.totalInvest}
+                          ${user.totalInvest}
                         </h2>
                         <p className="text-xs text-gray-300 whitespace-nowrap">
                           {formattedDate}
@@ -162,7 +151,7 @@ const Page = () => {
                 );
               })
             ) : (
-              <p>No users found.</p>
+              <p className="py-4">No users found.</p>
             )}
           </div>
 

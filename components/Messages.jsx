@@ -4,8 +4,8 @@ import { MdCheck, MdClose } from "react-icons/md";
 export const SuccessMessages = ({data, isOpen, status}) => {
     
   return (
-    <div className= {status ? "fixed flex justify-center items-center h-screen w-full z-50" : "hidden"}>
-        <div className="bg-darkColor h-screen w-full absolute z-0 opacity-90"></div>
+    <div className= {status ? "fixed flex justify-center items-center h-screen w-full z-50 top-0 left-0 right-0" : "hidden"}>
+        <div className="bg-darkColor h-screen w-full absolute z-0 opacity-90 top-0 left-0 right-0"></div>
 
       <div className="bg-white rounded-xl p-10 w-[80%] text-darkColor md:w-[50%] lg:w-[30%] max-w-[90%] z-10 relative">
         <MdClose className="absolute right-0 -top-10 text-white text-3xl cursor-pointer" onClick={isOpen}/>
@@ -27,8 +27,8 @@ export const SuccessMessages = ({data, isOpen, status}) => {
 export const ErrorMessages = ({data, isOpen, status}) => {
     
   return (
-    <div className= {status ? "fixed flex justify-center items-center h-screen w-full z-[1000]" : "hidden"}>
-        <div className="bg-darkColor h-screen w-full absolute z-0 opacity-90"></div>
+    <div className= {status ? "fixed flex justify-center items-center h-screen w-full z-[1000] top-0 left-0 right-0" : "hidden"}>
+        <div className="bg-darkColor h-screen w-full absolute z-0 opacity-90 top-0 left-0 right-0"></div>
 
       <div className="bg-white rounded-xl p-10 w-[80%] text-darkColor md:w-[50%] lg:w-[30%] max-w-[90%] z-10 relative">
         <MdClose className="absolute right-0 -top-10 text-white text-3xl cursor-pointer" onClick={isOpen}/>

@@ -23,11 +23,9 @@ const Page = () => {
     (state) => state.message
   );
   const dispatch = useDispatch();
-    const router = useRouter();
-  
+  const router = useRouter();
+
   const withdrawalData = useSelector((state) => state.withdrawal);
-  console.log(withdrawalData);
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,6 +53,7 @@ const Page = () => {
         // setMessage({ success: result.message, error: "" });
         dispatch(setSuccess(result.message));
         dispatch(setLoading(false));
+        router.push("/dashboard/withdrawal/");
       } else {
         dispatch(setError(result.message));
         dispatch(setLoading(false));
@@ -72,12 +71,12 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if(!withdrawalData.amount ||
+    if (
+      !withdrawalData.amount ||
       !withdrawalData.walletAddress ||
-      !withdrawalData.type){
-
-    }
-    else  {
+      !withdrawalData.type
+    ) {
+    } else {
       setAmount(withdrawalData.amount);
       setWalletAddress(withdrawalData.walletAddress);
       setType(withdrawalData.type);
@@ -107,9 +106,8 @@ const Page = () => {
       {loading && <Loader />}
 
       <Layout>
-        <div >
+        <div>
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
-
             <div className="grid place-items-center gap-10">
               <div className="px-4 md:p-10 lg:bg-neutral-800 rounded-2xl  overflow-hidden">
                 <h3 className="text-lg font-bold pt-4 pb-10 flex items-center gap-2">
