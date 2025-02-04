@@ -1,64 +1,87 @@
-import dbConnect from '@/lib/dbConnect';
-import User from '@/lib/model/user';
-import bcrypt from 'bcryptjs';
-import { generateToken } from '@/lib/utils/auth';
-import { NextResponse } from 'next/server';
+import dbConnect from "@/lib/dbConnect";
+import User from "@/lib/model/user";
+import bcrypt from "bcryptjs";
+import { generateToken } from "@/lib/utils/auth";
+import { NextResponse } from "next/server";
+import sendOTP from "@/lib/utils/sendOTP";
 
 export async function POST(req) {
-  const { email, password } = await req.json();
+  const { email, password, otp } = await req.json();
 
   try {
-    // Validate input
     if (!email || !password) {
       return NextResponse.json(
-        { message: 'Email and password are required' },
+        { message: "Email and password are required" },
         { status: 400 }
       );
     }
 
-    // Establish database connection
     await dbConnect();
+    const generateOTP = () => {
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    };
 
-    // Look for the user in the database
-    const user = await User.findOne({ email }).select('+password'); // Explicitly select password field
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return NextResponse.json(
-        { message: 'Invalid credentials' }, // Generic message for security
+        { message: "Invalid credentials" },
         { status: 401 }
       );
     }
 
-    // Compare the password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return NextResponse.json(
-        { message: 'Invalid credentials' }, // Generic message for security
+        { message: "Invalid credentials" },
         { status: 401 }
       );
     }
 
-    // Generate JWT token
-    const token = generateToken(user._id, user.email);
+    if (!otp) {
+      const otp = generateOTP();
+      user.otp = otp;
+      user.otpExpires = new Date(Date.now() + 10 * 60000);
+      await user.save();
 
-    // Respond with success and set the token in the cookies
-    const response = NextResponse.json(
-      { message: 'Login successful', profile: user  },
-      { status: 200 }
-    );
+      await sendOTP(email, otp);
 
-    response.cookies.set('token', token, {
-      httpOnly: true, // Prevent client-side JavaScript access
-      secure: process.env.NODE_ENV === 'production', // Ensure cookies are only sent over HTTPS in production
-      maxAge: 86400,
-      path: '/', // Make the cookie available across the entire site
-      sameSite: 'strict', // Prevent CSRF attacks
-    });
+      return NextResponse.json(
+        { message: "OTP sent to your email" },
+        { status: 200 }
+      );
+    } else {
+      if (user.otp !== otp || user.otpExpires < new Date()) {
+        return NextResponse.json(
+          { message: "Invalid or expired OTP" },
+          { status: 401 }
+        );
+      }
 
-    return response;
+      user.otp = undefined;
+      user.otpExpires = undefined;
+      await user.save();
+
+      const token = generateToken(user._id, user.email);
+
+      const response = NextResponse.json(
+        { message: "Login successful", profile: user },
+        { status: 200 }
+      );
+
+      response.cookies.set("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 86400,
+        path: "/",
+        sameSite: "strict",
+      });
+
+      return response;
+    }
   } catch (error) {
-    console.error('Login error:', error);
+    console.error("Login error:", error);
     return NextResponse.json(
-      { message: 'An error occurred while logging in' },
+      { message: "An error occurred while logging in" },
       { status: 500 }
     );
   }

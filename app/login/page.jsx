@@ -19,64 +19,83 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const router = useRouter();
-
-  const [userInfo, setUserInfo] = useState({
-    email: "",
-    password: "",
-  });
   const dispatch = useDispatch();
   const { success, error, loading, modalOpen } = useSelector(
     (state) => state.message
   );
 
+  // State for email, password, and OTP
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+    password: "",
+  });
+  const [otp, setOtp] = useState(""); // State for OTP input
+  const [showOtpField, setShowOtpField] = useState(false); // Toggle OTP field visibility
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setUserInfo((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
+  const handleOtpChange = (e) => {
+    setOtp(e.target.value); // Update OTP input
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     dispatch(setLoading(true));
     dispatch(clearMessages());
 
+    // Validate email and password
     if (userInfo.email === "" || userInfo.password === "") {
       dispatch(setError("All fields are required"));
       dispatch(setLoading(false));
-    } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
       dispatch(setError("Please enter a valid email"));
       dispatch(setLoading(false));
-    } else {
-      try {
-        const response = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userInfo),
-        });
+      return;
+    }
 
-        const data = await response.json();
+    try {
+      // Step 1: Send email and password to request OTP
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userInfo.email,
+          password: userInfo.password,
+          otp: showOtpField ? otp : undefined, // Include OTP only if OTP field is visible
+        }),
+      });
 
-        if (response.ok) {
-          // dispatch(setSuccess("Login successful!"));
+      const data = await response.json();
+
+      if (response.ok) {
+        if (!showOtpField) {
+          // If OTP field is not visible, show it after OTP is sent
+          setShowOtpField(true);
+          dispatch(setSuccess("OTP sent to your email"));
+        } else {
+          // If OTP is verified, log the user in
           dispatch(setUserData(data.profile));
           router.push("/dashboard");
-          console.log("success");
-          
-        } else {
-          dispatch(setError(data.message || "Invalid credentials"));
         }
-      } catch (error) {
-        console.error("Error logging in:", error);
-        dispatch(setError("An error occurred during login"));
+      } else {
+        dispatch(setError(data.message || "Invalid credentials"));
       }
-      dispatch(setLoading(false));
+    } catch (error) {
+      console.error("Error logging in:", error);
+      dispatch(setError("An error occurred during login"));
     }
+    dispatch(setLoading(false));
   };
 
   const handleModalClose = () => {
@@ -106,7 +125,7 @@ const Login = () => {
         <div className="col-span-1 hidden lg:flex bg-white w-full rounded-2xl h-[80vh] p-10 justify-center items-center text-center">
           <div className="grid place-items-center gap-6">
             <Image
-            unoptimized
+              unoptimized
               width={500}
               height={500}
               src="/key.gif"
@@ -116,9 +135,6 @@ const Login = () => {
             <h1 className="text-4xl font-bold text-darkColor">
               Login safely, stay protected. Your account is our top priority.
             </h1>
-            {/* <p className="text-xl text-darkColor">
-              Join us and be part of something extraordinary
-            </p> */}
           </div>
         </div>
         <form
@@ -155,20 +171,39 @@ const Login = () => {
               />
               <label className="user-label text-sm">Password</label>
             </div>
+
+            {/* OTP Field (Visible only after OTP is sent) */}
+            {showOtpField && (
+              <div className="input-group mt-4">
+                <input
+                  type="text"
+                  name="otp"
+                  value={otp}
+                  onChange={handleOtpChange}
+                  className="input w-full rounded-lg p-2 text-darkColor"
+                  placeholder=" "
+                />
+                <label className="user-label text-sm">OTP</label>
+              </div>
+            )}
           </div>
+
           <div className="mt-4 w-full flex items-center justify-between">
             <div className="flex gap-2 items-center">
               <input type="checkbox" />
               <span className="text-sm"> Remember me</span>
             </div>
             <Link href="/forgot-password" className="text-sm font-bold">
-              {" "}
               Forgot Password
             </Link>
           </div>
+
           <div className="w-full">
-            <button className="mt-6 md:mt-6 bg-redColor text-white py-3 md:py-4 px-10 text-sm rounded-lg w-full md:text-[16px]">
-              Log in
+            <button
+              type="submit"
+              className="mt-6 md:mt-6 bg-redColor text-white py-3 md:py-4 px-10 text-sm rounded-lg w-full md:text-[16px]"
+            >
+              {showOtpField ? "Verify OTP" : "Log in"}
             </button>
             <p className="pt-4">
               New User?{" "}
