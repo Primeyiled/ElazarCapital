@@ -27,7 +27,7 @@ export default function Layout({ children }) {
         )}
 
         {/* Main content */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col">
           {/* Header */}
           <Header setSidebarOpen={setSidebarOpen} />
 

@@ -29,8 +29,8 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [otp, setOtp] = useState(""); // State for OTP input
-  const [showOtpField, setShowOtpField] = useState(false); // Toggle OTP field visibility
+  const [otp, setOtp] = useState("");
+  const [showOtpField, setShowOtpField] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,7 +63,6 @@ const Login = () => {
     }
 
     try {
-      // Step 1: Send email and password to request OTP
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
@@ -80,11 +79,9 @@ const Login = () => {
 
       if (response.ok) {
         if (!showOtpField) {
-          // If OTP field is not visible, show it after OTP is sent
           setShowOtpField(true);
-          dispatch(setSuccess("OTP sent to your email"));
+          dispatch(setSuccess("We have sent a verification code to your email address."));
         } else {
-          // If OTP is verified, log the user in
           dispatch(setUserData(data.profile));
           router.push("/dashboard");
         }
@@ -139,51 +136,57 @@ const Login = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className=" p-4  md:p-8 rounded-2xl md:h-[80vh] h-full flex justify-center items-center flex-col"
+          className="p-4 md:p-8 rounded-2xl md:h-[80vh] h-full flex justify-center items-center flex-col"
         >
           <div className="col-span-1 mt-4 lg:mt-0 w-full">
-            <h1 className="text-3xl text-center font-bold pb-6">
-              Welcome Back
-            </h1>
+            {/* Conditionally render email and password fields only if OTP hasn't been sent */}
+            {!showOtpField ? (
+              <>
+                <h1 className="text-3xl text-center font-bold pb-6">
+                  Welcome Back
+                </h1>
+                <div className="input-group">
+                  <input
+                    type="email"
+                    name="email"
+                    value={userInfo.email}
+                    onChange={handleChange}
+                    className="input w-full rounded-lg px-2 py-3 text-darkColor"
+                    placeholder=" "
+                  />
+                  <label className="user-label text-sm" htmlFor="email">
+                    Email
+                  </label>
+                </div>
 
-            <div className="input-group">
-              <input
-                type="email"
-                name="email"
-                value={userInfo.email}
-                onChange={handleChange}
-                className="input w-full rounded-lg p-2 text-darkColor"
-                placeholder=" "
-              />
-              <label className="user-label text-sm" htmlFor="email">
-                Email
-              </label>
-            </div>
-
-            <div className="input-group">
-              <input
-                onChange={handleChange}
-                value={userInfo.password}
-                type="password"
-                name="password"
-                placeholder=" "
-                className="input w-full rounded-lg p-2 text-darkColor"
-              />
-              <label className="user-label text-sm">Password</label>
-            </div>
-
-            {/* OTP Field (Visible only after OTP is sent) */}
-            {showOtpField && (
-              <div className="input-group mt-4">
-                <input
-                  type="text"
-                  name="otp"
-                  value={otp}
-                  onChange={handleOtpChange}
-                  className="input w-full rounded-lg p-2 text-darkColor"
-                  placeholder=" "
-                />
-                <label className="user-label text-sm">OTP</label>
+                <div className="input-group">
+                  <input
+                    onChange={handleChange}
+                    value={userInfo.password}
+                    type="password"
+                    name="password"
+                    placeholder=" "
+                    className="input w-full rounded-lg px-2 py-3 text-darkColor"
+                  />
+                  <label className="user-label text-sm">Password</label>
+                </div>
+              </>
+            ) : (
+              <div className="">
+                <h1 className="text-3xl text-center font-bold pb-6">
+                  OTP Verification
+                </h1>
+                <div className="input-group mt-4">
+                  <input
+                    type="text"
+                    name="otp"
+                    value={otp}
+                    onChange={handleOtpChange}
+                    className="input w-full rounded-lg px-2 py-3 text-darkColor"
+                    placeholder=""
+                  />
+                  <label className="user-label text-sm">OTP</label>
+                </div>
               </div>
             )}
           </div>
@@ -191,9 +194,9 @@ const Login = () => {
           <div className="mt-4 w-full flex items-center justify-between">
             <div className="flex gap-2 items-center">
               <input type="checkbox" />
-              <span className="text-sm"> Remember me</span>
+              <span className="text-sm">Remember me</span>
             </div>
-            <Link href="/forgot-password" className="text-sm font-bold">
+            <Link href="/password-reset" className="text-sm font-bold">
               Forgot Password
             </Link>
           </div>

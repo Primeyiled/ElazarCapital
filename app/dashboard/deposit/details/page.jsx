@@ -49,6 +49,9 @@ const Page = () => {
       setInvestment(depositData.investment);
       setWalletAddress(WALLET_ADDRESSES[depositData.type] || "");
     }
+
+    window.scrollTo(0, 1);
+    window.scrollTo(0, 0);
   }, [depositData, router]);
 
   const handleCopyAddress = async () => {
@@ -131,7 +134,7 @@ const Page = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-1 bg-neutral-800">
+    <div className="w-full flex flex-1 bg-neutral-800">
       {success && modalOpen && (
         <SuccessMessages
           data={success}
@@ -147,7 +150,7 @@ const Page = () => {
         />
       )}
       <Layout>
-        <div>
+
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-full 2xl:h-[90vh] w-full">
             <div className="grid md:grid-cols-2 gap-10">
               <div className="px-4 md:px-0 rounded-2xl lg:p-6 overflow-hidden">
@@ -263,7 +266,7 @@ const Page = () => {
               </button>
             </div>
           </div>
-        </div>
+
       </Layout>
     </div>
   );
