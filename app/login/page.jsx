@@ -80,10 +80,18 @@ const Login = () => {
       if (response.ok) {
         if (!showOtpField) {
           setShowOtpField(true);
-          dispatch(setSuccess("We have sent a verification code to your email address."));
+          dispatch(
+            setSuccess(
+              "We have sent a verification code to your email address."
+            )
+          );
         } else {
           dispatch(setUserData(data.profile));
-          router.push("/dashboard");
+          if (data.profile.role === 1) {
+            router.push("/admin");
+          } else {
+            router.push("/dashboard");
+          }
         }
       } else {
         dispatch(setError(data.message || "Invalid credentials"));

@@ -8,13 +8,8 @@
         background-color: #f4f4f4;
       }
       .email-container {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #ffffff;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
       .header {
         margin-bottom: 20px;
@@ -22,30 +17,19 @@
         justify-content: space-between;
         align-items: center;
       }
-      .otp {
-        font-size: 24px;
-        font-weight: bold;
-        color: #000000;
-        margin-top: 10px;
-      }
       .footer {
-        text-align: center;
         font-size: 14px;
         color: #000000;
         margin-top: 20px;
       }
       .footer a {
-        color: #000000; /* Same primary color */
+        color: #000000;
         text-decoration: none;
       }
       .text {
         color: rgb(0, 0, 0);
         font-size: 14px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin:30px 0;
+        margin: 30px 0;
       }
     </style>
   </head>
@@ -58,11 +42,17 @@
           width="70"
         />
       </div>
-      <hr>
-      <p class="text">Please use the following One-Time Password (OTP) to complete your login.</p>
-      <p class="text">Your One Time Password: <span class="otp">${otp}</span></p>
+      <hr />
+      <p class="text">
+        Please use the following One-Time Password (OTP) to complete your login.
+      </p>
+      <p class="text">Your One Time Password:</p>
+      <h2 class="otp">${otp}</h2>
       <div class="footer">
-        <p>If you did not authorize this login attempt, please contact us immediately.</p>
+        <p>
+          If you did not authorize this login attempt, please contact us
+          immediately.
+        </p>
         <p>Thank you for using our service!</p>
         <p>Swizzfunds Team</p>
       </div>
