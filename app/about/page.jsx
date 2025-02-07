@@ -1,6 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import Heading from "@/components/Heading";
+import TransitionWrapper from "@/components/TransitionWrapper";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -20,30 +21,36 @@ const page = () => {
       <div>
         <div className="flex max-w-7xl mx-auto px-8 gap-10 lg:gap-32 mt-20 items-center">
           <div className="w-full ">
-            <h2 className="text-3xl lg:text-5xl/[4rem]  text-white font-bold">
-              The Vision that drives our Team
-            </h2>
-            <p className="py-10 md:text-xl/[2rem]">
-              Explore the foundations of Plax and how our purpose-driven start
-              has shaped our identity. From initial challenges to realizing our
-              vision of simplifying cross-border payments, this purposeful
-              journey has led Plax to become a leading force in the financial
-              revolution.
-            </p>
+            <TransitionWrapper>
+              <h2 className="text-3xl lg:text-5xl/[4rem]  text-white font-bold">
+                The Vision that drives our Team
+              </h2>
+            </TransitionWrapper>
+            <TransitionWrapper>
+              <p className="py-10 md:text-xl/[2rem]">
+                Explore the foundations of Plax and how our purpose-driven start
+                has shaped our identity. From initial challenges to realizing
+                our vision of simplifying cross-border payments, this purposeful
+                journey has led Plax to become a leading force in the financial
+                revolution.
+              </p>
+            </TransitionWrapper>
             <div className="flex gap-6">
               <span className="bg-[#03A6A6] size-8 rounded-full flex justify-center items-center p-2">
                 <MdCheck className="font-bold text-sm" />
               </span>{" "}
-              <div>
-                <h3 className="flex items-center gap-4 font-bold text-xl pb-4">
-                  {" "}
-                  Transformative Vision
-                </h3>
-                <p className="text-md">
-                  Discover how Plax's initial vision was focused on transforming
-                  the way people transact globally.
-                </p>
-              </div>
+              <TransitionWrapper>
+                <div>
+                  <h3 className="flex items-center gap-4 font-bold text-xl pb-4">
+                    {" "}
+                    Transformative Vision
+                  </h3>
+                  <p className="text-md">
+                    Discover how Plax's initial vision was focused on
+                    transforming the way people transact globally.
+                  </p>
+                </div>
+              </TransitionWrapper>
             </div>
           </div>
           <div className="w-full">
@@ -84,42 +91,62 @@ const page = () => {
         </div>
 
         <div className="bg-[#f2fafa] py-32">
-          <h2 className="max-w-2xl mx-auto text-greenColor text-3xl lg:text-5xl/[4rem] text-center font-bold">
-            Our Strengths: The Trust Base of our users
-          </h2>
+          <TransitionWrapper>
+            <h2 className="max-w-2xl mx-auto text-greenColor text-3xl lg:text-5xl/[4rem] text-center font-bold">
+              Our Strengths: The Trust Base of our users
+            </h2>
+          </TransitionWrapper>
 
           <div className="flex max-w-7xl mx-auto px-8 gap-10 mt-20 flex-col lg:flex-row">
             <div className="text-darkColor grid gap-4">
-              <MdPublic className="text-6xl text-redColor" />
-              <h3 className="text-[22px] font-semibold text-greenColor">
-                Connected Global Network
-              </h3>
-              <p className="text-[#898d96] text-lg">
-                Discover how our global network, spanning more than 170
-                countries, facilitates international transactions and connects
-                people around the world.
-              </p>
+              <TransitionWrapper>
+                <MdPublic className="text-6xl text-redColor" />
+              </TransitionWrapper>
+              <TransitionWrapper>
+                <h3 className="text-[22px] font-semibold text-greenColor">
+                  Connected Global Network
+                </h3>
+              </TransitionWrapper>
+              <TransitionWrapper>
+                <p className="text-[#898d96] text-lg">
+                  Discover how our global network, spanning more than 170
+                  countries, facilitates international transactions and connects
+                  people around the world.
+                </p>
+              </TransitionWrapper>
             </div>
             <div className="text-darkColor grid gap-4">
-              <MdSecurity className="text-6xl text-redColor" />
-              <h3 className="text-[22px] font-semibold text-greenColor">
-                Robust Security
-              </h3>
-              <p className="text-[#898d96] text-lg">
-                Learn about the security standards that are at the heart of
-                Plax, guaranteeing the protection of our users' financial and
-                personal information.
-              </p>
+              <TransitionWrapper>
+                <MdSecurity className="text-6xl text-redColor" />
+              </TransitionWrapper>
+              <TransitionWrapper>
+                <h3 className="text-[22px] font-semibold text-greenColor">
+                  Robust Security
+                </h3>
+              </TransitionWrapper>
+              <TransitionWrapper>
+                <p className="text-[#898d96] text-lg">
+                  Learn about the security standards that are at the heart of
+                  Plax, guaranteeing the protection of our users' financial and
+                  personal information.
+                </p>
+              </TransitionWrapper>
             </div>
             <div className="text-darkColor grid gap-4">
-              <MdCalculate className="text-6xl text-redColor" />
-              <h3 className="text-[22px] font-semibold text-greenColor">
-                Continuous Innovation
-              </h3>
-              <p className="text-[#898d96] text-lg">
-                Explore how constant innovation drives our growth, allowing us
-                to offer advanced and accessible financial solutions.
-              </p>
+              <TransitionWrapper>
+                <MdCalculate className="text-6xl text-redColor" />
+              </TransitionWrapper>
+              <TransitionWrapper>
+                <h3 className="text-[22px] font-semibold text-greenColor">
+                  Continuous Innovation
+                </h3>
+              </TransitionWrapper>
+              <TransitionWrapper>
+                <p className="text-[#898d96] text-lg">
+                  Explore how constant innovation drives our growth, allowing us
+                  to offer advanced and accessible financial solutions.
+                </p>
+              </TransitionWrapper>
             </div>
           </div>
         </div>
@@ -197,24 +224,30 @@ const page = () => {
         </div>
 
         <div
-          style={{ backgroundImage: "url(/bgAbout.png)" }}
-          className="py-28 lg:py-48 px-8 bg-center bg-cover my-20 "
-        >
-          <div className="max-w-7xl mx-auto">
+        style={{ backgroundImage: "url(/bgAbout.png)" }}
+        className="py-28 lg:py-48 px-8 bg-center bg-cover my-20 "
+      >
+        <div className="max-w-7xl mx-auto">
+          <TransitionWrapper>
             <h2 className="font-bold text-3xl lg:text-5xl/[4rem] max-w-2xl">
               Discover the freedom of Total Financial Control
             </h2>
+          </TransitionWrapper>
+          <TransitionWrapper>
             <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">
               Join Plax and take the first step towards a more balanced and
               hassle-free financial life.
             </p>
+          </TransitionWrapper>
+          <TransitionWrapper>
             <div className="mt-8">
               <Link href="" className="bg-redColor py-4 px-6 rounded-lg">
                 Get Started
               </Link>
             </div>
-          </div>
+          </TransitionWrapper>
         </div>
+      </div>
       </div>
 
       <Footer />

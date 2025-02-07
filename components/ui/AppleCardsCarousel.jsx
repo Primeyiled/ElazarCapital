@@ -217,7 +217,7 @@ export const Card = ({ card, index, layout = false }) => {
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
-        className="rounded-3xl bg-gray-100  h-80 w-[30rem]   overflow-hidden flex flex-col items-start justify-start relative z-10"
+        className="rounded-3xl bg-gray-100  h-80 md:w-[30rem] w-[20rem]  overflow-hidden flex flex-col items-start justify-start relative z-10"
       >
         <div className="absolute h-full top-0 inset-x-0 bg-greenColor z-30 pointer-events-none" />
         <div className="relative z-40 p-8">
