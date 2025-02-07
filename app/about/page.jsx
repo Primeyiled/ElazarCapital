@@ -20,10 +20,10 @@ const page = () => {
       <div>
         <div className="flex max-w-7xl mx-auto px-8 gap-10 lg:gap-32 mt-20 items-center">
           <div className="w-full ">
-            <h2 className="text-3xl lg:text-5xl  text-white font-bold">
+            <h2 className="text-3xl lg:text-5xl/[4rem]  text-white font-bold">
               The Vision that drives our Team
             </h2>
-            <p className="py-20 md:text-lg">
+            <p className="py-10 md:text-xl/[2rem]">
               Explore the foundations of Plax and how our purpose-driven start
               has shaped our identity. From initial challenges to realizing our
               vision of simplifying cross-border payments, this purposeful
@@ -83,18 +83,18 @@ const page = () => {
           </div>
         </div>
 
-        <div className="bg-[#f2fafa] py-28">
-          <h2 className="max-w-2xl mx-auto text-greenColor text-3xl lg:text-5xl text-center font-bold">
+        <div className="bg-[#f2fafa] py-32">
+          <h2 className="max-w-2xl mx-auto text-greenColor text-3xl lg:text-5xl/[4rem] text-center font-bold">
             Our Strengths: The Trust Base of our users
           </h2>
 
           <div className="flex max-w-7xl mx-auto px-8 gap-10 mt-20 flex-col lg:flex-row">
             <div className="text-darkColor grid gap-4">
               <MdPublic className="text-6xl text-redColor" />
-              <h3 className="text-xl font-semibold text-greenColor">
+              <h3 className="text-[22px] font-semibold text-greenColor">
                 Connected Global Network
               </h3>
-              <p className="text-[#898d96]">
+              <p className="text-[#898d96] text-lg">
                 Discover how our global network, spanning more than 170
                 countries, facilitates international transactions and connects
                 people around the world.
@@ -102,10 +102,10 @@ const page = () => {
             </div>
             <div className="text-darkColor grid gap-4">
               <MdSecurity className="text-6xl text-redColor" />
-              <h3 className="text-xl font-semibold text-greenColor">
+              <h3 className="text-[22px] font-semibold text-greenColor">
                 Robust Security
               </h3>
-              <p className="text-[#898d96]">
+              <p className="text-[#898d96] text-lg">
                 Learn about the security standards that are at the heart of
                 Plax, guaranteeing the protection of our users' financial and
                 personal information.
@@ -113,10 +113,10 @@ const page = () => {
             </div>
             <div className="text-darkColor grid gap-4">
               <MdCalculate className="text-6xl text-redColor" />
-              <h3 className="text-xl font-semibold text-greenColor">
+              <h3 className="text-[22px] font-semibold text-greenColor">
                 Continuous Innovation
               </h3>
-              <p className="text-[#898d96]">
+              <p className="text-[#898d96] text-lg">
                 Explore how constant innovation drives our growth, allowing us
                 to offer advanced and accessible financial solutions.
               </p>
@@ -132,15 +132,15 @@ const page = () => {
                 height={500}
                 src="/about2.png"
                 alt="about-asset"
-                className=""
+                className="rounded-3xl h-auto w-full"
               />
             </div>
 
             <div className="w-full ">
-              <h2 className="text-3xl lg:text-5xl  text-greenColor font-bold">
+              <h2 className="text-3xl lg:text-5xl/[3rem]  text-greenColor font-bold">
                 Our Values are foundations of Trust
               </h2>
-              <p className="py-20 text-[#898d96]">
+              <p className="py-10 text-[#898d96] text-lg">
                 Our values, from transparency to accountability, are the
                 foundation of our organizational culture and reflect our
                 unwavering.
@@ -150,23 +150,23 @@ const page = () => {
                   <MdCheck className="font-bold text-sm" />
                 </span>{" "}
                 <div>
-                  <h3 className="flex items-center gap-4 font-bold text-xl pb-4 text-greenColor">
+                  <h3 className="flex items-center gap-4 font-bold text-[22px] pb-4 text-greenColor">
                     {" "}
                     Absolute Transparency:
                   </h3>
-                  <p className="text-md text-[#898d96]">
+                  <p className="text-md text-[#898d96] text-lg">
                     Discover how transparency is ingrained in our culture,
                     providing our users with clarity and confidence in every
                     transaction.
                   </p>
                 </div>
               </div>
-              <div className="flex gap-6">
+              <div className="flex gap-6 mt-10">
                 <span className="bg-[#03A6A6] size-8 rounded-full flex justify-center items-center p-2">
                   <MdCheck className="font-bold text-sm" />
                 </span>{" "}
                 <div>
-                  <h3 className="flex items-center gap-4 font-bold text-xl pb-4 text-greenColor">
+                  <h3 className="flex items-center gap-4 font-bold text-[22px] pb-4 text-greenColor">
                     {" "}
                     Commitment to Safety:
                   </h3>
@@ -185,8 +185,8 @@ const page = () => {
           style={{ backgroundImage: "url(/bgBlue.png)" }}
           className="py-28 px-8"
         >
-          <div className="max-w-7xl mx-auto">
-            <h1 className="font-bold text-3xl lg:text-6xl">
+          <div className="max-w-5xl mx-auto">
+            <h1 className="font-bold text-3xl lg:text-6xl/[5rem]">
               "At Plax, transparency is not just a promise; It is the
               cornerstone of our relationship with you. We believe that trust is
               built with clear policies and coherent actions."
@@ -198,10 +198,10 @@ const page = () => {
 
         <div
           style={{ backgroundImage: "url(/bgAbout.png)" }}
-          className="py-28 lg:py-48 px-8 bg-center bg-cover my-20"
+          className="py-28 lg:py-48 px-8 bg-center bg-cover my-20 "
         >
-          <div>
-            <h2 className="font-bold text-3xl lg:text-5xl max-w-2xl">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="font-bold text-3xl lg:text-5xl/[4rem] max-w-2xl">
               Discover the freedom of Total Financial Control
             </h2>
             <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">

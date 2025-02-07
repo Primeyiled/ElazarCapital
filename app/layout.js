@@ -3,15 +3,37 @@ import "./globals.css";
 import StoreProvider from "@/lib/StoreProvider";
 import OnlineChecker from "./OnlineChecker";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+// const switzer = localFont({
+//   src: "/fonts/Switzer-Black.ttf",
+//   variable: "--font-switzer",
+//   weight: "100 900",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
+
+
+const switzerRegular = localFont({
+  src: './fonts/Switzer-Regular.ttf',
+  weight: '400', 
+  style: 'normal',
+  variable: '--font-switzer',
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const switzerBold = localFont({
+  src: './fonts/Switzer-Bold.ttf',
+  weight: '700', 
+  style: 'normal',
+  variable: '--font-switzer-bold', 
+});
+
+const switzerItalic = localFont({
+  src: './fonts/Switzer-Semibold.ttf',
+  weight: '400',
+  style: 'italic',
+  variable: '--font-switzer-italic', 
 });
 
 export const metadata = {
@@ -23,7 +45,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${switzerRegular.variable} ${switzerBold.variable} ${switzerItalic.variable} antialiased`}
       >
         {/* <OnlineChecker /> */}
         <StoreProvider>{children}</StoreProvider>

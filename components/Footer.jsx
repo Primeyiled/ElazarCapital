@@ -3,6 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
+    <>
     <div className="py-20 xl:pt-36 bg-greenColor px-8">
       <div className=" max-w-7xl mx-auto">
         <div className="flex justify-between md:items-center flex-col md:flex-row gap-12 md:gap-0 xl:mt-18">
@@ -35,6 +36,7 @@ const Footer = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
