@@ -1,0 +1,6 @@
+{
+  "common": {
+    "greeting": "Hello",
+    "farewell": "Goodbye"
+  }
+}

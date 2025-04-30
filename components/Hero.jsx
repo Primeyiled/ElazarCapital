@@ -1,50 +1,119 @@
-import Image from "next/image";
+"use client";
 import Link from "next/link";
-import React from "react";
-import { MdArrowForward, MdPlayArrow } from "react-icons/md";
+import React, { useRef, useEffect } from "react";
+import { MdArrowForward } from "react-icons/md";
+import { gsap } from "gsap";
+import { useSelector } from "react-redux";
+import CryptoMarquee from "./CryptoMarquee";
+import GoogleTranslate from "./GoogleTranslate";
 
 const Hero = () => {
+  const { loading } = useSelector((state) => state.message);
+
+  const heroTextRef = useRef(null);
+  const heroSubtextRef = useRef(null);
+  const heroButtonRef1 = useRef(null); // Ref for the first button
+  const heroButtonRef2 = useRef(null); // Ref for the second button
+
+  useEffect(() => {
+    if (!loading) {
+      // Ensure initial styles are set before animations
+      gsap.set(
+        [heroTextRef.current, heroSubtextRef.current, heroButtonRef1.current, heroButtonRef2.current],
+        {
+          opacity: 1,
+          y: 0,
+        }
+      );
+
+      // Animation for the main text
+      gsap.from(heroTextRef.current, {
+        y: -50,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power3.out",
+        delay: 0.5,
+        clearProps: "all", // Reset all animated properties after the animation
+      });
+
+      // Animation for the subtext
+      gsap.from(heroSubtextRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        delay: 1,
+        clearProps: "all", // Reset all animated properties after the animation
+      });
+
+      // Animation for the first button
+      gsap.from(heroButtonRef1.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power3.out",
+        delay: 1.5,
+        clearProps: "all", // Reset all animated properties after the animation
+      });
+
+      // Animation for the second button
+      gsap.from(heroButtonRef2.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power3.out",
+        delay: 1.5,
+        clearProps: "all", // Reset all animated properties after the animation
+      });
+    }
+  }, [loading]);
+
   return (
-    <div className="w-full h-full 2xl:h-[100vh]   px-4 xl:px-20 flex justify-center items-center">
-      <div className="xl:flex justify-between items-center max-w-7xl mx-auto pt-20 xl:py-6 gap-10">
-        <div className=" xl:w-[800px] 2xl:w-full">
-          <div className="font-bold text-[3.2rem] inline-block bg-gradient-to-r from-[#97CECF]  to-white text-transparent bg-clip-text md:text-7xl lg:text-[6rem] leading-snug text-center xl:text-left">
-            Control & balance your
-            <span className="inline-block align-middle">
-              <Image
-                src="/heroAsset.png"
-                alt="hero-icon"
-                width={500}
-                height={500}
-                className="w-[70px] md:w-[120px] inline-block align-middle mx-2 mb-5"
-              />
-            </span>
-            finances
-          </div>
-          <div className="flex gap-8 flex-col xl:flex-row just-center items-center mt-10">
-            <Link
-              href="/register"
-              className="bg-redColor text-white py-4 px-6 md:py-6 font-semibold flex gap-2 rounded-lg items-center"
-            >
-              Get Started <MdArrowForward className="size-5" />
-            </Link>
-            {/* <Link
-              href="/demo"
-              className="flex gap-2 text-gray-300 font-semibold items-center"
-            >
-              Watch tutorial <MdPlayArrow className="size-5" />
-            </Link> */}
-          </div>
+    <div className="w-full flex justify-center items-center relative py-10 md:py-32">
+      <div className="max-w-3xl px-4 overflow-hidden">
+        <div className="">
+          <GoogleTranslate />
         </div>
 
-        <div className="mt-6 xl:mt-0 w-full flex lg:justify-end justify-center">
-          <Image
-            width={500}
-            height={500}
-            src="/hand.png"
-            alt="hero-image"
-            className="w-full xl:w-[600px]"
-          />
+        <div className="">
+          <CryptoMarquee />
+        </div>
+
+        <br />
+
+        {/* Main Heading */}
+        <h1
+          ref={heroTextRef}
+          className="font-bold text-6xl lg:text-[5rem] bg-gradient-to-r from-[#97CECF] to-white text-transparent bg-clip-text leading-tight mb-2"
+        >
+          Invest for the Future.
+        </h1>
+
+        {/* Subtext */}
+        <p
+          ref={heroSubtextRef}
+          className="text-lg md:text-xl text-gray-300 max-w-2xl mb-10"
+        >
+          Work with all the necessary information and tools to boost money flow
+          from your capital investment using SwizzFunds!
+        </p>
+
+        {/* Call-to-Action Button */}
+        <div className="flex items-center gap-4">
+          <Link
+            ref={heroButtonRef1} // Use heroButtonRef1 for the first button
+            href="/register"
+            className="bg-redColor text-white py-4 px-8 md:py-5 md:px-10 font-semibold flex gap-2 rounded-lg items-center hover:bg-red-600 transition-all duration-300 whitespace-nowrap"
+          >
+            Get Started <MdArrowForward className="size-5" />
+          </Link>
+          <Link
+            ref={heroButtonRef2} // Use heroButtonRef2 for the second button
+            href="/login"
+            className="bg-white text-darkColor py-4 px-8 md:py-5 md:px-10 font-semibold flex gap-2 rounded-lg items-center hover:bg-gray-600 transition-all duration-300 whitespace-nowrap"
+          >
+            Log in <MdArrowForward className="size-5" />
+          </Link>
         </div>
       </div>
     </div>

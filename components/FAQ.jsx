@@ -21,7 +21,8 @@ const FAQ = () => {
         </TransitionWrapper>
         <TransitionWrapper>
           <p className=" py-8 text-[#a0cdcd] max-w-sm text-center mx-auto">
-            Find quick and clear answers to the most common questions about Plax
+            Find quick and clear answers to the most common questions about
+            SwizzFunds
           </p>
         </TransitionWrapper>
       </div>
@@ -33,7 +34,7 @@ const FAQ = () => {
               FrequentlyAskedQ.map((faq, index) => (
                 <div key={index}>
                   <div
-                    className=" font-bold text-white text-xl -tracking-tight flex justify-between items-center "
+                    className="text-white text-md lg:text-xl -tracking-tight flex justify-between items-center "
                     onClick={() => toggleFAQ(index)}
                   >
                     {faq.title}
@@ -50,7 +51,7 @@ const FAQ = () => {
                   </div>
                   {activeIndex === index && (
                     <div className=" leading-8 py-4 transition-all duration-300 ease-in-out opacity-100">
-                      <p className="text-[#898d96]">{faq.desc}</p>
+                      <p className="text-[#e5e7eb]">{faq.desc}</p>
                     </div>
                   )}
                 </div>

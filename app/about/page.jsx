@@ -6,11 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import CountUp from "react-countup";
-import { MdCalculate, MdCheck, MdPublic, MdSecurity } from "react-icons/md";
+import { MdCalculate, MdCheck, MdPublic, MdSecurity, MdStar, MdTrendingUp, MdDevices } from "react-icons/md";
 
 const page = () => {
   return (
     <div className="">
+      {/* Hero Section */}
       <div>
         <Heading
           page="About Us"
@@ -18,236 +19,258 @@ const page = () => {
           tab="About us"
         />
       </div>
-      <div>
-        <div className="flex max-w-7xl mx-auto px-8 gap-10 lg:gap-32 mt-20 items-center">
-          <div className="w-full ">
-            <TransitionWrapper>
-              <h2 className="text-3xl lg:text-5xl/[4rem]  text-white font-bold">
-                The Vision that drives our Team
-              </h2>
-            </TransitionWrapper>
-            <TransitionWrapper>
-              <p className="py-10 md:text-xl/[2rem]">
-                Explore the foundations of Plax and how our purpose-driven start
-                has shaped our identity. From initial challenges to realizing
-                our vision of simplifying cross-border payments, this purposeful
-                journey has led Plax to become a leading force in the financial
-                revolution.
-              </p>
-            </TransitionWrapper>
-            <div className="flex gap-6">
-              <span className="bg-[#03A6A6] size-8 rounded-full flex justify-center items-center p-2">
-                <MdCheck className="font-bold text-sm" />
-              </span>{" "}
-              <TransitionWrapper>
-                <div>
-                  <h3 className="flex items-center gap-4 font-bold text-xl pb-4">
-                    {" "}
-                    Transformative Vision
-                  </h3>
-                  <p className="text-md">
-                    Discover how Plax's initial vision was focused on
-                    transforming the way people transact globally.
-                  </p>
-                </div>
-              </TransitionWrapper>
-            </div>
-          </div>
-          <div className="w-full">
-            <Image
-              width={500}
-              height={500}
-              src="/about.png"
-              alt="about-asset"
-              className=""
-            />
-          </div>
-        </div>
 
-        <div className="flex justify-between flex-col md:flex-row items-center gap-20 py-40 max-w-7xl mx-auto px-8">
-          <div className="flex items-center flex-col">
-            <h1 className="text-7xl xl:text-[6rem] flex font-bold text-redColor">
-              <CountUp end={7} enableScrollSpy={true} />
-              <span className="text-gray-500">M</span>
-            </h1>
-            <p className="font-semibold text-lg py-2">Registerd Users</p>
-          </div>
-          <div>
-            <h1 className="text-7xl xl:text-[6rem] flex font-bold text-redColor">
-              <CountUp end={1.6} decimals={1} enableScrollSpy={true} />
-              <span className="text-gray-500">M</span>
-            </h1>
-            <p className="font-semibold text-lg py-2">Regular Users</p>
-          </div>
-          <div>
-            <h1 className="text-7xl xl:text-[6rem] flex font-bold text-redColor">
-              <CountUp end={170} enableScrollSpy={true} />
-              <span className="text-gray-500">+</span>
-            </h1>
-            <p className="font-semibold text-lg py-2">
-              Countries with our coverage
-            </p>
-          </div>
-        </div>
-
-        <div className="bg-[#f2fafa] py-32">
+      {/* Who We Are Section */}
+      <div className="flex flex-col lg:flex-row max-w-7xl mx-auto px-8 gap-10 lg:gap-32 mt-20 items-center">
+        <div className="w-full order-2 lg:order-1">
           <TransitionWrapper>
-            <h2 className="max-w-2xl mx-auto text-greenColor text-3xl lg:text-5xl/[4rem] text-center font-bold">
-              Our Strengths: The Trust Base of our users
-            </h2>
-          </TransitionWrapper>
-
-          <div className="flex max-w-7xl mx-auto px-8 gap-10 mt-20 flex-col lg:flex-row">
-            <div className="text-darkColor grid gap-4">
-              <TransitionWrapper>
-                <MdPublic className="text-6xl text-redColor" />
-              </TransitionWrapper>
-              <TransitionWrapper>
-                <h3 className="text-[22px] font-semibold text-greenColor">
-                  Connected Global Network
-                </h3>
-              </TransitionWrapper>
-              <TransitionWrapper>
-                <p className="text-[#898d96] text-lg">
-                  Discover how our global network, spanning more than 170
-                  countries, facilitates international transactions and connects
-                  people around the world.
-                </p>
-              </TransitionWrapper>
-            </div>
-            <div className="text-darkColor grid gap-4">
-              <TransitionWrapper>
-                <MdSecurity className="text-6xl text-redColor" />
-              </TransitionWrapper>
-              <TransitionWrapper>
-                <h3 className="text-[22px] font-semibold text-greenColor">
-                  Robust Security
-                </h3>
-              </TransitionWrapper>
-              <TransitionWrapper>
-                <p className="text-[#898d96] text-lg">
-                  Learn about the security standards that are at the heart of
-                  Plax, guaranteeing the protection of our users' financial and
-                  personal information.
-                </p>
-              </TransitionWrapper>
-            </div>
-            <div className="text-darkColor grid gap-4">
-              <TransitionWrapper>
-                <MdCalculate className="text-6xl text-redColor" />
-              </TransitionWrapper>
-              <TransitionWrapper>
-                <h3 className="text-[22px] font-semibold text-greenColor">
-                  Continuous Innovation
-                </h3>
-              </TransitionWrapper>
-              <TransitionWrapper>
-                <p className="text-[#898d96] text-lg">
-                  Explore how constant innovation drives our growth, allowing us
-                  to offer advanced and accessible financial solutions.
-                </p>
-              </TransitionWrapper>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-[#f2fafa]">
-          <div className="flex max-w-7xl mx-auto px-8 gap-10 lg:gap-32 py-20 items-center ">
-            <div className="w-full">
-              <Image
-                width={500}
-                height={500}
-                src="/about2.png"
-                alt="about-asset"
-                className="rounded-3xl h-auto w-full"
-              />
-            </div>
-
-            <div className="w-full ">
-              <h2 className="text-3xl lg:text-5xl/[3rem]  text-greenColor font-bold">
-                Our Values are foundations of Trust
-              </h2>
-              <p className="py-10 text-[#898d96] text-lg">
-                Our values, from transparency to accountability, are the
-                foundation of our organizational culture and reflect our
-                unwavering.
-              </p>
-              <div className="flex gap-6">
-                <span className="bg-[#03A6A6] size-8 rounded-full flex justify-center items-center p-2">
-                  <MdCheck className="font-bold text-sm" />
-                </span>{" "}
-                <div>
-                  <h3 className="flex items-center gap-4 font-bold text-[22px] pb-4 text-greenColor">
-                    {" "}
-                    Absolute Transparency:
-                  </h3>
-                  <p className="text-md text-[#898d96] text-lg">
-                    Discover how transparency is ingrained in our culture,
-                    providing our users with clarity and confidence in every
-                    transaction.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-6 mt-10">
-                <span className="bg-[#03A6A6] size-8 rounded-full flex justify-center items-center p-2">
-                  <MdCheck className="font-bold text-sm" />
-                </span>{" "}
-                <div>
-                  <h3 className="flex items-center gap-4 font-bold text-[22px] pb-4 text-greenColor">
-                    {" "}
-                    Commitment to Safety:
-                  </h3>
-                  <p className="text-md text-[#898d96]">
-                    Explore our unwavering commitment to security, ensuring
-                    every transaction is conducted with the highest standards of
-                    protection.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          style={{ backgroundImage: "url(/bgBlue.png)" }}
-          className="py-28 px-8"
-        >
-          <div className="max-w-5xl mx-auto">
-            <h1 className="font-bold text-3xl lg:text-6xl/[5rem]">
-              "At Plax, transparency is not just a promise; It is the
-              cornerstone of our relationship with you. We believe that trust is
-              built with clear policies and coherent actions."
-            </h1>
-            <br />
-            <p>- Plax Team</p>
-          </div>
-        </div>
-
-        <div
-        style={{ backgroundImage: "url(/bgAbout.png)" }}
-        className="py-28 lg:py-48 px-8 bg-center bg-cover my-20 "
-      >
-        <div className="max-w-7xl mx-auto">
-          <TransitionWrapper>
-            <h2 className="font-bold text-3xl lg:text-5xl/[4rem] max-w-2xl">
-              Discover the freedom of Total Financial Control
+            <h2 className="text-3xl lg:text-5xl/[4rem] text-white font-bold">
+              Who We Are
             </h2>
           </TransitionWrapper>
           <TransitionWrapper>
-            <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">
-              Join Plax and take the first step towards a more balanced and
-              hassle-free financial life.
+            <p className="py-10 md:text-xl/[2rem]">
+              SwizzFunds is a regulated broker and financial services provider for traders across the world. 
+              We are one of the fastest growing online brokers with an asset index of over 1,000 stocks, 
+              forex, commodities and indices available as CFDs. Our platforms provide instant access to 
+              global markets via desktop, smartphone or other mobile devices.
             </p>
           </TransitionWrapper>
+          <div className="grid gap-6">
+            {[
+              {
+                icon: <MdDevices className="text-2xl" />,
+                title: "Multi-Platform Access",
+                description: "Trade seamlessly across all your devices"
+              },
+              {
+                icon: <MdTrendingUp className="text-2xl" />,
+                title: "Diverse Assets",
+                description: "1,000+ instruments across multiple markets"
+              },
+              {
+                icon: <MdStar className="text-2xl" />,
+                title: "Regulated Broker",
+                description: "Compliant with international financial standards"
+              }
+            ].map((item, index) => (
+              <div key={index} className="flex gap-6">
+                <span className="bg-[#03A6A6] size-10 rounded-full flex justify-center items-center p-2">
+                  {item.icon}
+                </span>
+                <div>
+                  <h3 className="font-bold text-xl pb-2">{item.title}</h3>
+                  <p className="text-md">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-full order-1 lg:order-2">
+          <Image
+            width={600}
+            height={600}
+            src="/about.png"
+            alt="SwizzFunds trading platform"
+            className="rounded-xl"
+          />
+        </div>
+      </div>
+      <div className="bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] py-16 mt-20">
+        <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-3 gap-8 text-center">
           <TransitionWrapper>
-            <div className="mt-8">
-              <Link href="" className="bg-redColor py-4 px-6 rounded-lg">
-                Get Started
-              </Link>
+            <div className="text-white">
+              <h1 className="text-4xl md:text-5xl font-bold mb-2">
+                $<CountUp end={5000000} enableScrollSpy={true} />+
+              </h1>
+              <p className="text-lg opacity-80">Assets Under Management</p>
+            </div>
+          </TransitionWrapper>
+          <TransitionWrapper>
+            <div className="text-white">
+              <h1 className="text-4xl md:text-5xl font-bold mb-2">
+                <CountUp end={35000} enableScrollSpy={true} />+
+              </h1>
+              <p className="text-lg opacity-80">Active Investors</p>
+            </div>
+          </TransitionWrapper>
+          <TransitionWrapper>
+            <div className="text-white">
+              <h1 className="text-4xl md:text-5xl font-bold mb-2">
+                <CountUp end={1000} enableScrollSpy={true} />+
+              </h1>
+              <p className="text-lg opacity-80">Investment Products</p>
             </div>
           </TransitionWrapper>
         </div>
       </div>
+
+      {/* Why Choose Us Section */}
+      <div className="bg-[#f2fafa] py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <TransitionWrapper>
+            <h2 className="text-greenColor text-3xl lg:text-5xl/[4rem] font-bold mb-20">
+              Why SwizzFunds?
+            </h2>
+          </TransitionWrapper>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <TransitionWrapper>
+                <p className="text-[#898d96] text-xl leading-relaxed mb-8">
+                  SwizzFunds combines professional expertise with cutting-edge technology 
+                  to deliver a premium trading experience. Our reputation for financial 
+                  competence, integrity and honesty is built through constant innovation 
+                  and commitment to our clients.
+                </p>
+              </TransitionWrapper>
+              <Image
+                width={400}
+                height={400}
+                src="/about2.png"
+                alt="Why choose SwizzFunds"
+                className="rounded-xl object-cover size-50 "
+              />
+            </div>
+            
+            <div className="space-y-8">
+              {[
+                {
+                  icon: <MdSecurity className="text-3xl" />,
+                  title: "Trust & Integrity",
+                  content: "We maintain the highest standards of financial ethics and transparency."
+                },
+                {
+                  icon: <MdTrendingUp className="text-3xl" />,
+                  title: "Continuous Innovation",
+                  content: "Regular investment in technology ensures you get the best trading tools."
+                },
+                {
+                  icon: <MdPublic className="text-3xl" />,
+                  title: "Global Perspective",
+                  content: "Access to international markets with localized support."
+                },
+                {
+                  icon: <MdCalculate className="text-3xl" />,
+                  title: "Client-Centric Approach",
+                  content: "Your success is our priority with personalized account management."
+                }
+              ].map((item, index) => (
+                <TransitionWrapper key={index}>
+                  <div className="flex gap-6 items-start">
+                    <span className="bg-redColor text-white p-3 rounded-full">
+                      {item.icon}
+                    </span>
+                    <div>
+                      <h3 className="text-2xl font-bold text-greenColor mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-[#898d96]">
+                        {item.content}
+                      </p>
+                    </div>
+                  </div>
+                </TransitionWrapper>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Values Section */}
+      <div className="bg-[#222E2E] text-white py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <TransitionWrapper>
+            <h2 className="text-3xl lg:text-5xl/[4rem] font-bold mb-4">
+              Our Core Values
+            </h2>
+            <p className="text-xl text-[#a0cdcd] max-w-3xl mb-20">
+              The principles that guide every decision we make and every 
+              interaction we have with our clients.
+            </p>
+          </TransitionWrapper>
+          
+          <div className="grid md:grid-cols-3 gap-10">
+            {[
+              {
+                title: "Transparency",
+                description: "Clear pricing, no hidden fees, and open communication.",
+                icon: "🔍"
+              },
+              {
+                title: "Security",
+                description: "Bank-level encryption and strict regulatory compliance.",
+                icon: "🛡️"
+              },
+              {
+                title: "Innovation",
+                description: "Constantly evolving to bring you cutting-edge tools.",
+                icon: "💡"
+              },
+              {
+                title: "Integrity",
+                description: "We do what's right, not just what's profitable.",
+                icon: "🤝"
+              },
+              {
+                title: "Excellence",
+                description: "Relentless pursuit of the best trading experience.",
+                icon: "⭐"
+              },
+              {
+                title: "Community",
+                description: "Building financial literacy and trader success.",
+                icon: "🌍"
+              }
+            ].map((value, index) => (
+              <TransitionWrapper key={index}>
+                <div className="bg-[#1D615F] p-8 rounded-xl h-full">
+                  <span className="text-4xl mb-4 inline-block">{value.icon}</span>
+                  <h3 className="text-2xl font-bold mb-4">{value.title}</h3>
+                  <p>{value.description}</p>
+                </div>
+              </TransitionWrapper>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonial Section */}
+      <div style={{ backgroundImage: "url(/bgBlue.png)" }} className="py-28 px-8">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="font-bold text-3xl lg:text-6xl/[5rem] mb-6">
+            "At SwizzFunds, transparency is not just a promise; It is the
+            cornerstone of our relationship with you. We believe that trust is
+            built with clear policies and coherent actions."
+          </h1>
+          <p className="text-xl">- SwizzFunds Team</p>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div style={{ backgroundImage: "url(/bgAbout.png)" }} className="py-28 lg:py-48 px-8 bg-center bg-cover my-20">
+        <div className="max-w-7xl mx-auto">
+          <TransitionWrapper>
+            <h2 className="font-bold text-3xl lg:text-5xl/[4rem] max-w-2xl">
+              Ready to experience the SwizzFunds difference?
+            </h2>
+          </TransitionWrapper>
+          <TransitionWrapper>
+            <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">
+              Join our global community of traders today.
+            </p>
+          </TransitionWrapper>
+          <TransitionWrapper>
+            <div className="flex flex-wrap gap-4 mt-8">
+              <Link href="/register" className="bg-redColor py-4 px-8 rounded-lg font-medium text-lg hover:bg-red-600 transition">
+                Open Account
+              </Link>
+              <Link href="/contact" className="bg-transparent border-2 border-white py-4 px-8 rounded-lg font-medium text-lg hover:bg-white hover:text-greenColor transition">
+                Contact Us
+              </Link>
+            </div>
+          </TransitionWrapper>
+        </div>
       </div>
 
       <Footer />

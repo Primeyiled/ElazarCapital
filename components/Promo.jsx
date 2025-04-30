@@ -18,7 +18,7 @@ const Promo = () => {
             </TransitionWrapper>
             <TransitionWrapper>
               <p className="text-gray-500 md:text-lg lg:w-[400px] text-center">
-                At Plax, we understand the importance of the security and
+                At SwizzFunds, we understand the importance of the security and
                 privacy of your financial data.
               </p>
             </TransitionWrapper>
