@@ -22,7 +22,7 @@ const FAQ = () => {
         <TransitionWrapper>
           <p className=" py-8 text-[#a0cdcd] max-w-sm text-center mx-auto">
             Find quick and clear answers to the most common questions about
-            SwizzFunds
+            ElazarCapital
           </p>
         </TransitionWrapper>
       </div>

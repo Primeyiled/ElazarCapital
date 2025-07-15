@@ -19,7 +19,12 @@ const Hero = () => {
     if (!loading) {
       // Ensure initial styles are set before animations
       gsap.set(
-        [heroTextRef.current, heroSubtextRef.current, heroButtonRef1.current, heroButtonRef2.current],
+        [
+          heroTextRef.current,
+          heroSubtextRef.current,
+          heroButtonRef1.current,
+          heroButtonRef2.current,
+        ],
         {
           opacity: 1,
           y: 0,
@@ -95,7 +100,7 @@ const Hero = () => {
           className="text-lg md:text-xl text-gray-300 max-w-2xl mb-10"
         >
           Work with all the necessary information and tools to boost money flow
-          from your capital investment using SwizzFunds!
+          from your capital investment using ElazarCapital!
         </p>
 
         {/* Call-to-Action Button */}

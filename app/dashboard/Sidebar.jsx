@@ -5,6 +5,7 @@ import { clearDepositData } from "@/lib/features/depositSlice";
 import { clearUserData } from "@/lib/features/userSlice";
 import { clearWithdrawalData } from "@/lib/features/withdrawalSlice";
 import { IconArrowLeft } from "@tabler/icons-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
@@ -43,11 +44,17 @@ export default function Sidebar({ sidebarOpen, closeSidebar }) {
     >
       {/* Logo */}
       <Link
-        href="/"
+        href="/dashboard"
         className="text-white flex items-center space-x-2 px-4"
         onClick={closeSidebar}
       >
-        <span className="text-2xl font-extrabold">Logo.</span>
+         <Image
+                    width={55}
+                    height={55}
+                    src="/logo.png"
+                    alt="ElazarCapital_logo"
+                    className="size-50"
+                  />
       </Link>
 
       {/* Navigation */}

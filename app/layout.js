@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import StoreProvider from "@/lib/StoreProvider";
+import CookieConsent from "@/components/CookieConsent";
 // import OnlineChecker from "./OnlineChecker";
 
 const switzerRegular = localFont({
@@ -25,23 +26,25 @@ const switzerItalic = localFont({
 });
 
 export const metadata = {
-  title: "HomePage - SwizzFunds",
-  description: `SwizzFunds is a regulated broker and financial services provider for 
+  title: "HomePage - ElazarCapital",
+  description: `ElazarCapital is a regulated broker and financial services provider for 
             traders across the world. We are also one of the fastest growing
             online brokers with an asset index of over 1,000 stocks, forex,
-            commodities and indices available as CFDs.`
+            commodities and indices available as CFDs.`,
 };
 
 function RootLayout({ children }) {
-
-
   return (
-    <html lang={'en'}>
+    <html lang={"en"}>
       <body
         className={`${switzerRegular.variable} ${switzerBold.variable} ${switzerItalic.variable} antialiased`}
       >
         {/* <OnlineChecker /> */}
-          <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          {children}
+
+          <CookieConsent />
+        </StoreProvider>
       </body>
     </html>
   );

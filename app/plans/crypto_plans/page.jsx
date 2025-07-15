@@ -102,9 +102,9 @@ const CryptoPage = () => {
             journey unfold!
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="bg-redColor hover:bg-redColor/80 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+            <Link href="/register" className="bg-redColor hover:bg-redColor/80 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
               Get Started
-            </button>
+            </Link>
           </div>
         </motion.div>
         <motion.div
@@ -330,7 +330,7 @@ const CryptoPage = () => {
                   href="/register"
                   className="bg-redColor text-white py-3 px-8 rounded-xl font-semibold hover:bg-red-600 transition-colors"
                 >
-                  Choose Plan
+                  Get Started
                 </Link>
               </TransitionWrapper>
 
@@ -366,6 +366,10 @@ const CryptoPage = () => {
         </TransitionWrapper>
       </div>
 
+      <div className="w-full h-[400px] lg:h-[500px] max-w-4xl mx-auto px-8 my-10">
+        <CryptoChart />
+      </div>
+
       {/* Future of Crypto */}
       <div className="bg-greenColor py-16 mb-20">
         <div className="max-w-7xl mx-auto px-8 text-center">
@@ -379,20 +383,18 @@ const CryptoPage = () => {
             of this revolution.
           </p>
           <div className="flex justify-center">
-            <motion.div
+            <Link href="/register"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-redColor hover:bg-redColor/80 text-white py-3 px-8 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
             >
               <FaRocket /> Get Started
-            </motion.div>
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="w-full h-[40%] lg:h-[60%] max-w-7xl mx-auto px-8">
-        <CryptoChart />
-      </div>
+      
 
       <Footer />
     </section>

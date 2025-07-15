@@ -90,11 +90,11 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-8 py-20">
+      <div className="max-w-7xl mx-auto px-4 py-20">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
           <TransitionWrapper>
-            <div className="bg-greenColor rounded-xl p-8 border border-[#2a2a42]">
+            <div className="bg-greenColor rounded-xl p-6 border border-[#2a2a42]">
               <h2 className="text-2xl font-bold text-white mb-6">
                 Send Us a Message
               </h2>
@@ -191,7 +191,7 @@ const Page = () => {
           {/* Contact Information */}
           <TransitionWrapper>
             <div className="space-y-8">
-              <div className="bg-greenColor rounded-xl p-8 border border-[#2a2a42]">
+              <div className="bg-greenColor rounded-xl p-6 border border-[#2a2a42]">
                 <h2 className="text-2xl font-bold text-white mb-6">
                   Contact Information
                 </h2>
@@ -213,8 +213,10 @@ const Page = () => {
                       <h3 className="text-lg font-semibold text-white">
                         Email Us
                       </h3>
-                      <p className="text-gray-300">support@swizzfunds.com</p>
-                      <p className="text-gray-300">inquiries@swizzfunds.com</p>
+                      <p className="text-gray-300">support@ElazarCapital.com</p>
+                      <p className="text-gray-300">
+                        inquiries@ElazarCapital.com
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -238,22 +240,22 @@ const Page = () => {
                 </div>
               </div>
 
-              <div className="bg-greenColor rounded-xl p-8 border border-[#2a2a42]">
+              <div className="bg-greenColor rounded-xl p-6 border border-[#2a2a42]">
                 <h2 className="text-2xl font-bold text-white mb-6">
                   Business Hours
                 </h2>
                 <div className="space-y-4">
-                  <div className="flex justify-between text-gray-300">
+                  <div className="flex justify-between gap-2 text-gray-300">
                     <span>Monday - Friday</span>
-                    <span>9:00 AM - 6:00 PM (EST)</span>
+                    <b>9:00 AM - 6:00 PM (EST)</b>
                   </div>
-                  <div className="flex justify-between text-gray-300">
+                  <div className="flex justify-between gap-2 text-gray-300">
                     <span>Saturday</span>
-                    <span>10:00 AM - 4:00 PM (EST)</span>
+                    <b>10:00 AM - 4:00 PM (EST)</b>
                   </div>
-                  <div className="flex justify-between text-gray-300">
+                  <div className="flex justify-between gap-2 text-gray-300">
                     <span>Sunday</span>
-                    <span>Closed</span>
+                    <b>Closed</b>
                   </div>
                 </div>
               </div>

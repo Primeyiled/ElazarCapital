@@ -88,7 +88,7 @@ const createPasswordResetEmailContent = (resetLink) => {
       <div class="header">
         <img
           src="https://res.cloudinary.com/dcxfxfa52/image/upload/v1738674100/deposit_slips/ifzhr9kyxhio8zhabftc.png"
-          alt="Swizzfunds Logo"
+          alt="ElazarCapital Logo"
         />
       </div>
       <hr />
@@ -100,8 +100,8 @@ const createPasswordResetEmailContent = (resetLink) => {
       <p>If you did not request this, please ignore this email.</p>
       <div class="footer">
         <p>Thank you for using our service!</p>
-        <p><strong>Swizzfunds Team</strong></p>
-        <p>Contact us: <a href="mailto:support@swizzfunds.com">support@swizzfunds.com</a></p>
+        <p><strong>ElazarCapital Team</strong></p>
+        <p>Contact us: <a href="mailto:support@ElazarCapital.com">support@ElazarCapital.com</a></p>
       </div>
     </div>
   </body>

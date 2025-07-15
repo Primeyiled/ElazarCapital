@@ -46,7 +46,7 @@ const Benefits = () => {
           variants={containerVariants}
           viewport={{ once: true }}
         >
-          Explore the advantages that SwizzFunds has to offer in the world of
+          Explore the advantages that ElazarCapital has to offer in the world of
           personal finance
         </motion.p>
       </div>
@@ -85,7 +85,7 @@ const Benefits = () => {
               icon: <MdSmartScreen className="text-4xl" />,
               title: "Firm Regulation",
               description:
-                "SwizzFunds complies with the strictest regulation guigelines, under IFSC (International Financial Services Commission), to ensure the safest trading conditions.",
+                "ElazarCapital complies with the strictest regulation guigelines, under IFSC (International Financial Services Commission), to ensure the safest trading conditions.",
               link: "/",
             },
           ].map((card, index) => (
@@ -125,18 +125,18 @@ const Benefits = () => {
                 Trade globally, control locally.
               </h2>
               <p className="text-[#a0cdcd] md:text-lg lg:w-[400px]">
-                With SwizzFunds, you can access global markets from anywhere
+                With ElazarCapital, you can access global markets from anywhere
                 using your desktop or mobile device — all while managing your
                 personal portfolio on a single, intuitive dashboard.
               </p>
-              <div className="mt-16">
+              {/* <div className="mt-16">
                 <Link
                   href="/"
                   className="bg-redColor rounded-xl py-4 px-8 font-semibold"
                 >
                   Learn More
                 </Link>
-              </div>
+              </div> */}
             </div>
             <motion.div className="mt-10 w-full" variants={cardVariants}>
               <Image
@@ -181,14 +181,14 @@ const Benefits = () => {
                   Constant innovation in financial tech
                 </p>
               </div>
-              <div className="mt-16">
+              {/* <div className="mt-16">
                 <Link
                   href="/"
                   className="bg-redColor rounded-xl py-4 px-8 font-semibold"
                 >
                   Learn More
                 </Link>
-              </div>
+              </div> */}
             </div>
             <motion.div
               className="mt-10 w-full flex lg:justify-end"

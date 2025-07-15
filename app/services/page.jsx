@@ -23,68 +23,74 @@ const page = () => {
       name: "Crypto Investment",
       desc: "Secure digital asset management with expert portfolio strategies",
       icon: <IconCurrencyBitcoin className="size-16 text-redColor" />,
+      link: "/plans/crypto_plans",
       features: [
         "Portfolio diversification",
         "Cold storage security",
         "Staking rewards",
-        "ICO access"
-      ]
+        "ICO access",
+      ],
     },
     {
       name: "Real Estate",
       desc: "Global property investments with stable returns",
       icon: <IconBuildingSkyscraper className="size-16 text-redColor" />,
+      link: "/plans/real_estate_plans",
       features: [
         "Commercial properties",
         "REITs",
         "Development projects",
-        "Rental income"
-      ]
+        "Rental income",
+      ],
     },
-    {
-      name: "Forex Trading",
-      desc: "24/5 currency trading with institutional spreads",
-      icon: <IconTrendingUp className="size-16 text-redColor" />,
-      features: [
-        "Major/minor pairs",
-        "Low latency execution",
-        "Expert analysis",
-        "Risk management"
-      ]
-    },
-    {
-      name: "Stock Trading",
-      desc: "Global equities with advanced research tools",
-      icon: <IconChartCandle className="size-16 text-redColor" />,
-      features: [
-        "Fractional shares",
-        "Dividend reinvestment",
-        "IPO access",
-        "Portfolio tracking"
-      ]
-    },
+    // {
+    //   name: "Forex Trading",
+    //   desc: "24/5 currency trading with institutional spreads",
+    //   icon: <IconTrendingUp className="size-16 text-redColor" />,
+    //   link: "/plans/forex_plans",
+    //   features: [
+    //     "Major/minor pairs",
+    //     "Low latency execution",
+    //     "Expert analysis",
+    //     "Risk management",
+    //   ],
+    // },
+    // {
+    //   name: "Stock Trading",
+    //   desc: "Global equities with advanced research tools",
+    //   icon: <IconChartCandle className="size-16 text-redColor" />,
+    //   link: "/plans/stock_plans",
+    //   features: [
+    //     "Fractional shares",
+    //     "Dividend reinvestment",
+    //     "IPO access",
+    //     "Portfolio tracking",
+    //   ],
+    // },
     {
       name: "Gold Trading",
       desc: "Physical and paper gold investments",
       icon: <IconCoin className="size-16 text-redColor" />,
+      link: "/plans/gold_plans",
       features: [
         "Spot prices",
         "Allocated storage",
         "Futures contracts",
-        "Hedging strategies"
-      ]
+        "Hedging strategies",
+      ],
     },
-    {
-      name: "Silver Trading",
-      desc: "Precious metal trading with secure storage",
-      icon: <IconCoin className="size-16 text-redColor" />,
-      features: [
-        "Industrial demand focus",
-        "Physical allocation",
-        "ETFs",
-        "Volatility management"
-      ]
-    }
+    // {
+    //   name: "Silver Trading",
+    //   desc: "Precious metal trading with secure storage",
+    //   icon: <IconCoin className="size-16 text-redColor" />,
+    //   link: "/plans/silver_plans",
+    //   features: [
+    //     "Industrial demand focus",
+    //     "Physical allocation",
+    //     "ETFs",
+    //     "Volatility management",
+    //   ],
+    // },
   ];
 
   return (
@@ -134,8 +140,8 @@ const page = () => {
             Comprehensive Financial Services
           </h2>
           <p className="text-lg text-gray-300 max-w-3xl mb-12">
-            We offer institutional-grade investment solutions tailored for private
-            investors and organizations.
+            We offer institutional-grade investment solutions tailored for
+            private investors and organizations.
           </p>
         </TransitionWrapper>
 
@@ -143,10 +149,10 @@ const page = () => {
           {services.map((service, index) => (
             <TransitionWrapper key={index}>
               <div className="bg-[#222E2E] rounded-xl p-8 h-full hover:bg-[#1D615F] transition-all duration-300 border border-[#1D615F]">
-                <div className="mb-6">
-                  {service.icon}
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">{service.name}</h3>
+                <div className="mb-6">{service.icon}</div>
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  {service.name}
+                </h3>
                 <p className="text-gray-300 mb-5">{service.desc}</p>
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature, i) => (
@@ -157,7 +163,7 @@ const page = () => {
                   ))}
                 </ul>
                 <Link
-                  href="#"
+                  href={service.link}
                   className="inline-block bg-redColor hover:bg-red-700 text-white py-2 px-6 rounded-lg transition-colors duration-300"
                 >
                   Learn More
@@ -173,10 +179,11 @@ const page = () => {
         <div className="max-w-7xl mx-auto px-8">
           <TransitionWrapper>
             <h2 className="text-3xl lg:text-5xl font-bold text-greenColor text-center mb-4">
-              Why Investors Choose SwizzFunds
+              Why Investors Choose ElazarCapital
             </h2>
             <p className="text-lg text-[#898d96] text-center max-w-3xl mx-auto mb-16">
-              Our commitment to excellence sets us apart in the financial services industry
+              Our commitment to excellence sets us apart in the financial
+              services industry
             </p>
           </TransitionWrapper>
 
@@ -184,27 +191,36 @@ const page = () => {
             <TransitionWrapper>
               <div className="bg-white p-8 rounded-xl shadow-lg">
                 <IconShieldLock className="size-12 text-redColor mb-6" />
-                <h3 className="text-2xl font-bold text-greenColor mb-4">Regulated Security</h3>
+                <h3 className="text-2xl font-bold text-greenColor mb-4">
+                  Regulated Security
+                </h3>
                 <p className="text-[#898d96]">
-                  Fully compliant with international financial regulations ensuring the highest standards of investor protection.
+                  Fully compliant with international financial regulations
+                  ensuring the highest standards of investor protection.
                 </p>
               </div>
             </TransitionWrapper>
             <TransitionWrapper>
               <div className="bg-white p-8 rounded-xl shadow-lg">
                 <IconDiamond className="size-12 text-redColor mb-6" />
-                <h3 className="text-2xl font-bold text-greenColor mb-4">Premium Execution</h3>
+                <h3 className="text-2xl font-bold text-greenColor mb-4">
+                  Premium Execution
+                </h3>
                 <p className="text-[#898d96]">
-                  Ultra-low latency trade execution with tight spreads across all asset classes.
+                  Ultra-low latency trade execution with tight spreads across
+                  all asset classes.
                 </p>
               </div>
             </TransitionWrapper>
             <TransitionWrapper>
               <div className="bg-white p-8 rounded-xl shadow-lg">
                 <IconTrendingUp className="size-12 text-redColor mb-6" />
-                <h3 className="text-2xl font-bold text-greenColor mb-4">Expert Insights</h3>
+                <h3 className="text-2xl font-bold text-greenColor mb-4">
+                  Expert Insights
+                </h3>
                 <p className="text-[#898d96]">
-                  Daily market analysis and investment strategies from our team of seasoned professionals.
+                  Daily market analysis and investment strategies from our team
+                  of seasoned professionals.
                 </p>
               </div>
             </TransitionWrapper>
@@ -225,15 +241,22 @@ const page = () => {
           </TransitionWrapper>
           <TransitionWrapper>
             <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">
-              Join thousands of investors who trust us with their financial growth.
+              Join thousands of investors who trust us with their financial
+              growth.
             </p>
           </TransitionWrapper>
           <TransitionWrapper>
             <div className="flex flex-wrap gap-4">
-              <Link href="#" className="bg-redColor py-4 px-6 rounded-lg hover:bg-red-700 transition-colors duration-300">
+              <Link
+                href="#"
+                className="bg-redColor py-4 px-6 rounded-lg hover:bg-red-700 transition-colors duration-300"
+              >
                 Open Account
               </Link>
-              <Link href="#" className="bg-transparent border-2 border-white py-4 px-6 rounded-lg hover:bg-white hover:text-darkColor transition-colors duration-300">
+              <Link
+                href="#"
+                className="bg-transparent border-2 border-white py-4 px-6 rounded-lg hover:bg-white hover:text-darkColor transition-colors duration-300"
+              >
                 Contact Advisor
               </Link>
             </div>

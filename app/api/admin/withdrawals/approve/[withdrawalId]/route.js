@@ -131,7 +131,7 @@ export async function PUT(req, { params }) {
         <div class="header">
           <img
             src="https://res.cloudinary.com/dcxfxfa52/image/upload/v1738674100/deposit_slips/ifzhr9kyxhio8zhabftc.png"
-            alt="Swizzfunds Logo"
+            alt="ElazarCapital Logo"
           />
         </div>
         <hr />
@@ -140,14 +140,14 @@ export async function PUT(req, { params }) {
           <p>Hello,</p>
           <p>We are pleased to inform you that your withdrawal of <strong>$${withdrawal.amount}</strong> has been successfully approved.</p>
           <p>You can now start using the funds in your account. If you have any questions or need further assistance, feel free to contact our support team.</p>
-          <p>Thank you for choosing Swizzfunds!</p>
+          <p>Thank you for choosing ElazarCapital!</p>
           <a href="${process.env.NEXT_PUBLIC_BASE_URL}/dashboard" class="button">Go to Dashboard</a>
         </div>
         <hr />
         <div class="footer">
           <p>Best regards,</p>
-          <p><strong>Swizzfunds Team</strong></p>
-          <p>Contact us: <a href="mailto:support@swizzfunds.com">support@swizzfunds.com</a></p>
+          <p><strong>ElazarCapital Team</strong></p>
+          <p>Contact us: <a href="mailto:support@ElazarCapital.com">support@ElazarCapital.com</a></p>
           
         </div>
       </div>

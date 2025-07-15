@@ -9,172 +9,172 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 
-export const Dailyplans = [
-  {
-    title: "SwizzFunds Consumer",
-    description: "Sending and receiving money in up to 5 countries",
-    price: "$0.00",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#222E2E",
-  },
-  {
-    title: "SwizzFunds Business",
-    description: "Access to multi-currency accounts and local payments",
-    price: "$14.00",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#1D615F",
-  },
-  {
-    title: "SwizzFunds Enterprise",
-    description: "Secure and reliable transactions at the enterprise level",
-    price: "$34.99",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#222E2E",
-  },
-];
+// export const Dailyplans = [
+//   {
+//     title: "ElazarCapital Consumer",
+//     description: "Sending and receiving money in up to 5 countries",
+//     price: "$0.00",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#222E2E",
+//   },
+//   {
+//     title: "ElazarCapital Business",
+//     description: "Access to multi-currency accounts and local payments",
+//     price: "$14.00",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#1D615F",
+//   },
+//   {
+//     title: "ElazarCapital Enterprise",
+//     description: "Secure and reliable transactions at the enterprise level",
+//     price: "$34.99",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#222E2E",
+//   },
+// ];
 
-export const Monthlyplans = [
-  {
-    title: "SwizzFunds Consumer",
-    description: "Sending and receiving money in up to 5 countries",
-    price: "$10.00",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#222E2E",
-  },
-  {
-    title: "SwizzFunds Business",
-    description: "Access to multi-currency accounts and local payments",
-    price: "$40.00",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#1D615F",
-  },
-  {
-    title: "SwizzFunds Enterprise",
-    description: "Secure and reliable transactions at the enterprise level",
-    price: "$54.99",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#222E2E",
-  },
-];
+// export const Monthlyplans = [
+//   {
+//     title: "ElazarCapital Consumer",
+//     description: "Sending and receiving money in up to 5 countries",
+//     price: "$10.00",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#222E2E",
+//   },
+//   {
+//     title: "ElazarCapital Business",
+//     description: "Access to multi-currency accounts and local payments",
+//     price: "$40.00",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#1D615F",
+//   },
+//   {
+//     title: "ElazarCapital Enterprise",
+//     description: "Secure and reliable transactions at the enterprise level",
+//     price: "$54.99",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#222E2E",
+//   },
+// ];
 
-export const Yearlyplans = [
-  {
-    title: "SwizzFunds Consumer",
-    description: "Sending and receiving money in up to 5 countries",
-    price: "$30.00",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#222E2E",
-  },
-  {
-    title: "SwizzFunds Business",
-    description: "Access to multi-currency accounts and local payments",
-    price: "$60.00",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#1D615F",
-  },
-  {
-    title: "SwizzFunds Enterprise",
-    description: "Secure and reliable transactions at the enterprise level",
-    price: "$80.99",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#222E2E",
-  },
-];
+// export const Yearlyplans = [
+//   {
+//     title: "ElazarCapital Consumer",
+//     description: "Sending and receiving money in up to 5 countries",
+//     price: "$30.00",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#222E2E",
+//   },
+//   {
+//     title: "ElazarCapital Business",
+//     description: "Access to multi-currency accounts and local payments",
+//     price: "$60.00",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#1D615F",
+//   },
+//   {
+//     title: "ElazarCapital Enterprise",
+//     description: "Secure and reliable transactions at the enterprise level",
+//     price: "$80.99",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#222E2E",
+//   },
+// ];
 
-export const TwoYearsplans = [
-  {
-    title: "SwizzFunds Consumer",
-    description: "Sending and receiving money in up to 5 countries",
-    price: "$50.00",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#222E2E",
-  },
-  {
-    title: "SwizzFunds Business",
-    description: "Access to multi-currency accounts and local payments",
-    price: "$90.00",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#1D615F",
-  },
-  {
-    title: "SwizzFunds Enterprise",
-    description: "Secure and reliable transactions at the enterprise level",
-    price: "$100.99",
-    features: [
-      "Unlimited transactions",
-      "Basic Technical Support (Email)",
-      "Instructional advisor",
-    ],
-    backgroundColor: "#222E2E",
-  },
-];
+// export const TwoYearsplans = [
+//   {
+//     title: "ElazarCapital Consumer",
+//     description: "Sending and receiving money in up to 5 countries",
+//     price: "$50.00",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#222E2E",
+//   },
+//   {
+//     title: "ElazarCapital Business",
+//     description: "Access to multi-currency accounts and local payments",
+//     price: "$90.00",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#1D615F",
+//   },
+//   {
+//     title: "ElazarCapital Enterprise",
+//     description: "Secure and reliable transactions at the enterprise level",
+//     price: "$100.99",
+//     features: [
+//       "Unlimited transactions",
+//       "Basic Technical Support (Email)",
+//       "Instructional advisor",
+//     ],
+//     backgroundColor: "#222E2E",
+//   },
+// ];
 
 export const FeedBacks = [
   {
     category: "Rüdiger Karlsen",
     title:
-      "Explore more Managing savings has never been so easy. SwizzFunds has helped me achieve my financial goals faster than I imagined.",
+      "Explore more Managing savings has never been so easy. ElazarCapital has helped me achieve my financial goals faster than I imagined.",
   },
 
   {
     category: "Branka Berg",
     title:
-      "SwizzFunds's security is unparalleled. I feel comfortable knowing that my data is protected while I control my finances.",
+      "ElazarCapital's security is unparalleled. I feel comfortable knowing that my data is protected while I control my finances.",
   },
 
   {
     category: "Karl Andreassen",
     title:
-      "SwizzFunds adapts to my needs. I can customize my plan and I really feel like I am in control who formed us in his own image.",
+      "ElazarCapital adapts to my needs. I can customize my plan and I really feel like I am in control who formed us in his own image.",
   },
   {
     category: "Karl Andreassen",
     title:
-      "SwizzFunds adapts to my needs. I can customize my plan and I really feel like I am in control who formed us in his own image.",
+      "ElazarCapital adapts to my needs. I can customize my plan and I really feel like I am in control who formed us in his own image.",
   },
 ];
 
@@ -339,7 +339,7 @@ export const EstatePlans = [
       WeeklyProfit: "14%",
       MonthlyProfit: "60%",
       ReferralBonus: "10%",
-      Duration: "15 Day(s)",
+
     },
     backgroundColor: "#222E2E",
   },
@@ -353,7 +353,6 @@ export const EstatePlans = [
       WeeklyProfit: "21%",
       MonthlyProfit: "90%",
       ReferralBonus: "10%",
-      Duration: "20 Day(s)",
     },
     backgroundColor: "#1D615F",
   },
@@ -367,7 +366,6 @@ export const EstatePlans = [
       WeeklyProfit: "35%",
       MonthlyProfit: "150%",
       ReferralBonus: "10%",
-      Duration: "31 Day(s)",
     },
     backgroundColor: "#222E2E",
   },
@@ -381,7 +379,6 @@ export const EstatePlans = [
       WeeklyProfit: "42%",
       MonthlyProfit: "180%",
       ReferralBonus: "10%",
-      Duration: "50 Day(s)",
     },
     backgroundColor: "#1D615F",
   },
@@ -392,15 +389,14 @@ export const CryptoPlans = [
     title: "Starter Plan",
     Minimum: "$300",
     Maximum: "Unlimited",
-    backgroundColor: "#222E2E", 
+    backgroundColor: "#222E2E",
     features: {
       DailyProfit: "2.3%",
       WeeklyProfit: "6%",
       MonthlyProfit: "24%",
       Withdrawal: "Weekly",
       ReferralBonus: "5%",
-      Duration: "7 Day(s)",
-    }
+    },
   },
   {
     id: "c2",
@@ -414,8 +410,7 @@ export const CryptoPlans = [
       MonthlyProfit: "36%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
-      Duration: "7 Day(s)",
-    }
+    },
   },
   {
     id: "c3",
@@ -429,8 +424,7 @@ export const CryptoPlans = [
       MonthlyProfit: "28.2%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
-      Duration: "30 Day(s)",
-    }
+    },
   },
   {
     id: "c4",
@@ -444,8 +438,7 @@ export const CryptoPlans = [
       MonthlyProfit: "48%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
-      Duration: "30 Day(s)",
-    }
+    },
   },
   {
     id: "c5",
@@ -459,8 +452,7 @@ export const CryptoPlans = [
       MonthlyProfit: "72%",
       Withdrawal: "Weekly",
       ReferralBonus: "15%",
-      Duration: "50 Day(s)",
-    }
+    },
   },
   {
     id: "c6",
@@ -474,8 +466,7 @@ export const CryptoPlans = [
       MonthlyProfit: "60%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
-      Duration: "60 Day(s)",
-    }
+    },
   },
 ];
 
@@ -492,7 +483,7 @@ export const ForexPlans = [
       MonthlyProfit: "30%",
       ReferralBonus: "5%",
       Duration: "7 Day(s)",
-    }
+    },
   },
   {
     id: "f2",
@@ -506,7 +497,7 @@ export const ForexPlans = [
       MonthlyProfit: "60%",
       ReferralBonus: "5%",
       Duration: "21 Day(s)",
-    }
+    },
   },
   {
     id: "f3",
@@ -520,7 +511,7 @@ export const ForexPlans = [
       MonthlyProfit: "90%",
       ReferralBonus: "7%",
       Duration: "31 Day(s)",
-    }
+    },
   },
   {
     id: "f4",
@@ -534,7 +525,7 @@ export const ForexPlans = [
       MonthlyProfit: "210%",
       ReferralBonus: "10%",
       Duration: "61 Day(s)",
-    }
+    },
   },
 ];
 
@@ -551,7 +542,7 @@ export const StockPlans = [
       MonthlyProfit: "30%",
       ReferralBonus: "3%",
       Duration: "20 Day(s)",
-    }
+    },
   },
   {
     id: "s2",
@@ -565,7 +556,7 @@ export const StockPlans = [
       MonthlyProfit: "60%",
       ReferralBonus: "5%",
       Duration: "21 Day(s)",
-    }
+    },
   },
   {
     id: "s3",
@@ -579,7 +570,7 @@ export const StockPlans = [
       MonthlyProfit: "90%",
       ReferralBonus: "7%",
       Duration: "30 Day(s)",
-    }
+    },
   },
   {
     id: "s4",
@@ -593,7 +584,7 @@ export const StockPlans = [
       MonthlyProfit: "150%",
       ReferralBonus: "10%",
       Duration: "40 Day(s)",
-    }
+    },
   },
   {
     id: "s5",
@@ -607,13 +598,13 @@ export const StockPlans = [
       MonthlyProfit: "150%",
       ReferralBonus: "6%",
       Duration: "20 Day(s)",
-    }
+    },
   },
 ];
 
 export const GoldPlans = [
   {
-    id: "g1",  // Changed from c1 to g1 for gold-specific IDs
+    id: "g1", // Changed from c1 to g1 for gold-specific IDs
     title: "Starter Plan",
     Minimum: "$5,000",
     Maximum: "Unlimited",
@@ -624,11 +615,10 @@ export const GoldPlans = [
       MonthlyProfit: "24%",
       Withdrawal: "Weekly",
       ReferralBonus: "5%",
-      Duration: "7 Day(s)",
-    }
+    },
   },
   {
-    id: "g2",  // Changed from c2 to g2
+    id: "g2", // Changed from c2 to g2
     title: "Basic Plan",
     Minimum: "$35,000",
     Maximum: "Unlimited",
@@ -638,12 +628,11 @@ export const GoldPlans = [
       WeeklyProfit: "9%",
       MonthlyProfit: "36%",
       Withdrawal: "Weekly",
-      ReferralBonus: "10%",  // Fixed typo from "ReferralBonus"
-      Duration: "20 Day(s)",
-    }
+      ReferralBonus: "10%", 
+    },
   },
   {
-    id: "g3",  // Changed from c3 to g3
+    id: "g3", // Changed from c3 to g3
     title: "Advanced Plan",
     Minimum: "$100,000",
     Maximum: "Unlimited",
@@ -654,11 +643,10 @@ export const GoldPlans = [
       MonthlyProfit: "48%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
-      Duration: "30 Day(s)",
-    }
+    },
   },
   {
-    id: "g4",  // Changed from c4 to g4
+    id: "g4", // Changed from c4 to g4
     title: "Premium Plan",
     Minimum: "$500,000",
     Maximum: "Unlimited",
@@ -669,14 +657,13 @@ export const GoldPlans = [
       MonthlyProfit: "72%",
       Withdrawal: "Weekly",
       ReferralBonus: "15%",
-      Duration: "50 Day(s)",
-    }
+    },
   },
 ];
 
 export const SilverPlans = [
   {
-    id: "s1",  // Changed from c1 to s1 for silver-specific IDs
+    id: "s1", // Changed from c1 to s1 for silver-specific IDs
     title: "Starter Plan",
     Minimum: "$1,000.00",
     Maximum: "$20,000.00",
@@ -687,10 +674,10 @@ export const SilverPlans = [
       MonthlyProfit: "30%",
       ReferralBonus: "5%",
       Duration: "7 Day(s)",
-    }
+    },
   },
   {
-    id: "s2",  // Changed from c2 to s2
+    id: "s2", // Changed from c2 to s2
     title: "Basic Plan",
     Minimum: "$20,000.00",
     Maximum: "$50,000.00",
@@ -701,10 +688,10 @@ export const SilverPlans = [
       MonthlyProfit: "60%",
       ReferralBonus: "5%",
       Duration: "21 Day(s)",
-    }
+    },
   },
   {
-    id: "s3",  // Changed from c3 to s3
+    id: "s3", // Changed from c3 to s3
     title: "Advanced Plan",
     Minimum: "$50,000.00",
     Maximum: "$100,000.00",
@@ -715,12 +702,12 @@ export const SilverPlans = [
       MonthlyProfit: "90%",
       ReferralBonus: "7%",
       Duration: "31 Day(s)",
-    }
+    },
   },
   {
-    id: "s4",  // Changed from c4 to s4
+    id: "s4", // Changed from c4 to s4
     title: "Premium Plan",
-    Minimum: "$100,000.00",  // Fixed extra space
+    Minimum: "$100,000.00", // Fixed extra space
     Maximum: "$250,000.00",
     backgroundColor: "#1D615F", // Lighter teal
     features: {
@@ -729,6 +716,6 @@ export const SilverPlans = [
       MonthlyProfit: "210%",
       ReferralBonus: "10%",
       Duration: "61 Day(s)",
-    }
+    },
   },
 ];

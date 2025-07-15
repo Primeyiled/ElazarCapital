@@ -128,7 +128,7 @@ export async function PUT(req, { params }) {
         <div class="header">
           <img
             src="https://res.cloudinary.com/dcxfxfa52/image/upload/v1738674100/deposit_slips/ifzhr9kyxhio8zhabftc.png"
-            alt="Swizzfunds Logo"
+            alt="ElazarCapital Logo"
           />
         </div>
         <hr />
@@ -144,8 +144,8 @@ export async function PUT(req, { params }) {
         <hr />
         <div class="footer">
           <p>Best regards,</p>
-          <p><strong>Swizzfunds Team</strong></p>
-          <p>Contact us: <a href="mailto:support@swizzfunds.com">support@swizzfunds.com</a></p>
+          <p><strong>ElazarCapital Team</strong></p>
+          <p>Contact us: <a href="mailto:support@ElazarCapital.com">support@ElazarCapital.com</a></p>
         </div>
       </div>
     </body>

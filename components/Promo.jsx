@@ -18,8 +18,8 @@ const Promo = () => {
             </TransitionWrapper>
             <TransitionWrapper>
               <p className="text-gray-500 md:text-lg lg:w-[400px] text-center">
-                At SwizzFunds, we understand the importance of the security and
-                privacy of your financial data.
+                At ElazarCapital, we understand the importance of the security
+                and privacy of your financial data.
               </p>
             </TransitionWrapper>
             <TransitionWrapper>

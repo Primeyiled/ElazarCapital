@@ -15,6 +15,9 @@ import Image from "next/image";
 import TransitionWrapper from "@/components/TransitionWrapper";
 import CountUp from "react-countup";
 import Footer from "@/components/Footer";
+import Link from "next/link";
+import { EstatePlans } from "@/constants/data";
+import { MdCheck } from "react-icons/md";
 
 const RealEstatePage = () => {
   const [activeTab, setActiveTab] = useState("benefits");
@@ -267,7 +270,7 @@ const RealEstatePage = () => {
             </div>
             <div className="relative h-64 md:h-80">
               <Image
-                src="/real-estate-benefits.jpg"
+                src="/invest.jpg"
                 alt="Real estate benefits"
                 fill
                 className="object-cover rounded-lg"
@@ -277,24 +280,73 @@ const RealEstatePage = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-blue-900 py-16">
-        <div className="max-w-7xl mx-auto px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to <span className="text-blue-300">Invest in Brick and Mortar?</span>
-          </h2>
-          <p className="text-gray-300 mb-8 max-w-3xl mx-auto">
-            Our real estate specialists will guide you through every step, from property selection to ownership.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-lg font-semibold transition-colors">
-              View Investment Plans
-            </button>
-            <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-900 py-3 px-8 rounded-lg font-semibold transition-colors">
-              Schedule Consultation
-            </button>
-          </div>
+    <div className="max-w-7xl mx-auto px-8 py-16">
+        <TransitionWrapper>
+          <h1 className="font-bold text-3xl lg:text-5xl text-center text-white mb-6">
+            Our <span className="text-redColor">Real Estate Investment</span> Plans
+          </h1>
+        </TransitionWrapper>
+
+        <div className="flex flex-wrap justify-center gap-8">
+          {EstatePlans.map((plan) => (
+            <motion.div
+              key={plan.id}
+              whileHover={{ y: -5 }}
+              className={`py-10 px-6 text-center flex flex-col items-center gap-6 rounded-[2.5rem] w-full md:w-[350px]`}
+              style={{ backgroundColor: plan.backgroundColor }}
+            >
+              <TransitionWrapper>
+                <h2 className="font-bold text-xl text-white">{plan.title}</h2>
+              </TransitionWrapper>
+
+              <TransitionWrapper>
+                <div className="text-[#a0cdcd]">
+                  <p>Investment Range:</p>
+                  <p className="font-medium">
+                    {plan.Minimum} - {plan.Maximum}
+                  </p>
+                </div>
+              </TransitionWrapper>
+
+              <TransitionWrapper>
+                <Link
+                  href="/register"
+                  className="bg-redColor text-white py-3 px-8 rounded-xl font-semibold hover:bg-red-600 transition-colors"
+                >
+                  Get Started
+                </Link>
+              </TransitionWrapper>
+
+              <TransitionWrapper>
+                <div className="grid gap-4 w-full">
+                  {Object.entries(plan.features).map(([key, value]) => (
+                    <p
+                      key={key}
+                      className="flex items-start gap-3 text-sm text-[#a0cdcd] text-left"
+                    >
+                      <span className="bg-[#03A6A6] size-5 rounded-full flex justify-center items-center mt-1 flex-shrink-0">
+                        <MdCheck className="font-bold text-xs" />
+                      </span>
+                      <span>
+                        <span className="font-medium">
+                          {key.replace(/([A-Z])/g, " $1")}:
+                        </span>{" "}
+                        {value}
+                      </span>
+                    </p>
+                  ))}
+                </div>
+              </TransitionWrapper>
+            </motion.div>
+          ))}
         </div>
+
+        <TransitionWrapper>
+          <p className="text-center text-gray-400 mt-12">
+            All plans include 24/7 monitoring by our experts and
+            institutional-grade security.
+          </p>
+        </TransitionWrapper>
       </div>
 
       <Footer />

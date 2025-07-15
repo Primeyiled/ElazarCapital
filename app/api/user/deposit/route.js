@@ -96,21 +96,21 @@ export async function POST(request) {
 
     // Send email to the user
     const userEmailSubject = "Deposit Request Submitted";
-    const userEmailTextContent = `Dear ${user.userName},\n\nYour deposit request of $${amount} has been successfully submitted. We will notify you once it is approved.\n\nThank you for choosing Swizzfunds!`;
+    const userEmailTextContent = `Dear ${user.userName},\n\nYour deposit request of $${amount} has been successfully submitted. We will notify you once it is approved.\n\nThank you for choosing ElazarCapital!`;
     const userEmailHtmlContent = `
       <div>
       <div class="header">
           <img
             src="https://res.cloudinary.com/dcxfxfa52/image/upload/v1738674100/deposit_slips/ifzhr9kyxhio8zhabftc.png"
-            alt="Swizzfunds Logo"
+            alt="ElazarCapital Logo"
           />
         </div>
         <hr />
         <p>Dear ${user.userName},</p>
         <p>Your deposit request of <strong>$${amount}</strong> has been successfully submitted. We will notify you once it is approved.</p>
-        <p>Thank you for choosing Swizzfunds!</p>
+        <p>Thank you for choosing ElazarCapital!</p>
         <p>Best regards,</p>
-        <p><strong>Swizzfunds Team</strong></p>
+        <p><strong>ElazarCapital Team</strong></p>
       </div>
     `;
 
@@ -122,7 +122,7 @@ export async function POST(request) {
     );
 
     // Send email to the admin
-    const adminEmail = "admin@swizzfunds.com"; // Replace with the admin's email
+    const adminEmail = "admin@ElazarCapital.com"; // Replace with the admin's email
     const adminEmailSubject = "New Deposit Request";
     const adminEmailTextContent = `A new deposit request has been submitted by ${user.userName} (${user.email}) for $${amount}. Please review it in the admin panel.`;
     const adminEmailHtmlContent = `
@@ -136,7 +136,7 @@ export async function POST(request) {
         </ul>
         <p>Please review it in the admin panel.</p>
         <p>Best regards,</p>
-        <p><strong>Swizzfunds Team</strong></p>
+        <p><strong>ElazarCapital Team</strong></p>
       </div>
     `;
 

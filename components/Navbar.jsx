@@ -110,21 +110,21 @@ const Navbar = () => {
       href: "/plans/gold_plans",
       icon: <GiGoldBar className="text-yellow-500" />,
     },
-    {
-      name: "Forex Investment Plan",
-      href: "/plans/forex_plans",
-      icon: <GiTrade className="text-green-400" />,
-    },
-    {
-      name: "Stock Investment Plan",
-      href: "/plans/stock_plans",
-      icon: <FaChartLine className="text-red-400" />, // Changed to FaChartLine
-    },
-    {
-      name: "Silver Investment Plan",
-      href: "/plans/silver_plans",
-      icon: <GiSilverBullet className="text-gray-300" />,
-    },
+    // {
+    //   name: "Forex Investment Plan",
+    //   href: "/plans/forex_plans",
+    //   icon: <GiTrade className="text-green-400" />,
+    // },
+    // {
+    //   name: "Stock Investment Plan",
+    //   href: "/plans/stock_plans",
+    //   icon: <FaChartLine className="text-red-400" />, // Changed to FaChartLine
+    // },
+    // {
+    //   name: "Silver Investment Plan",
+    //   href: "/plans/silver_plans",
+    //   icon: <GiSilverBullet className="text-gray-300" />,
+    // },
   ];
 
   return (
@@ -142,10 +142,10 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Image
-            width={50}
-            height={50}
+            width={55}
+            height={55}
             src="/logo.png"
-            alt="swizzfunds_logo"
+            alt="ElazarCapital_logo"
             className="size-50"
           />
 
@@ -217,7 +217,7 @@ const Navbar = () => {
 
               {/* Desktop Dropdown */}
               <div
-                className={`hidden lg:block absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-greenColor/95 backdrop-blur-sm overflow-hidden transition-all duration-300 origin-top ${
+                className={`hidden lg:block absolute left-0 mt-2 w-56 z-[70] rounded-md shadow-lg bg-greenColor/95 backdrop-blur-sm overflow-hidden transition-all duration-300 origin-top ${
                   plansDropdown
                     ? "scale-y-100 opacity-100"
                     : "scale-y-0 opacity-0"
@@ -262,19 +262,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            <Link
-              href="/blog"
-              className={`${
-                isActive("/blog")
-                  ? "text-redColor relative"
-                  : "text-white hover:text-redColor transition-all duration-300"
-              }`}
-            >
-              Blog
-              {isActive("/blog") && (
-                <span className="absolute -bottom-4 left-0 w-full h-1 bg-redColor transition-all duration-300" />
-              )}
-            </Link>
+          
             <Link
               href="/contact"
               className={`${
@@ -288,16 +276,45 @@ const Navbar = () => {
                 <span className="absolute -bottom-4 left-0 w-full h-1 bg-redColor transition-all duration-300" />
               )}
             </Link>
+          
+            <Link
+              href="/frequently-asked-questions"
+              className={`${
+                isActive("/frequently-asked-questions")
+                  ? "text-redColor relative"
+                  : "text-white hover:text-redColor transition-all duration-300"
+              }`}
+            >
+              FAQ
+              {isActive("/frequently-asked-questions") && (
+                <span className="absolute -bottom-4 left-0 w-full h-1 bg-redColor transition-all duration-300" />
+              )}
+            </Link>
+
+            <div className="flex gap-4 mt-10 lg:mt-0 lg:ml-24">
+            <Link
+              href="/login"
+              className={"bg-white text-black px-4 py-2 rounded-lg font-normal text-sm"}
+            >
+              Login
+            </Link>
+            <Link
+              href="/register"
+              className={"bg-redColor text-white px-4 py-2 rounded-lg font-normal text-sm"}
+            >
+              Register
+            </Link>
+            </div>
           </div>
 
           <div className="flex gap-4 items-center lg:hidden">
             <span className="bg-black flex justify-center items-center p-2 rounded-lg size-12 lg:hidden">
               <MdMenu
-                className={!toggleMenu ? "size-9 absolute" : "hidden"}
+                className={!toggleMenu ? "size-9 absolute cursor-pointer" : "hidden"}
                 onClick={handleMenu}
               />
               <MdClose
-                className={toggleMenu ? "size-9 absolute" : "hidden"}
+                className={toggleMenu ? "size-9 absolute cursor-pointer" : "hidden"}
                 onClick={handleMenu}
               />
             </span>
