@@ -25,7 +25,7 @@ const Promo = () => {
             <TransitionWrapper>
               <div className="mt-16">
                 <Link
-                  href="/"
+                  href="/services"
                   className="bg-redColor rounded-xl py-6 px-8 font-semibold"
                 >
                   Explore Our Services

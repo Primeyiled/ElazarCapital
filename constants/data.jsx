@@ -173,9 +173,9 @@ export const FeedBacks = [
       "ElazarCapital adapts to my needs. I can customize my plan and I really feel like I am in control who formed us in his own image.",
   },
   {
-    category: "Karl Andreassen",
+    category: "Ethan Cole",
     title:
-      "ElazarCapital adapts to my needs. I can customize my plan and I really feel like I am in control who formed us in his own image.",
+      "ElazarCapital has redefined my investment experience. The platform is intuitive, the support is responsive, and I feel genuinely empowered to grow my finances with clarity and confidence.",
   },
 ];
 

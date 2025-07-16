@@ -3,6 +3,7 @@ import User from "@/lib/model/user";
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import Withdraw from "@/lib/model/withdraw";
+import sendEmail from "@/lib/utils/sendEmail";
 
 export async function PUT(req, { params }) {
   try {
@@ -56,7 +57,7 @@ export async function PUT(req, { params }) {
     }
 
     if (withdrawal.status === "Approved") {
-      user.totalInvest -= withdrawal.amount;
+      user.totalProfit += withdrawal.amount;
     }
 
     withdrawal.status = "Declined";

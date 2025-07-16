@@ -25,7 +25,7 @@ const Footer = () => {
                 </Link>
                 <Link href="/about">About Us</Link>
                 <Link href="/contact">Contact Us</Link>
-                <Link href="/service">Services</Link>
+                <Link href="/services">Services</Link>
                 <Link href="/frequently-asked-questions">FAQ</Link>
               </div>
             </div>
@@ -33,7 +33,7 @@ const Footer = () => {
             <div className="text-gray-300 grid gap-6">
               <p>999 Rue du Cherche-Midi, 7755500666 Paris, France</p>
               <p>+001 (808) 555-0111</p>
-              <p>support@ElazarCapital.network</p>
+              <p>support@elazarcapital.com</p>
             </div>
           </div>
           <br />
@@ -43,9 +43,9 @@ const Footer = () => {
           <br />
           <div className="flex justify-between items-center flex-col lg:flex-row">
             <p className="text-gray-300">
-              © 2024 ElazarCapital Finance & Fintech Design{" "}
+              © 2025 ElazarCapital | All rights reserved.
             </p>
-            <div className="space-x-4 text-gray-300 text-[15px]">
+            <div className="space-x-4 text-gray-300 text-[15px] mt-10 lg:mt-0">
               <Link href="/privacy-policy">Privacy Policy</Link>
               <Link href="/terms-of-services">Terms of Services</Link>
             </div>

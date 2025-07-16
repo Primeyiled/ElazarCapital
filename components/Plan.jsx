@@ -89,7 +89,7 @@ const Plan = () => {
             </TransitionWrapper>
 
             <Link
-              href="/"
+              href="/register"
               className="bg-redColor text-white py-3 px-8 rounded-xl font-semibold"
             >
               Get Started

@@ -1,7 +1,11 @@
-"use client";
 import Footer from "@/components/Footer";
 import Heading from "@/components/Heading";
 
+export const metadata = {
+  title: "Privacy Policy - ElazarCapital",
+  description:
+    "Learn how ElazarCapital collects, uses, and protects your personal information. Our privacy policy is designed to keep your data safe and secure at all times.",
+};
 const page = () => {
   return (
     <div>

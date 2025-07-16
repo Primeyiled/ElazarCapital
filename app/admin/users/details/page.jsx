@@ -142,41 +142,52 @@ const Page = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(setLoading(true));
-    dispatch(clearMessages());
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  dispatch(setLoading(true));
+  dispatch(clearMessages());
 
-    try {
-      const response = await fetch(
-        `/api/admin/users/update/${selectedUserData._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify(userInfo),
-        }
-      );
+  // Parse and prepare updated values
+  const refBonus = parseFloat(userInfo.refBonus) || 0;
+  const totalProfit = parseFloat(userInfo.totalProfit) || 0;
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        dispatch(setError(errorData.message || "Failed to update user"));
-        dispatch(setLoading(false));
-        throw new Error("Failed to update user");
-      } else {
-        const result = await response.json();
-        dispatch(setSuccess(result.message));
-        dispatch(setLoading(false));
-        router.push("/admin/");
-      }
-    } catch (error) {
-      dispatch(setError("An error occurred while updating user."));
-      dispatch(setLoading(false));
-      console.error("Error updating user:", error);
-    }
+  const updatedUserInfo = {
+    ...userInfo,
+    totalProfit: totalProfit + refBonus, // add refBonus to totalProfit
+    refBonus, // retain the original value
   };
+
+  try {
+    const response = await fetch(
+      `/api/admin/users/update/${selectedUserData._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(updatedUserInfo),
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      dispatch(setError(errorData.message || "Failed to update user"));
+      dispatch(setLoading(false));
+      throw new Error("Failed to update user");
+    } else {
+      const result = await response.json();
+      dispatch(setSuccess(result.message));
+      dispatch(setLoading(false));
+      router.push("/admin/");
+    }
+  } catch (error) {
+    dispatch(setError("An error occurred while updating user."));
+    dispatch(setLoading(false));
+    console.error("Error updating user:", error);
+  }
+};
+
 
   const handleModalClose = () => {
     dispatch(toggleModal());

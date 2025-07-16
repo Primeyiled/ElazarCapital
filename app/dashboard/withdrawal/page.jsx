@@ -48,8 +48,8 @@ const Withdrawal = () => {
     } else {
       dispatch(setWithdrawalData({ amount, walletAddress, type }));
     }
-          dispatch(setLoading(false));
-    
+    dispatch(setLoading(false));
+
     router.push("/dashboard/withdrawal/details");
   };
 
@@ -76,7 +76,7 @@ const Withdrawal = () => {
       {loading && <Loader />}
 
       <Layout>
-        <div >
+        <div>
           <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
             <p className="font-semibold md:text-lg pb-10">
               Select Payment Gateway
