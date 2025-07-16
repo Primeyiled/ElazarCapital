@@ -127,7 +127,7 @@ export async function PUT(req, { params }) {
       <div class="container">
         <div class="header">
           <img
-            src="https://res.cloudinary.com/dcxfxfa52/image/upload/v1738674100/deposit_slips/ifzhr9kyxhio8zhabftc.png"
+            src="https://res.cloudinary.com/dff9xwtjc/image/upload/v1752631553/logo_vvkbds.png"
             alt="ElazarCapital Logo"
           />
         </div>
