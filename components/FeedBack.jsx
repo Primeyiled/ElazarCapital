@@ -35,7 +35,7 @@ export function AppleCardsCarouselDemo() {
           <TransitionWrapper>
             <p className="lg:text-xl xl:max-w-2xl text-center text-white">
               Join thousands of global traders accessing 1,000+ assets,
-              real-time market insights, and advanced tools—all from one
+              real-time market insights, and advanced tools, all from one
               powerful platform. With ElazarCapital, financial freedom is just a
               trade away.
             </p>

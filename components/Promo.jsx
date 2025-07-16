@@ -28,7 +28,7 @@ const Promo = () => {
                   href="/"
                   className="bg-redColor rounded-xl py-6 px-8 font-semibold"
                 >
-                  Explore More
+                  Explore Our Services
                 </Link>
               </div>
             </TransitionWrapper>

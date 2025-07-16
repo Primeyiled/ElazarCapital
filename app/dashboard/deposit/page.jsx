@@ -6,6 +6,7 @@ import {
   DepositData,
   EstatePlans,
   ForexPlans,
+  GoldPlans,
   StockPlans,
 } from "@/constants/data";
 import {
@@ -31,9 +32,15 @@ import Layout from "../Layout";
 
 const investmentPlans = {
   "Real Estate": EstatePlans,
-  "Crypto currency": CryptoPlans,
-  "Forex Investment": ForexPlans,
-  "Stock Investment": StockPlans,
+  "Crypto Currency": CryptoPlans,
+  "Gold Investment": GoldPlans,
+};
+
+// Helper function to parse currency strings
+const parseCurrency = (currencyString) => {
+  if (!currencyString) return 0;
+  const numericString = currencyString.replace(/[^0-9.]/g, '');
+  return parseFloat(numericString) || 0;
 };
 
 const Page = () => {
@@ -41,6 +48,8 @@ const Page = () => {
   const [selectedDepositType, setSelectedDepositType] = useState("");
   const [selectedInvestment, setSelectedInvestment] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("");
+  const [selectedPlanDetails, setSelectedPlanDetails] = useState(null);
+  const [amountError, setAmountError] = useState("");
 
   const { userData } = useSelector((state) => state.user);
   const { success, error, loading, modalOpen } = useSelector(
@@ -61,26 +70,100 @@ const Page = () => {
     setSelectedPlan("");
   }, [selectedInvestment]);
 
+  useEffect(() => {
+    if (selectedPlan && selectedInvestment) {
+      const details = investmentPlans[selectedInvestment]?.find(
+        (plan) => plan.title === selectedPlan
+      );
+      setSelectedPlanDetails(details);
+    } else {
+      setSelectedPlanDetails(null);
+    }
+  }, [selectedPlan, selectedInvestment]);
+
+  useEffect(() => {
+    if (selectedPlanDetails && selectedAmount) {
+      const amount = parseFloat(selectedAmount);
+      const min = parseCurrency(selectedPlanDetails.Minimum);
+      const max = parseCurrency(selectedPlanDetails.Maximum) || Infinity;
+
+      if (isNaN(amount)) {
+        setAmountError("Please enter a valid number");
+      } else if (amount < min) {
+        setAmountError(`Minimum deposit is ${selectedPlanDetails.Minimum}`);
+      } else if (selectedPlanDetails.Maximum && amount > max) {
+        setAmountError(`Maximum deposit is ${selectedPlanDetails.Maximum}`);
+      } else {
+        setAmountError("");
+      }
+    } else {
+      setAmountError("");
+    }
+  }, [selectedAmount, selectedPlanDetails]);
+
+  useEffect(() => {
+    if (selectedPlanDetails) {
+      setSelectedAmount(parseCurrency(selectedPlanDetails.Minimum).toString());
+    }
+  }, [selectedPlanDetails]);
+
+  const handleAmountChange = (e) => {
+    const value = e.target.value;
+    // Only allow numbers and empty string
+    if (value === "" || /^[0-9]*\.?[0-9]*$/.test(value)) {
+      setSelectedAmount(value);
+    }
+  };
+
   const handleDeposit = (e) => {
     dispatch(setLoading(true));
     dispatch(clearMessages());
 
-    const amount = selectedAmount;
-    const type = selectedDepositType;
-
-    if (!amount || !type || !selectedInvestment || !selectedPlan) {
+    // Check for empty fields first
+    if (!selectedAmount || !selectedDepositType || !selectedInvestment || !selectedPlan) {
       dispatch(setError("All fields are required"));
       dispatch(setLoading(false));
-    } else {
-      dispatch(
-        setDepositData({ amount, type, selectedInvestment, selectedPlan })
-      );
-      dispatch(setLoading(false));
-      router.push("/dashboard/deposit/details");
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 100);
+      return;
     }
+
+    // Convert currency strings to numbers
+    const amount = parseFloat(selectedAmount);
+    const min = parseCurrency(selectedPlanDetails?.Minimum);
+    const max = parseCurrency(selectedPlanDetails?.Maximum) || Infinity;
+
+    // Validate amount
+    if (isNaN(amount)) {
+      dispatch(setError("Please enter a valid amount"));
+      dispatch(setLoading(false));
+      return;
+    }
+
+    if (amount < min) {
+      dispatch(setError(`Minimum deposit for this plan is ${selectedPlanDetails.Minimum}`));
+      dispatch(setLoading(false));
+      return;
+    }
+
+    if (selectedPlanDetails.Maximum && amount > max) {
+      dispatch(setError(`Maximum deposit for this plan is ${selectedPlanDetails.Maximum}`));
+      dispatch(setLoading(false));
+      return;
+    }
+
+    // Only proceed if all validations pass
+    dispatch(
+      setDepositData({ 
+        amount: selectedAmount, 
+        type: selectedDepositType, 
+        selectedInvestment, 
+        selectedPlan 
+      })
+    );
+    dispatch(setLoading(false));
+    router.push("/dashboard/deposit/details");
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
   };
 
   const handleModalClose = () => {
@@ -140,22 +223,6 @@ const Page = () => {
                       <ModalBody>
                         <ModalContent>
                           <div className="mt-4">
-                            <div className="input-group">
-                              <input
-                                value={selectedAmount}
-                                onChange={(e) =>
-                                  setSelectedAmount(e.target.value)
-                                }
-                                autoComplete="off"
-                                type="number"
-                                className="border border-[#9e9e9e] rounded-xl w-full p-3 text-sm text-darkColor input"
-                                minLength={2}
-                                placeholder=" "
-                              />
-                              <label className="user-label text-sm">
-                                Enter Amount
-                              </label>
-                            </div>
                             <div className="mt-4">
                               <select
                                 name="investment"
@@ -167,17 +234,14 @@ const Page = () => {
                               >
                                 <option value="">Choose an option</option>
                                 <option value="Real Estate">Real Estate</option>
-                                <option value="Crypto currency">
+                                <option value="Crypto Currency">
                                   Crypto Currency
                                 </option>
-                                <option value="Forex Investment">
-                                  Forex Investment
-                                </option>
-                                <option value="Stock Investment">
-                                  Stock Investment
+                                <option value="Gold Investment">
+                                  Gold Investment
                                 </option>
                               </select>
-                              <p className="text-sm pt-1 text-yellow-500">
+                              <p className="text-xs pt-1 text-yellow-500">
                                 NOTE: You can switch from your default
                                 investment plan here and select a new one.
                               </p>
@@ -196,20 +260,122 @@ const Page = () => {
                                   <option value="">Select a plan</option>
                                   {investmentPlans[selectedInvestment]?.map(
                                     (plan) => (
-                                      <option key={plan.name} value={plan.name}>
-                                        {plan.name}
+                                      <option
+                                        key={plan.title}
+                                        value={plan.title}
+                                      >
+                                        {plan.title}
                                       </option>
                                     )
                                   )}
                                 </select>
+
+                                {selectedPlanDetails && (
+                                  <div className="bg-neutral-700 p-4 rounded-lg mt-2">
+                                    <h3 className="font-semibold text-lg mb-2">
+                                      {selectedPlanDetails.title}
+                                    </h3>
+                                    <div className="grid grid-cols-2 gap-1">
+                                      <div>
+                                        <p className="text-xs text-gray-400">
+                                          Minimum Deposit
+                                        </p>
+                                        <p className="font-medium">
+                                          {selectedPlanDetails.Minimum}
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-gray-400">
+                                          Maximum Deposit
+                                        </p>
+                                        <p className="font-medium">
+                                          {selectedPlanDetails.Maximum}
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-gray-400">
+                                          Daily Profit
+                                        </p>
+                                        <p className="font-medium">
+                                          {
+                                            selectedPlanDetails.features
+                                              ?.DailyProfit
+                                          }
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-gray-400">
+                                          Monthly Profit
+                                        </p>
+                                        <p className="font-medium">
+                                          {
+                                            selectedPlanDetails.features
+                                              ?.MonthlyProfit
+                                          }
+                                        </p>
+                                      </div>
+
+                                      {selectedPlanDetails.features
+                                        ?.Withdrawal && (
+                                        <div>
+                                          <p className="text-xs text-gray-400">
+                                            Withdrawal
+                                          </p>
+                                          <p className="font-medium">
+                                            {
+                                              selectedPlanDetails.features
+                                                .Withdrawal
+                                            }
+                                          </p>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             )}
+
+                            <div className="input-group mt-4 relative">
+                              <input
+                                value={selectedAmount}
+                                onChange={handleAmountChange}
+                                autoComplete="off"
+                                type="number"
+                                className={`border ${
+                                  amountError
+                                    ? "border-red-500"
+                                    : "border-[#9e9e9e]"
+                                } rounded-xl w-full p-3 text-sm text-darkColor input bg-white`}
+                                min={parseCurrency(selectedPlanDetails?.Minimum) || ""}
+                                max={parseCurrency(selectedPlanDetails?.Maximum) || ""}
+                                placeholder=" "
+                                disabled={!selectedPlanDetails}
+                              />
+                              <label className="user-label text-sm">
+                                Enter Amount
+                              </label>
+                              {amountError && (
+                                <p className="text-red-500 text-xs mt-1">
+                                  {amountError}
+                                </p>
+                              )}
+                              {selectedPlanDetails && (
+                                <p className="text-xs text-gray-500 mt-1">
+                                  Required range: {selectedPlanDetails.Minimum} - {selectedPlanDetails.Maximum || "No maximum"}
+                                </p>
+                              )}
+                            </div>
                           </div>
                         </ModalContent>
                         <ModalFooter className="gap-4">
                           <button
                             onClick={handleDeposit}
-                            className="bg-[#6C5AD4] text-white text-sm px-6 py-2 rounded-m w-50"
+                            className={`bg-[#6C5AD4] text-white text-sm px-6 py-2 rounded-md w-50 ${
+                              amountError || !selectedAmount || !selectedDepositType || !selectedInvestment || !selectedPlan
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-[#5a4ac4]"
+                            }`}
+                            disabled={!!amountError || !selectedAmount || !selectedDepositType || !selectedInvestment || !selectedPlan}
                           >
                             Deposit Now
                           </button>

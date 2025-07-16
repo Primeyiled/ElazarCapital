@@ -21,6 +21,16 @@ const fetcher = async (url) => {
   return res.json();
 };
 
+const formatCurrency = (amount) => {
+  if (amount === null || amount === undefined) return "$0";
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount);
+};
+
 const Page = () => {
   // Fetch all users using useSWR
   const { data, error, isLoading } = useSWR("/api/admin/deposits/", fetcher);
@@ -151,7 +161,7 @@ const Page = () => {
                       </div>
                       <div className="flex flex-col gap-2 w-fit items-end">
                         <h2 className="text-sm font-bold">
-                          ${deposit.amount}
+                          {formatCurrency(deposit.amount)}
                         </h2>
                         <p className={`text-xs ${transStatusColor} whitespace-nowrap`}>
                         {deposit.status}

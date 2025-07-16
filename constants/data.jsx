@@ -8,6 +8,7 @@ import {
   IconUserBolt,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { MdOutlineShield } from "react-icons/md";
 
 // export const Dailyplans = [
 //   {
@@ -255,6 +256,13 @@ export const Dashinks = [
     href: "/dashboard/profile",
     icon: (
       <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    ),
+  },
+  {
+    label: "2FA (Security)",
+    href: "/dashboard/two-factor-authentication",
+    icon: (
+      <MdOutlineShield className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     ),
   },
 

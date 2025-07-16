@@ -57,21 +57,39 @@ export async function POST(request) {
     const userEmailSubject = "Withdrawal Request Submitted";
     const userEmailTextContent = `Dear ${user.userName},\n\nYour withdrawal request of $${amount} has been successfully submitted. Processing may take up to 24 hours.\n\nThank you for choosing ElazarCapital!`;
     const userEmailHtmlContent = `
-      <div>
-      <div class="header">
-          <img
-            src="https://res.cloudinary.com/dcxfxfa52/image/upload/v1738674100/deposit_slips/ifzhr9kyxhio8zhabftc.png"
-            alt="ElazarCapital Logo"
-          />
-        </div>
-        <hr />
-        <p>Dear ${user.userName},</p>
-        <p>Your withdrawal request of <strong>$${amount}</strong> has been successfully submitted. Processing may take up to 24 hours.</p>
-        <p>Thank you for choosing ElazarCapital!</p>
-        <p>Best regards,</p>
-        <p><strong>ElazarCapital Team</strong></p>
-      </div>
-    `;
+  <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #333;">
+    <div class="header" style="text-align: center; padding: 20px 0;">
+  <img 
+    src="https://res.cloudinary.com/dff9xwtjc/image/upload/v1752631553/logo_vvkbds.png" 
+    alt="ElazarCapital Logo" 
+    width="100" height="auto"
+    style="display: block; margin: 0 auto; max-width: 100px; height: auto;"
+  />
+</div>
+    <hr style="border: 0; border-top: 1px solid #eaeaea; margin: 0 20px;">
+    <div style="padding: 20px;">
+      <p style="font-size: 16px; line-height: 1.6; margin-bottom: 15px;">Dear ${
+        user.userName
+      },</p>
+      <p style="font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+        Your withdrawal request of <strong style="color: #4a6bdf;">$${amount}</strong> 
+        has been successfully submitted. Processing may take up to 24 hours.
+      </p>
+      <p style="font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+        <span style="color: #d35400; font-weight: bold;">Important:</span> 
+        For security reasons, please verify this transaction if you receive any confirmation requests.
+      </p>
+      <p style="font-size: 16px; line-height: 1.6; margin-bottom: 15px;">Thank you for choosing ElazarCapital!</p>
+      <p style="font-size: 16px; line-height: 1.6; margin-bottom: 5px;">Best regards,</p>
+      <p style="font-size: 16px; line-height: 1.6;">
+        <strong style="color: #4a6bdf;">ElazarCapital Team</strong>
+      </p>
+    </div>
+    <div style="background-color: #f8f9fa; padding: 15px; text-align: center; font-size: 14px; color: #666;">
+      <p style="margin: 0;">© ${new Date().getFullYear()} ElazarCapital. All rights reserved.</p>
+    </div>
+  </div>
+`;
 
     await sendEmail(
       user.email,

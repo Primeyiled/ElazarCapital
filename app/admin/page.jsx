@@ -20,6 +20,16 @@ const fetcher = async (url) => {
   return res.json();
 };
 
+const formatCurrency = (amount) => {
+  if (amount === null || amount === undefined) return "$0";
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount);
+}; 
+
 const Page = () => {
   const { data, error, isLoading } = useSWR("/api/admin/users/", fetcher);
 
@@ -140,7 +150,7 @@ const Page = () => {
                       </div>
                       <div className="flex flex-col gap-2 w-fit items-end">
                         <h2 className="text-sm font-bold">
-                          ${user.totalInvest}
+                          {formatCurrency(user.totalInvest)}
                         </h2>
                         <p className="text-xs text-gray-300 whitespace-nowrap">
                           {formattedDate}

@@ -19,6 +19,17 @@ import CryptoChart from "@/components/CryptoChart";
 import Layout from "./Layout";
 import { setError } from "@/lib/features/messageSlice";
 
+// Helper function to format currency
+const formatCurrency = (amount) => {
+  if (amount === null || amount === undefined) return "$0";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+};
+
 const fetcher = async (url) => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 50000);
@@ -45,7 +56,7 @@ const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   const { data, error, isLoading } = useSWR("/api/user/profile", fetcher, {
     revalidateOnFocus: false,
@@ -57,11 +68,11 @@ const Page = () => {
   });
 
   useEffect(() => {
-   if (error && error.status === 401) {
-    router.push("/login");
-  } else if (data && data.profile) {
-    dispatch(setUserData(data.profile));
-  }
+    if (error && error.status === 401) {
+      router.push("/login");
+    } else if (data && data.profile) {
+      dispatch(setUserData(data.profile));
+    }
   }, [data, error, dispatch, router]);
 
   if (isLoading) {
@@ -69,18 +80,17 @@ const Page = () => {
   }
 
   const handleCopy = async (code) => {
-      if (typeof window !== "undefined" && navigator.clipboard) {
-        try {
-          if (!code) throw new Error("Referrer code is not available.");
-          await navigator.clipboard.writeText(code);
-          setCopied(true);
-          setTimeout(() => setCopied(false), 2000);
-        } catch (err) {
-          dispatch(setError("Error copying wallet address"));
-        }
+    if (typeof window !== "undefined" && navigator.clipboard) {
+      try {
+        if (!code) throw new Error("Referrer code is not available.");
+        await navigator.clipboard.writeText(code);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        dispatch(setError("Error copying wallet address"));
       }
-    };
-
+    }
+  };
 
   const accumulatedBalance =
     (userData?.totalProfit || 0) +
@@ -88,19 +98,18 @@ const Page = () => {
     (userData?.totalInvest || 0);
 
   const totalProfit = (userData?.totalProfit || 0) + (userData?.refBonus || 0);
+
   return (
     <>
       <Layout>
         <div className="rounded-xl py-8 px-4 md:px-8 bg-neutral-800 h-auto 2xl:h-[90vh] w-full">
-          {/* <Header page="Dashboard" /> */}
           <div className="grid md:grid-cols-2 xl:gap-6 gap-4">
             {/* Balance Card */}
             <div className="bg-purpleColor p-4 rounded-3xl flex justify-between md:items-start">
               <div className="flex-col gap-2 flex justify-center items-start">
                 {accumulatedBalance != null ? (
                   <h1 className="font-bold text-xl md:text-4xl">
-                    ${accumulatedBalance}.
-                    <span className="text-lg text-gray-300">00</span>
+                    {formatCurrency(accumulatedBalance)}
                   </h1>
                 ) : (
                   <p>Loading...</p>
@@ -120,8 +129,7 @@ const Page = () => {
               <div className="flex-col gap-2 flex justify-center items-start">
                 {userData?.totalInvest != null ? (
                   <h1 className="font-bold text-xl md:text-4xl text-darkColor">
-                    ${userData.totalInvest}.
-                    <span className="text-lg text-gray-300">00</span>
+                    {formatCurrency(userData.totalInvest)}
                   </h1>
                 ) : (
                   <p className="text-darkColor">Loading...</p>
@@ -144,8 +152,7 @@ const Page = () => {
               <div className="flex-col gap-2 flex justify-center items-start">
                 {totalProfit != null ? (
                   <h1 className="font-bold text-xl md:text-4xl text-darkColor">
-                    ${totalProfit}.
-                    <span className="text-lg text-gray-300">00</span>
+                    {formatCurrency(totalProfit)}
                   </h1>
                 ) : (
                   <p className="text-darkColor">Loading...</p>
@@ -175,8 +182,7 @@ const Page = () => {
               <div className="flex-col gap-2 flex justify-center items-start">
                 {userData?.refBonus != null ? (
                   <h1 className="font-bold text-xl md:text-4xl text-darkColor">
-                    ${userData.refBonus}.
-                    <span className="text-lg text-gray-300">00</span>
+                    {formatCurrency(userData.refBonus)}
                   </h1>
                 ) : (
                   <p className="text-darkColor">Loading...</p>
@@ -220,18 +226,32 @@ const Page = () => {
                 </div>
                 <div className="py-2 px-4 bg-gray-100 rounded-full w-full flex justify-between items-center">
                   <p className="text-darkColor text-sm">
-                  {userData?.referralCode ? userData.referralCode : "Loading..."}
+                    {isLoading
+                      ? "Loading..."
+                      : userData?.referralCode
+                      ? userData.referralCode
+                      : "No referral code available"}
                   </p>
-                  {
-                    copied ? <p className="text-green-500 text-sm">Copied</p> : 
-                  <MdCopyAll className="text-darkColor text-2xl cursor-pointer"  onClick={()=>handleCopy(userData.referralCode)}/>
-                  }
+                  {!isLoading &&
+                    userData?.referralCode &&
+                    (copied ? (
+                      <p className="text-green-500 text-sm">Copied</p>
+                    ) : (
+                      <MdCopyAll
+                        className="text-darkColor text-2xl cursor-pointer"
+                        onClick={() => handleCopy(userData.referralCode)}
+                      />
+                    ))}
                 </div>
                 <div className="py-2 px-4 w-full flex justify-end items-center">
                   <p className="text-white text-sm font-semibold flex gap-2">
-                  Your Referrals:  <span>{userData?.referralCount ? userData.referralCount : "Loading..."}</span>
+                    Your Referrals:{" "}
+                    <span>
+                      {userData?.referralCount
+                        ? userData.referralCount
+                        : "Loading..."}
+                    </span>
                   </p>
-                  
                 </div>
               </div>
             </div>

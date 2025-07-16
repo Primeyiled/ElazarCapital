@@ -45,63 +45,61 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(setLoading(true));
-    dispatch(clearMessages());
+  e.preventDefault();
+  dispatch(setLoading(true));
+  dispatch(clearMessages());
 
-    // Validate email and password
-    if (userInfo.email === "" || userInfo.password === "") {
-      dispatch(setError("All fields are required"));
-      dispatch(setLoading(false));
-      return;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
-      dispatch(setError("Please enter a valid email"));
-      dispatch(setLoading(false));
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: userInfo.email,
-          password: userInfo.password,
-          otp: showOtpField ? otp : undefined, // Include OTP only if OTP field is visible
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        if (!showOtpField) {
-          setShowOtpField(true);
-          dispatch(
-            setSuccess(
-              "We have sent a verification code to your email address."
-            )
-          );
-        } else {
-          dispatch(setUserData(data.profile));
-          if (data.profile.role === 1) {
-            router.push("/admin");
-          } else {
-            router.push("/dashboard");
-          }
-        }
-      } else {
-        dispatch(setError(data.message || "Invalid credentials"));
-      }
-    } catch (error) {
-      console.error("Error logging in:", error);
-      dispatch(setError("An error occurred during login"));
-    }
+  // Validate email and password before making request
+  if (userInfo.email === "" || userInfo.password === "") {
+    dispatch(setError("All fields are required"));
     dispatch(setLoading(false));
-  };
+    return;
+  }
+
+  if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
+    dispatch(setError("Please enter a valid email"));
+    dispatch(setLoading(false));
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: userInfo.email,
+        password: userInfo.password,
+        otp: showOtpField ? otp : undefined,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      if (data.twoFactorRequired) {
+        // Backend says OTP is required
+        setShowOtpField(true);
+        dispatch(setSuccess(data.message || "OTP sent to your email."));
+      } else {
+        // Successful login
+        dispatch(setUserData(data.profile));
+        if (data.profile.role === 1) {
+          router.push("/admin");
+        } else {
+          router.push("/dashboard");
+        }
+      }
+    } else {
+      dispatch(setError(data.message || "Invalid credentials"));
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    dispatch(setError("An error occurred during login"));
+  }
+
+  dispatch(setLoading(false));
+};
+
 
   const handleModalClose = () => {
     dispatch(toggleModal());

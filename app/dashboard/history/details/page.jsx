@@ -15,6 +15,17 @@ import { ErrorMessages, SuccessMessages } from "@/components/Messages";
 import Loader from "@/components/Loader";
 import Image from "next/image";
 
+// Helper function to format currency
+const formatCurrency = (amount) => {
+  if (amount === null || amount === undefined) return "$0";
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount);
+};
+
 const Page = () => {
   const { historyData } = useSelector((state) => state.history);
   const { success, error, loading, modalOpen } = useSelector(
@@ -41,30 +52,43 @@ const Page = () => {
     return { formattedDate, formattedTime };
   };
 
-  const handleDeleteTransaction = async () => {
-    dispatch(setLoading(true));
-    dispatch(clearMessages());
-    try {
-      const response = await fetch(`/api/user/history/${historyData._id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+const handleDeleteTransaction = async () => {
+  if (!historyData?._id) {
+    dispatch(setError("Invalid transaction ID"));
+    return;
+  }
 
-      if (!response.ok) {
-        dispatch(setError(response.message));
-        dispatch(setLoading(false));
-        throw new Error("Failed to delete transaction");
-      }
-      dispatch(setSuccess(response.message));
-      dispatch(setLoading(false));
-      router.push("/dashboard/history/");
+  const confirmed = window.confirm("Are you sure you want to delete this transaction?");
+  if (!confirmed) return;
 
-    } catch (error) {
-      dispatch(setError("An error occurred while deleting transaction."));
-      dispatch(setLoading(false));
-      console.error("Error deleting transaction:", error);
+  dispatch(setLoading(true));
+  dispatch(clearMessages());
+
+  try {
+    const response = await fetch(`/api/user/history/${historyData._id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to delete transaction");
     }
-  };
+
+    dispatch(setSuccess("Transaction deleted successfully"));
+    router.push("/dashboard/history/");
+  } catch (error) {
+    console.error("Deletion error:", error);
+    dispatch(setError(error.message));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+
+
+
   const handleModalClose = () => {
     dispatch(toggleModal());
   };
@@ -113,7 +137,7 @@ const Page = () => {
             {historyData?.amount && (
               <p className="flex justify-between items-center text-sm md:text-md py-2 font-bold">
                 Amount:{" "}
-                <span className="font-normal">${historyData.amount}</span>
+                <span className="font-normal">{formatCurrency(historyData.amount)}</span>
               </p>
             )}
 
@@ -168,15 +192,14 @@ const Page = () => {
               <div className="flex justify-between items-center text-sm md:text-md py-2 font-bold flex-col gap-4 mt-2">
                 Payment Slip:{" "}
                   <Image width={200} height={200} src={historyData.paymentSlip} alt="payment-slip" className="rounded-xl"/>
-                
               </div>
             )}
-          <button
-            onClick={handleDeleteTransaction}
-            className="flex gap-2 text-xs mt-2 bg-purpleColor p-3 rounded-xl items-center hover:bg-neutral-900 cursor-pointer duration-150 text-white float-end"
-          >
-            <IconTrash className="text-4xl" /> Delete
-          </button>
+            <button
+              onClick={handleDeleteTransaction}
+              className="flex gap-2 text-xs mt-2 bg-purpleColor p-3 rounded-xl items-center hover:bg-neutral-900 cursor-pointer duration-150 text-white float-end"
+            >
+              <IconTrash className="text-4xl" /> Delete
+            </button>
           </div>
         </div>
       </div>

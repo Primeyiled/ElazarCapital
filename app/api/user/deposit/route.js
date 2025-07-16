@@ -57,30 +57,31 @@ export async function POST(request) {
     }
 
     let paymentSlipUrl = null;
-    if (paymentSlip) {
-      const fileBuffer = await paymentSlip.arrayBuffer();
+    let paymentSlipPublicId = null;
 
-      const result = await new Promise((resolve, reject) => {
-        cloudinary.uploader
-          .upload_stream(
-            {
-              resource_type: "auto",
-              folder: "deposit_slips",
-            },
-            (error, result) => {
-              if (error) {
-                reject(error);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .end(Buffer.from(fileBuffer));
-      });
+    const fileBuffer = await paymentSlip.arrayBuffer();
 
-      paymentSlipUrl = result.secure_url;
-    }
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            resource_type: "auto",
+            folder: "deposit_slips",
+            use_filename: true,
+            unique_filename: true,
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        )
+        .end(Buffer.from(fileBuffer));
+    });
 
+    paymentSlipUrl = result.secure_url;
+    paymentSlipPublicId = result.public_id;
+
+    // Save to DB
     const deposit = new Deposit({
       type,
       investment,
@@ -88,6 +89,7 @@ export async function POST(request) {
       amount,
       wallet,
       paymentSlip: paymentSlipUrl,
+      paymentSlipPublicId,
       user: authResult.userId,
       userName: user.userName,
     });
@@ -98,21 +100,30 @@ export async function POST(request) {
     const userEmailSubject = "Deposit Request Submitted";
     const userEmailTextContent = `Dear ${user.userName},\n\nYour deposit request of $${amount} has been successfully submitted. We will notify you once it is approved.\n\nThank you for choosing ElazarCapital!`;
     const userEmailHtmlContent = `
-      <div>
-      <div class="header">
-          <img
-            src="https://res.cloudinary.com/dcxfxfa52/image/upload/v1738674100/deposit_slips/ifzhr9kyxhio8zhabftc.png"
-            alt="ElazarCapital Logo"
-          />
-        </div>
-        <hr />
-        <p>Dear ${user.userName},</p>
-        <p>Your deposit request of <strong>$${amount}</strong> has been successfully submitted. We will notify you once it is approved.</p>
-        <p>Thank you for choosing ElazarCapital!</p>
-        <p>Best regards,</p>
-        <p><strong>ElazarCapital Team</strong></p>
-      </div>
-    `;
+  <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+    <div class="header" style="text-align: center; padding: 20px 0;">
+  <img 
+    src="https://res.cloudinary.com/dff9xwtjc/image/upload/v1752631553/logo_vvkbds.png" 
+    alt="ElazarCapital Logo" 
+    width="100" height="auto"
+    style="display: block; margin: 0 auto; max-width: 100px; height: auto;"
+  />
+</div>
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 0 20px;">
+    <div style="padding: 20px;">
+      <p style="font-size: 16px; line-height: 1.5;">Dear ${user.userName},</p>
+      <p style="font-size: 16px; line-height: 1.5;">
+        Your deposit request of <strong style="color: #4a6bdf;">$${amount}</strong> 
+        has been successfully submitted. We will notify you once it is approved.
+      </p>
+      <p style="font-size: 16px; line-height: 1.5;">Thank you for choosing ElazarCapital!</p>
+      <p style="font-size: 16px; line-height: 1.5;">Best regards,</p>
+      <p style="font-size: 16px; line-height: 1.5;">
+        <strong style="color: #4a6bdf;">ElazarCapital Team</strong>
+      </p>
+    </div>
+  </div>
+`;
 
     await sendEmail(
       user.email,

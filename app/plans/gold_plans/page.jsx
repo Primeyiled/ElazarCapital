@@ -21,7 +21,6 @@ import { MdCheck } from "react-icons/md";
 // import GoldChart from "@/components/GoldChart";
 
 const GoldPage = () => {
-  const [activeTab, setActiveTab] = useState("fun-facts");
 
   const goldFacts = [
     {
@@ -54,7 +53,7 @@ const GoldPage = () => {
         />
       </div>
 
-      <div className="bg-gradient-to-r from-[#D4AF37] via-[#E6C200] to-[#FFD700] py-16">
+      <div className="bg-gradient-to-r from-[#caa735] via-[#E6C200] to-[#FFD700] py-16">
         <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-3 gap-8 text-center">
           <TransitionWrapper>
             <div className="text-black">
@@ -84,7 +83,7 @@ const GoldPage = () => {
       </div>
 
       {/* Gold Value Proposition */}
-      <div className="max-w-7xl mx-auto px-8 py-16 grid md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-8 py-24 grid md:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -138,7 +137,7 @@ const GoldPage = () => {
       </div>
 
       {/* Gold Facts Section */}
-      <div className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] py-16">
+      <div className="bg-gradient-to-r from-[#e2bb3b] to-[#af9504] py-16">
         <div className="max-w-7xl mx-auto px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
             Golden Facts <span className="text-darkColor">You Should Know</span>

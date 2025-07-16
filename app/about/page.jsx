@@ -1,4 +1,5 @@
 "use client";
+import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import Heading from "@/components/Heading";
 import TransitionWrapper from "@/components/TransitionWrapper";
@@ -270,39 +271,7 @@ const page = () => {
       </div>
 
       {/* CTA Section */}
-      <div
-        style={{ backgroundImage: "url(/bgAbout.png)" }}
-        className="py-28 lg:py-48 px-8 bg-center bg-cover my-20"
-      >
-        <div className="max-w-7xl mx-auto">
-          <TransitionWrapper>
-            <h2 className="font-bold text-3xl lg:text-5xl/[4rem] max-w-2xl">
-              Ready to experience the ElazarCapital difference?
-            </h2>
-          </TransitionWrapper>
-          <TransitionWrapper>
-            <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">
-              Join our global community of traders today.
-            </p>
-          </TransitionWrapper>
-          <TransitionWrapper>
-            <div className="flex flex-wrap gap-4 mt-8">
-              <Link
-                href="/register"
-                className="bg-redColor py-4 px-8 rounded-lg font-medium text-lg hover:bg-red-600 transition"
-              >
-                Open Account
-              </Link>
-              <Link
-                href="/contact"
-                className="bg-transparent border-2 border-white py-4 px-8 rounded-lg font-medium text-lg hover:bg-white hover:text-greenColor transition"
-              >
-                Contact Us
-              </Link>
-            </div>
-          </TransitionWrapper>
-        </div>
-      </div>
+      <CTA/>
 
       <Footer />
     </div>

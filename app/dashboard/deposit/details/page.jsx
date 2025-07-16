@@ -22,6 +22,16 @@ const WALLET_ADDRESSES = {
   Ethereum: "0x6c311B7D17F5C39f71603ABaDA2971b6d6187Eee",
 };
 
+const formatCurrency = (amount) => {
+  if (amount === null || amount === undefined) return "$0";
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount);
+};
+
 const Page = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [amount, setAmount] = useState(null);
@@ -162,7 +172,7 @@ const Page = () => {
                   Payment Gateway <span className="font-normal">{type}</span>
                 </p>
                 <p className="flex justify-between items-center text-sm md:text-md py-2 font-bold">
-                  Amount <span className="font-normal">${amount}</span>
+                  Amount <span className="font-normal">{formatCurrency(amount)}</span>
                 </p>
                 <p className="flex justify-between items-center text-sm md:text-md py-2 font-bold">
                   Investment Plan{" "}

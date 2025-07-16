@@ -16,6 +16,7 @@ import Link from "next/link";
 import React from "react";
 import { MdCheck } from "react-icons/md";
 import CountUp from "react-countup";
+import CTA from "@/components/CTA";
 
 const page = () => {
   const services = [
@@ -229,40 +230,7 @@ const page = () => {
       </div>
 
       {/* CTA Section */}
-      <div
-        style={{ backgroundImage: "url(/bgAbout.png)" }}
-        className="py-28 lg:py-48 px-8 bg-center bg-cover my-20"
-      >
-        <div className="max-w-7xl mx-auto">
-          <TransitionWrapper>
-            <h2 className="font-bold text-3xl lg:text-5xl/[4rem] max-w-2xl text-white">
-              Begin Your Investment Journey Today
-            </h2>
-          </TransitionWrapper>
-          <TransitionWrapper>
-            <p className="py-10 text-[#a0cdcd] lg:w-[400px] text-lg">
-              Join thousands of investors who trust us with their financial
-              growth.
-            </p>
-          </TransitionWrapper>
-          <TransitionWrapper>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="#"
-                className="bg-redColor py-4 px-6 rounded-lg hover:bg-red-700 transition-colors duration-300"
-              >
-                Open Account
-              </Link>
-              <Link
-                href="#"
-                className="bg-transparent border-2 border-white py-4 px-6 rounded-lg hover:bg-white hover:text-darkColor transition-colors duration-300"
-              >
-                Contact Advisor
-              </Link>
-            </div>
-          </TransitionWrapper>
-        </div>
-      </div>
+      <CTA />
       <Footer />
     </div>
   );

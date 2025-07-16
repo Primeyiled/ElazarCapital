@@ -17,9 +17,6 @@ export async function POST(req) {
     }
 
     await dbConnect();
-    const generateOTP = () => {
-      return Math.floor(100000 + Math.random() * 900000).toString();
-    };
 
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
@@ -37,19 +34,23 @@ export async function POST(req) {
       );
     }
 
-    if (!otp) {
-      const otp = generateOTP();
-      user.otp = otp;
-      user.otpExpires = new Date(Date.now() + 10 * 60000);
-      await user.save();
+    // 🔐 If 2FA is enabled, require OTP
+    if (user.twoFactorAuth) {
+      // Case: OTP not provided yet — send OTP
+      if (!otp) {
+        const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+        user.otp = generatedOTP;
+        user.otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+        await user.save();
 
-      await sendOTP(email, otp);
+        await sendOTP(email, generatedOTP);
+        return NextResponse.json(
+          { message: "We’ve sent a verification code to your email.", twoFactorRequired: true },
+          { status: 200 }
+        );
+      }
 
-      return NextResponse.json(
-        { message: "OTP sent to your email" },
-        { status: 200 }
-      );
-    } else {
+      // Case: OTP provided — verify it
       if (user.otp !== otp || user.otpExpires < new Date()) {
         return NextResponse.json(
           { message: "Invalid or expired OTP" },
@@ -57,27 +58,29 @@ export async function POST(req) {
         );
       }
 
+      // Clear OTP after use
       user.otp = undefined;
       user.otpExpires = undefined;
       await user.save();
-
-      const token = generateToken(user._id, user.email);
-
-      const response = NextResponse.json(
-        { message: "Login successful", profile: user },
-        { status: 200 }
-      );
-
-      response.cookies.set("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 86400,
-        path: "/",
-        sameSite: "strict",
-      });
-
-      return response;
     }
+
+    // ✅ Successful login (with or without OTP based on 2FA)
+    const token = generateToken(user._id, user.email);
+
+    const response = NextResponse.json(
+      { message: "Login successful", profile: user },
+      { status: 200 }
+    );
+
+    response.cookies.set("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 86400,
+      path: "/",
+      sameSite: "strict",
+    });
+
+    return response;
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(

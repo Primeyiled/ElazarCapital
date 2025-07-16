@@ -126,7 +126,7 @@ const Benefits = () => {
               </h2>
               <p className="text-[#a0cdcd] md:text-lg lg:w-[400px]">
                 With ElazarCapital, you can access global markets from anywhere
-                using your desktop or mobile device — all while managing your
+                using your desktop or mobile device, all while managing your
                 personal portfolio on a single, intuitive dashboard.
               </p>
               {/* <div className="mt-16">

@@ -10,6 +10,17 @@ import { useRouter } from "next/navigation";
 import { clearMessages, setError, setLoading } from "@/lib/features/messageSlice";
 import { setHistoryData } from "@/lib/features/historySlice";
 
+// Helper function to format currency
+const formatCurrency = (amount) => {
+  if (amount === null || amount === undefined) return "$0";
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount);
+};
+
 const fetcher = async (url) => {
   const res = await fetch(url, { credentials: "include" });
 
@@ -27,9 +38,6 @@ const History = () => {
   const [transactionsPerPage] = useState(5);
 
   const { userData } = useSelector((state) => state.user);
-  // const { success, error, loading, modalOpen } = useSelector(
-  //   (state) => state.message
-  // );
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -47,26 +55,20 @@ const History = () => {
   };
 
   const handleTransactionClick = (transaction) => {
-    
     dispatch(setLoading(true));
-        dispatch(clearMessages());
+    dispatch(clearMessages());
     
-    
-        if (!transaction) {
-          dispatch(setError("No transaction information"));
-          dispatch(setLoading(false));
-        } else {
-          console.log("dispatched");
-          
-          dispatch(
-            setHistoryData(transaction)
-          );
-          dispatch(setLoading(false));
-          router.push("/dashboard/history/details");
-          setTimeout(() => {
-            window.scrollTo(0, 0);
-          }, 100);
-        }
+    if (!transaction) {
+      dispatch(setError("No transaction information"));
+      dispatch(setLoading(false));
+    } else {
+      dispatch(setHistoryData(transaction));
+      dispatch(setLoading(false));
+      router.push("/dashboard/history/details");
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
+    }
   };
 
   const formatDateTime = (dateString) => {
@@ -132,7 +134,7 @@ const History = () => {
                       ).length
                     }
                   </h3>
-                  <p className=" text-xs md:text-sm font-medium">Total Withdrawals</p>
+                  <p className="text-xs md:text-sm font-medium">Total Withdrawals</p>
                 </div>
               </div>
             </div>
@@ -163,7 +165,6 @@ const History = () => {
                     : transaction.status === "Approved"
                     ? "text-green-500"
                     : "text-red-500";
-                    
 
                 return (
                   <div
@@ -194,8 +195,8 @@ const History = () => {
                       <div>
                         <h2 className="text-sm font-bold">
                           {transaction.type === "Deposit"
-                            ? `+$${transaction.amount}`
-                            : `-$${transaction.amount}`}
+                            ? `+${formatCurrency(transaction.amount)}`
+                            : `-${formatCurrency(transaction.amount)}`}
                         </h2>
                         <p className={`text-xs ${transStatusColor} pt-2 font-semibold`}>
                           {transStatus}
@@ -228,7 +229,7 @@ const History = () => {
                   currentPage ===
                   Math.ceil(combinedTransactions.length / transactionsPerPage)
                 }
-                className="px-4 py-2  text-xs bg-purpleColor rounded-lg disabled:opacity-50"
+                className="px-4 py-2 text-xs bg-purpleColor rounded-lg disabled:opacity-50"
               >
                 Next
               </button>

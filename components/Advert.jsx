@@ -18,7 +18,7 @@ const Advert = () => {
             <TransitionWrapper>
               <p className="text-[#a0cdcd] md:text-lg lg:w-[400px]">
                 We’ve made it simple. From registration to withdrawal,
-                ElazarCapital puts you in control of your financial journey —
+                ElazarCapital puts you in control of your financial journey,
                 securely and efficiently.
               </p>
             </TransitionWrapper>

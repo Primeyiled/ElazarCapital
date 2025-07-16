@@ -31,6 +31,7 @@ const Page = () => {
     referralCode: "",
     referredBy: "",
   });
+  const [tempPassword, setTempPassword] = useState("");
 
   const { success, error, loading, modalOpen } = useSelector(
     (state) => state.message
@@ -73,6 +74,30 @@ const Page = () => {
     });
 
     return { formattedDate, formattedTime };
+  };
+
+  const handleGenerateTempPassword = async () => {
+    try {
+      dispatch(setLoading(true));
+      dispatch(clearMessages());
+
+      const res = await fetch(`/api/admin/users/${selectedUserData._id}`, {
+        method: "POST",
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        setTempPassword(data.tempPassword);
+        dispatch(setSuccess("Temporary password generated."));
+      } else {
+        dispatch(setError(data.message));
+      }
+    } catch (err) {
+      console.error(err);
+      dispatch(setError("Something went wrong."));
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   const handleDeleteTransaction = async (e) => {
@@ -293,6 +318,48 @@ const Page = () => {
                   </span>
                 </p>
               )}
+              <div className="mt-8 w-full space-y-4">
+                <div className="bg-neutral-700 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-8 shadow-sm border border-yellow-500">
+                  <button
+                    onClick={handleGenerateTempPassword}
+                    type="button"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-2 rounded-lg text-sm transition-all duration-200"
+                  >
+                    Generate Temporary Password
+                  </button>
+
+                  {tempPassword && (
+                    <div className="bg-neutral-800 rounded-lg px-4 py-2 border border-green-600 text-green-400 text-sm font-medium w-full sm:w-auto truncate">
+                      Temp Password:{" "}
+                      <span className="font-bold">{tempPassword}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* 🔐 Warning Notice */}
+                <div className="bg-yellow-100 text-yellow-900 border border-yellow-400 rounded-lg p-4 text-sm leading-6">
+                  <strong>⚠️ Warning:</strong> Temporary passwords should only
+                  be generated at the request of the user.
+                  <ul className="list-disc list-inside mt-2 space-y-1">
+                    <li>
+                      Passwords are sensitive information and should never be
+                      shared casually.
+                    </li>
+                    <li>
+                      This password will be re-hashed automatically after a
+                      short time window (e.g. 5 minutes).
+                    </li>
+                    <li>
+                      Ensure you're communicating securely when sending this to
+                      the user (e.g. email, secure chat).
+                    </li>
+                    <li>
+                      Never store or share temporary passwords outside of this
+                      admin panel.
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
               <div className="flex justify-between mt-4">
                 <button
