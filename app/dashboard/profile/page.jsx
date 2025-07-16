@@ -122,7 +122,7 @@ const Profile = () => {
       )}
       {loading && <Loader />}
       <Layout>
-        <div >
+        <div>
           <div className="rounded-xl pb-8 pt-4 px-4 md:px-8 bg-neutral-800 h-full 2xl:h-[90vh] w-full">
             <div className="flex justify-between items-center">
               <p className=" md:text-lg py-4 font-bold">My Profile</p>

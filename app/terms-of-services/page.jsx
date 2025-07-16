@@ -1,6 +1,11 @@
-"use client";
 import Footer from "@/components/Footer";
 import Heading from "@/components/Heading";
+
+export const metadata = {
+  title: "Terms of Service - ElazarCapital",
+  description:
+    "Review the terms and conditions for using ElazarCapital's platform. Understand your rights, responsibilities, and our commitment to transparent, fair service.",
+};
 
 const page = () => {
   return (

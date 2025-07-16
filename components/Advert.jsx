@@ -63,7 +63,7 @@ const Advert = () => {
                     <h3 className="font-bold text-lg">Withdraw Your Profits</h3>
                     <p className="text-[#a0cdcd] md:text-lg lg:w-[400px]">
                       Once your plan matures, you can withdraw funds directly to
-                      your wallet — fast and hassle-free.
+                      your wallet, fast and hassle-free.
                     </p>
                   </div>
                 </div>

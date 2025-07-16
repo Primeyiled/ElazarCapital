@@ -39,7 +39,7 @@ const investmentPlans = {
 // Helper function to parse currency strings
 const parseCurrency = (currencyString) => {
   if (!currencyString) return 0;
-  const numericString = currencyString.replace(/[^0-9.]/g, '');
+  const numericString = currencyString.replace(/[^0-9.]/g, "");
   return parseFloat(numericString) || 0;
 };
 
@@ -120,7 +120,12 @@ const Page = () => {
     dispatch(clearMessages());
 
     // Check for empty fields first
-    if (!selectedAmount || !selectedDepositType || !selectedInvestment || !selectedPlan) {
+    if (
+      !selectedAmount ||
+      !selectedDepositType ||
+      !selectedInvestment ||
+      !selectedPlan
+    ) {
       dispatch(setError("All fields are required"));
       dispatch(setLoading(false));
       return;
@@ -139,24 +144,32 @@ const Page = () => {
     }
 
     if (amount < min) {
-      dispatch(setError(`Minimum deposit for this plan is ${selectedPlanDetails.Minimum}`));
+      dispatch(
+        setError(
+          `Minimum deposit for this plan is ${selectedPlanDetails.Minimum}`
+        )
+      );
       dispatch(setLoading(false));
       return;
     }
 
     if (selectedPlanDetails.Maximum && amount > max) {
-      dispatch(setError(`Maximum deposit for this plan is ${selectedPlanDetails.Maximum}`));
+      dispatch(
+        setError(
+          `Maximum deposit for this plan is ${selectedPlanDetails.Maximum}`
+        )
+      );
       dispatch(setLoading(false));
       return;
     }
 
     // Only proceed if all validations pass
     dispatch(
-      setDepositData({ 
-        amount: selectedAmount, 
-        type: selectedDepositType, 
-        selectedInvestment, 
-        selectedPlan 
+      setDepositData({
+        amount: selectedAmount,
+        type: selectedDepositType,
+        selectedInvestment,
+        selectedPlan,
       })
     );
     dispatch(setLoading(false));
@@ -346,8 +359,14 @@ const Page = () => {
                                     ? "border-red-500"
                                     : "border-[#9e9e9e]"
                                 } rounded-xl w-full p-3 text-sm text-darkColor input bg-white`}
-                                min={parseCurrency(selectedPlanDetails?.Minimum) || ""}
-                                max={parseCurrency(selectedPlanDetails?.Maximum) || ""}
+                                min={
+                                  parseCurrency(selectedPlanDetails?.Minimum) ||
+                                  ""
+                                }
+                                max={
+                                  parseCurrency(selectedPlanDetails?.Maximum) ||
+                                  ""
+                                }
                                 placeholder=" "
                                 disabled={!selectedPlanDetails}
                               />
@@ -361,7 +380,9 @@ const Page = () => {
                               )}
                               {selectedPlanDetails && (
                                 <p className="text-xs text-gray-500 mt-1">
-                                  Required range: {selectedPlanDetails.Minimum} - {selectedPlanDetails.Maximum || "No maximum"}
+                                  Required range: {selectedPlanDetails.Minimum}{" "}
+                                  -{" "}
+                                  {selectedPlanDetails.Maximum || "No maximum"}
                                 </p>
                               )}
                             </div>
@@ -371,11 +392,21 @@ const Page = () => {
                           <button
                             onClick={handleDeposit}
                             className={`bg-[#6C5AD4] text-white text-sm px-6 py-2 rounded-md w-50 ${
-                              amountError || !selectedAmount || !selectedDepositType || !selectedInvestment || !selectedPlan
+                              amountError ||
+                              !selectedAmount ||
+                              !selectedDepositType ||
+                              !selectedInvestment ||
+                              !selectedPlan
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-[#5a4ac4]"
                             }`}
-                            disabled={!!amountError || !selectedAmount || !selectedDepositType || !selectedInvestment || !selectedPlan}
+                            disabled={
+                              !!amountError ||
+                              !selectedAmount ||
+                              !selectedDepositType ||
+                              !selectedInvestment ||
+                              !selectedPlan
+                            }
                           >
                             Deposit Now
                           </button>

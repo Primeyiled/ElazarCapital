@@ -14,6 +14,7 @@ import { setLoading } from "@/lib/features/messageSlice";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import About from "@/components/About";
 
 export default function Home() {
   const { loading } = useSelector((state) => state.message);
@@ -65,6 +66,7 @@ export default function Home() {
 
         <div className="bg-[#192626]">
           <Benefits />
+          <About />
           <Advert />
           <Plan />
           <Promo />

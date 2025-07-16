@@ -17,14 +17,13 @@ import Layout from "../../Layout";
 
 const formatCurrency = (amount) => {
   if (amount === null || amount === undefined) return "$0";
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0
+    maximumFractionDigits: 0,
   }).format(amount);
 };
-
 
 const Page = () => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -130,7 +129,8 @@ const Page = () => {
                   Payment Gateway: <span className="font-bold">{type}</span>
                 </p>
                 <p className="flex justify-between items-center text-sm md:text-lg py-6 ">
-                  Amount: <span className="font-bold">{formatCurrency(amount)}</span>
+                  Amount:{" "}
+                  <span className="font-bold">{formatCurrency(amount)}</span>
                 </p>
                 <div className="grid gap-2">
                   <h2 className=" text-sm md:text-lg whitespace-nowrap">

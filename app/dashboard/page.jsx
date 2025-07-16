@@ -94,10 +94,9 @@ const Page = () => {
 
   const accumulatedBalance =
     (userData?.totalProfit || 0) +
-    (userData?.refBonus || 0) +
     (userData?.totalInvest || 0);
 
-  const totalProfit = (userData?.totalProfit || 0) + (userData?.refBonus || 0);
+  const totalProfit = (userData?.totalProfit || 0) ;
 
   return (
     <>

@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import StoreProvider from "@/lib/StoreProvider";
 import CookieConsent from "@/components/CookieConsent";
+import Script from "next/script";
 // import OnlineChecker from "./OnlineChecker";
 
 const switzerRegular = localFont({
@@ -36,6 +37,22 @@ export const metadata = {
 function RootLayout({ children }) {
   return (
     <html lang={"en"}>
+      <head>
+        {/* Smartsupp Live Chat Script */}
+        <Script id="smartsupp-chat" strategy="afterInteractive">
+          {`
+            var _smartsupp = _smartsupp || {};
+            _smartsupp.key = 'dadc9e176f9f3627d849fec6533fa93099c1b0eb';
+            window.smartsupp||(function(d) {
+              var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+              s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+              c.type='text/javascript';c.charset='utf-8';c.async=true;
+              c.src='https://www.smartsuppchat.com/loader.js?';
+              s.parentNode.insertBefore(c,s);
+            })(document);
+          `}
+        </Script>
+      </head>
       <body
         className={`${switzerRegular.variable} ${switzerBold.variable} ${switzerItalic.variable} antialiased`}
       >

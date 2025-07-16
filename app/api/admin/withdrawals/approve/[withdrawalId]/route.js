@@ -56,11 +56,11 @@ export async function PUT(req, { params }) {
     }
 
     if (withdrawal.status === "Declined") {
-      user.totalInvest -= withdrawal.amount;
+      user.totalProfit -= withdrawal.amount;
     }
 
     if (withdrawal.status === "Pending") {
-      user.totalInvest -= withdrawal.amount;
+      user.totalProfit -= withdrawal.amount;
     }
 
     withdrawal.status = "Approved";

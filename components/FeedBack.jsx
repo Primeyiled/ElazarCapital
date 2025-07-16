@@ -43,7 +43,7 @@ export function AppleCardsCarouselDemo() {
           <TransitionWrapper>
             <div className="mt-8">
               <Link
-                href="/"
+                href="/register"
                 className="bg-redColor rounded-xl py-6 px-8 font-semibold"
               >
                 Get Started
