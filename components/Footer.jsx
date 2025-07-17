@@ -31,8 +31,8 @@ const Footer = () => {
             </div>
 
             <div className="text-gray-300 grid gap-6">
-              <p>999 Rue du Cherche-Midi, 7755500666 Paris, France</p>
-              <p>+001 (808) 555-0111</p>
+              <p>TechNova Sp. z o.o., ul. Polna 18, 30-002 Kraków, Małopolskie, Poland</p>
+              {/* <p>+001 (808) 555-0111</p> */}
               <p>support@elazarcapital.com</p>
             </div>
           </div>

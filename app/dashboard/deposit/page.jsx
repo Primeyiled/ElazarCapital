@@ -307,23 +307,23 @@ const Page = () => {
                                       </div>
                                       <div>
                                         <p className="text-xs text-gray-400">
-                                          Daily Profit
+                                          Daily ROI
                                         </p>
                                         <p className="font-medium">
                                           {
                                             selectedPlanDetails.features
-                                              ?.DailyProfit
+                                              ?.DailyROI
                                           }
                                         </p>
                                       </div>
                                       <div>
                                         <p className="text-xs text-gray-400">
-                                          Monthly Profit
+                                          Weekly ROI
                                         </p>
                                         <p className="font-medium">
                                           {
                                             selectedPlanDetails.features
-                                              ?.MonthlyProfit
+                                              ?.WeeklyROI
                                           }
                                         </p>
                                       </div>

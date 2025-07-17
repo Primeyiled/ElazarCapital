@@ -191,8 +191,7 @@ const RegisterClient = () => {
                 </option>
                 <option value="Real Estate">Real Estate</option>
                 <option value="Crypto currency">Crypto Currency</option>
-                <option value="Forex Investment">Forex Investment</option>
-                <option value="Stock Investment">Stock Investment</option>
+                <option value="Gold Investment">Gold Investment</option>
               </select>
               {/* <label className="select-label text-sm">Initial Plan</label> */}
             </div>

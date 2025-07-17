@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import { AdminDashinks } from "@/constants/data";
 import { clearDepositData } from "@/lib/features/depositSlice";
 import { clearUserData } from "@/lib/features/userSlice";
 import { clearWithdrawalData } from "@/lib/features/withdrawalSlice";
 import { IconArrowLeft } from "@tabler/icons-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
@@ -11,10 +12,9 @@ import { useDispatch } from "react-redux";
 
 export default function Sidebar({ sidebarOpen, closeSidebar }) {
   const dispatch = useDispatch();
-    const router = useRouter();
+  const router = useRouter();
 
-
-  const handleLogout = async () =>{
+  const handleLogout = async () => {
     try {
       const response = await fetch("/api/auth/logout", {
         method: "POST",
@@ -32,7 +32,7 @@ export default function Sidebar({ sidebarOpen, closeSidebar }) {
     } catch (error) {
       console.error("Logout failed:", error);
     }
-  }
+  };
 
   return (
     <div
@@ -46,7 +46,13 @@ export default function Sidebar({ sidebarOpen, closeSidebar }) {
         className="text-white flex items-center space-x-2 px-4"
         onClick={closeSidebar}
       >
-        <span className="text-2xl font-extrabold">Logo.</span>
+        <Image
+          width={55}
+          height={55}
+          src="/logo.png"
+          alt="ElazarCapital_logo"
+          className="size-50"
+        />
       </Link>
 
       {/* Navigation */}
@@ -59,14 +65,19 @@ export default function Sidebar({ sidebarOpen, closeSidebar }) {
               onClick={closeSidebar}
             >
               <span>{link.icon}</span>
-              <span className="hover:pl-3 duration-300 hover:text-gray-400 text-sm">{link.label}</span>
-              
+              <span className="hover:pl-3 duration-300 hover:text-gray-400 text-sm">
+                {link.label}
+              </span>
             </Link>
           </Fragment>
         ))}
-        <button onClick={handleLogout} className="py-2.5 px-4 rounded transition duration-200  flex gap-2 group text-sm" >
-        <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-          Logout</button>
+        <button
+          onClick={handleLogout}
+          className="py-2.5 px-4 rounded transition duration-200  flex gap-2 group text-sm"
+        >
+          <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+          Logout
+        </button>
       </nav>
     </div>
   );

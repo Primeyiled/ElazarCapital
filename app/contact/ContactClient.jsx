@@ -204,7 +204,7 @@ const ContactClient = () => {
                         Our Headquarters
                       </h3>
                       <p className="text-gray-300">
-                        8361 International Dr, Orlando, FL 92810, United States
+                        TechNova Sp. z o.o., ul. Polna 18, 30-002 Kraków, Małopolskie, Poland
                       </p>
                     </div>
                   </div>
@@ -214,13 +214,10 @@ const ContactClient = () => {
                       <h3 className="text-lg font-semibold text-white">
                         Email Us
                       </h3>
-                      <p className="text-gray-300">support@ElazarCapital.com</p>
-                      <p className="text-gray-300">
-                        inquiries@ElazarCapital.com
-                      </p>
+                      <p className="text-gray-300">support@elazarcapital.com</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4">
+                  {/* <div className="flex items-start gap-4">
                     <MdPhone className="text-redColor text-2xl mt-1" />
                     <div>
                       <h3 className="text-lg font-semibold text-white">
@@ -228,8 +225,8 @@ const ContactClient = () => {
                       </h3>
                       <p className="text-gray-300">+1 (239) 203-8946</p>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
+                  </div> */}
+                  {/* <div className="flex items-start gap-4">
                     <FaWhatsapp className="text-redColor text-2xl mt-1" />
                     <div>
                       <h3 className="text-lg font-semibold text-white">
@@ -237,7 +234,7 @@ const ContactClient = () => {
                       </h3>
                       <p className="text-gray-300">+1 (239) 203-8946</p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
