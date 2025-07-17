@@ -3,6 +3,7 @@ import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import AuthCheck from "../AuthCheck";
+import Head from "next/head";
 
 export default function Layout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,6 +15,13 @@ export default function Layout({ children }) {
 
   return (
     <AuthCheck>
+      <Head>
+        <title>Dashboard - ElazarCapital</title>
+        <meta
+          name="description"
+          content="Access your personalized dashboard, manage your investments, track referrals and earnings."
+        />
+      </Head>
       <div className="flex min-h-screen bg-gray-100 w-full">
         {/* Sidebar */}
         <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />

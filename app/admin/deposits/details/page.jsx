@@ -2,7 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../Layout";
-import { IconCheck, IconNotebook, IconThumbDown, IconThumbUp, IconTrash } from "@tabler/icons-react";
+import {
+  IconCheck,
+  IconNotebook,
+  IconThumbDown,
+  IconThumbUp,
+  IconTrash,
+} from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import {
   clearMessages,
@@ -17,6 +23,7 @@ import Image from "next/image";
 
 const Page = () => {
   const { selectedDepositData } = useSelector((state) => state.deposit);
+  const [showImageModal, setShowImageModal] = useState(false);
   const [depositInfo, setDepositInfo] = useState({
     userName: "",
     amount: "",
@@ -70,7 +77,9 @@ const Page = () => {
   const handleDeleteTransaction = async (e) => {
     e.preventDefault();
 
-    let userResponse = confirm("Are you sure you want to delete this user's deposit?");
+    let userResponse = confirm(
+      "Are you sure you want to delete this user's deposit?"
+    );
     if (userResponse) {
       dispatch(setLoading(true));
       dispatch(clearMessages());
@@ -220,7 +229,7 @@ const Page = () => {
   };
 
   return (
-    <Layout> 
+    <Layout>
       {success && modalOpen && (
         <SuccessMessages
           data={success}
@@ -303,8 +312,23 @@ const Page = () => {
                   height={500}
                   src={depositInfo.paymentSlip}
                   alt="payment-slip"
-                  className="rounded-xl "
+                  className="rounded-xl cursor-pointer"
+                  onClick={() => setShowImageModal(true)}
                 />
+                {showImageModal && (
+                  <div
+                    className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
+                    onClick={() => setShowImageModal(false)}
+                  >
+                    <Image
+                      width={800}
+                      height={800}
+                      src={depositInfo.paymentSlip}
+                      alt="payment-slip-full"
+                      className="max-w-full max-h-full rounded-lg"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col text-sm md:text-md font-medium py-2">
@@ -354,23 +378,22 @@ const Page = () => {
 
               <div className="flex text-sm md:text-md font-medium py-2 mt- justify-between">
                 Status:
-              <div className="flex justify-end gap-4 lg:gap-6">
-                <button
-                  type="button"
-                  onClick={handleDecline}
-                  className="flex gap-2 text-xs bg-yellow-500 p-3 rounded-xl items-center hover:bg-yellow-700 cursor-pointer duration-150 text-white"
-                >
-                  <IconThumbDown className="text-4xl" /> Decline
-                </button>
-                <button
-                  type="button"
-                  onClick={handleApprove}
-                  className="flex gap-2 text-xs bg-green-500 p-3 rounded-xl items-center hover:bg-green-700 cursor-pointer duration-150 text-white"
-                >
-                  <IconThumbUp className="text-4xl" /> Approve
-                </button>
-              </div>
-              
+                <div className="flex justify-end gap-4 lg:gap-6">
+                  <button
+                    type="button"
+                    onClick={handleDecline}
+                    className="flex gap-2 text-xs bg-yellow-500 p-3 rounded-xl items-center hover:bg-yellow-700 cursor-pointer duration-150 text-white"
+                  >
+                    <IconThumbDown className="text-4xl" /> Decline
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleApprove}
+                    className="flex gap-2 text-xs bg-green-500 p-3 rounded-xl items-center hover:bg-green-700 cursor-pointer duration-150 text-white"
+                  >
+                    <IconThumbUp className="text-4xl" /> Approve
+                  </button>
+                </div>
               </div>
 
               <div className="flex justify-between mt-10">
@@ -380,7 +403,7 @@ const Page = () => {
                 >
                   <IconTrash className="text-4xl" /> Delete
                 </button>
-               
+
                 <button
                   type="submit"
                   className="flex gap-2 text-xs bg-purpleColor p-3 rounded-xl items-center hover:bg-neutral-900 cursor-pointer duration-150 text-white"

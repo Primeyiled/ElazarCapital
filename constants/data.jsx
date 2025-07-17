@@ -343,11 +343,9 @@ export const EstatePlans = [
     Maximum: "$30,000.00",
     title: "Bronze Package",
     features: {
-      DailyProfit: "5%",
-      WeeklyProfit: "14%",
-      MonthlyProfit: "60%",
+      DailyROI: "5%",
+      WeeklyROI: "14%",
       ReferralBonus: "10%",
-
     },
     backgroundColor: "#222E2E",
   },
@@ -357,9 +355,8 @@ export const EstatePlans = [
     Maximum: "$100,000.00",
     title: "Silver Package",
     features: {
-      DailyProfit: "6.5%",
-      WeeklyProfit: "21%",
-      MonthlyProfit: "90%",
+      DailyROI: "6.5%",
+      WeeklyROI: "21%",
       ReferralBonus: "10%",
     },
     backgroundColor: "#1D615F",
@@ -370,9 +367,8 @@ export const EstatePlans = [
     Maximum: "$500,000.00",
     title: "Platinum Package",
     features: {
-      DailyProfit: "7%",
-      WeeklyProfit: "35%",
-      MonthlyProfit: "150%",
+      DailyROI: "7%",
+      WeeklyROI: "35%",
       ReferralBonus: "10%",
     },
     backgroundColor: "#222E2E",
@@ -383,9 +379,8 @@ export const EstatePlans = [
     Maximum: "$1,500,000.00",
     title: "Gold Package",
     features: {
-      DailyProfit: "7.5%",
-      WeeklyProfit: "42%",
-      MonthlyProfit: "180%",
+      DailyROI: "7.5%",
+      WeeklyROI: "42%",
       ReferralBonus: "10%",
     },
     backgroundColor: "#1D615F",
@@ -394,14 +389,13 @@ export const EstatePlans = [
 export const CryptoPlans = [
   {
     id: "c1",
-    title: "Starter Plan",
-    Minimum: "$300",
-    Maximum: "Unlimited",
+    title: "Beginner Plan",
+    Minimum: "$500",
+    Maximum: "$9,999",
     backgroundColor: "#222E2E",
     features: {
-      DailyProfit: "2.3%",
-      WeeklyProfit: "6%",
-      MonthlyProfit: "24%",
+      DailyROI: "2.3%",
+      WeeklyROI: "5%",
       Withdrawal: "Weekly",
       ReferralBonus: "5%",
     },
@@ -409,13 +403,12 @@ export const CryptoPlans = [
   {
     id: "c2",
     title: "Basic Plan",
-    Minimum: "$1,000",
-    Maximum: "Unlimited",
+    Minimum: "$10,000",
+    Maximum: "$49,999",
     backgroundColor: "#1D615F", // Green shade
     features: {
-      DailyProfit: "2.9%",
-      WeeklyProfit: "9%",
-      MonthlyProfit: "36%",
+      DailyROI: "2.9%",
+      WeeklyROI: "9%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
     },
@@ -424,191 +417,175 @@ export const CryptoPlans = [
     id: "c3",
     title: "Couple Plan",
     Minimum: "$50,000",
-    Maximum: "Unlimited",
+    Maximum: "$99,999",
     backgroundColor: "#222E2E", // Purple shade
     features: {
-      DailyProfit: "4.4%",
-      WeeklyProfit: "7.2%",
-      MonthlyProfit: "28.2%",
+      DailyROI: "4.4%",
+      WeeklyROI: "7.2%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
     },
   },
+
   {
     id: "c4",
-    title: "Investor Plan",
+    title: "Professional Plan",
     Minimum: "$100,000",
-    Maximum: "Unlimited",
-    backgroundColor: "#1D615F", // Red shade
-    features: {
-      DailyProfit: "5.3%",
-      WeeklyProfit: "12%",
-      MonthlyProfit: "48%",
-      Withdrawal: "Weekly",
-      ReferralBonus: "10%",
-    },
-  },
-  {
-    id: "c5",
-    title: "Business Plan",
-    Minimum: "$500,000",
-    Maximum: "Unlimited",
+    Maximum: "$1,000,000",
     backgroundColor: "#222E2E", // Amber shade
     features: {
-      DailyProfit: "6%",
-      WeeklyProfit: "18%",
-      MonthlyProfit: "72%",
+      DailyROI: "6%",
+      WeeklyROI: "18%",
       Withdrawal: "Weekly",
       ReferralBonus: "15%",
     },
   },
   {
-    id: "c6",
+    id: "c5",
     title: "Corporate Account",
     Minimum: "$1,000,000.00",
     Maximum: "Unlimited",
     backgroundColor: "#1D615F", // Dark gray
     features: {
-      DailyProfit: "8%",
-      WeeklyProfit: "15%",
-      MonthlyProfit: "60%",
+      DailyROI: "8%",
+      WeeklyROI: "15%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
     },
   },
 ];
 
-export const ForexPlans = [
-  {
-    id: "f1",
-    title: "Euro",
-    Minimum: "$1,000.00",
-    Maximum: "$20,000.00",
-    backgroundColor: "#222E2E", // Darker teal
-    features: {
-      DailyProfit: "2.9%",
-      WeeklyProfit: "7%",
-      MonthlyProfit: "30%",
-      ReferralBonus: "5%",
-      Duration: "7 Day(s)",
-    },
-  },
-  {
-    id: "f2",
-    title: "Dollar",
-    Minimum: "$20,000.00",
-    Maximum: "$50,000.00",
-    backgroundColor: "#1D615F", // Lighter teal
-    features: {
-      DailyProfit: "4.8%",
-      WeeklyProfit: "14%",
-      MonthlyProfit: "60%",
-      ReferralBonus: "5%",
-      Duration: "21 Day(s)",
-    },
-  },
-  {
-    id: "f3",
-    title: "Yen",
-    Minimum: "$50,000.00",
-    Maximum: "$100,000.00",
-    backgroundColor: "#222E2E", // Darker teal
-    features: {
-      DailyProfit: "5.3%",
-      WeeklyProfit: "21%",
-      MonthlyProfit: "90%",
-      ReferralBonus: "7%",
-      Duration: "31 Day(s)",
-    },
-  },
-  {
-    id: "f4",
-    title: "Pounds",
-    Minimum: "$100,000.00",
-    Maximum: "$250,000.00",
-    backgroundColor: "#1D615F", // Lighter teal
-    features: {
-      DailyProfit: "7%",
-      WeeklyProfit: "49%",
-      MonthlyProfit: "210%",
-      ReferralBonus: "10%",
-      Duration: "61 Day(s)",
-    },
-  },
-];
+// export const ForexPlans = [
+//   {
+//     id: "f1",
+//     title: "Euro",
+//     Minimum: "$1,000.00",
+//     Maximum: "$20,000.00",
+//     backgroundColor: "#222E2E", // Darker teal
+//     features: {
+//       DailyProfit: "2.9%",
+//       WeeklyProfit: "7%",
+//       MonthlyProfit: "30%",
+//       ReferralBonus: "5%",
+//       Duration: "7 Day(s)",
+//     },
+//   },
+//   {
+//     id: "f2",
+//     title: "Dollar",
+//     Minimum: "$20,000.00",
+//     Maximum: "$50,000.00",
+//     backgroundColor: "#1D615F", // Lighter teal
+//     features: {
+//       DailyProfit: "4.8%",
+//       WeeklyProfit: "14%",
+//       MonthlyProfit: "60%",
+//       ReferralBonus: "5%",
+//       Duration: "21 Day(s)",
+//     },
+//   },
+//   {
+//     id: "f3",
+//     title: "Yen",
+//     Minimum: "$50,000.00",
+//     Maximum: "$100,000.00",
+//     backgroundColor: "#222E2E", // Darker teal
+//     features: {
+//       DailyProfit: "5.3%",
+//       WeeklyProfit: "21%",
+//       MonthlyProfit: "90%",
+//       ReferralBonus: "7%",
+//       Duration: "31 Day(s)",
+//     },
+//   },
+//   {
+//     id: "f4",
+//     title: "Pounds",
+//     Minimum: "$100,000.00",
+//     Maximum: "$250,000.00",
+//     backgroundColor: "#1D615F", // Lighter teal
+//     features: {
+//       DailyProfit: "7%",
+//       WeeklyProfit: "49%",
+//       MonthlyProfit: "210%",
+//       ReferralBonus: "10%",
+//       Duration: "61 Day(s)",
+//     },
+//   },
+// ];
 
-export const StockPlans = [
-  {
-    id: "s1",
-    title: "Apple Stock",
-    Minimum: "$5,000.00",
-    Maximum: "$50,000.00",
-    backgroundColor: "#222E2E", // Darker teal
-    features: {
-      DailyProfit: "4%",
-      WeeklyProfit: "7%",
-      MonthlyProfit: "30%",
-      ReferralBonus: "3%",
-      Duration: "20 Day(s)",
-    },
-  },
-  {
-    id: "s2",
-    title: "Google Stock",
-    Minimum: "$50,000.00",
-    Maximum: "$100,000.00",
-    backgroundColor: "#1D615F", // Lighter teal
-    features: {
-      DailyProfit: "5%",
-      WeeklyProfit: "14%",
-      MonthlyProfit: "60%",
-      ReferralBonus: "5%",
-      Duration: "21 Day(s)",
-    },
-  },
-  {
-    id: "s3",
-    title: "Tesla",
-    Minimum: "$150,000.00",
-    Maximum: "$3,000,000.00",
-    backgroundColor: "#222E2E", // Darker teal
-    features: {
-      DailyProfit: "6%",
-      WeeklyProfit: "21%",
-      MonthlyProfit: "90%",
-      ReferralBonus: "7%",
-      Duration: "30 Day(s)",
-    },
-  },
-  {
-    id: "s4",
-    title: "Amazon Stock",
-    Minimum: "$300,000.00",
-    Maximum: "$1,000,000.00",
-    backgroundColor: "#1D615F", // Lighter teal
-    features: {
-      DailyProfit: "7.6%",
-      WeeklyProfit: "35%",
-      MonthlyProfit: "150%",
-      ReferralBonus: "10%",
-      Duration: "40 Day(s)",
-    },
-  },
-  {
-    id: "s5",
-    title: "Amature",
-    Minimum: "$50,000.00", // Fixed extra space
-    Maximum: "$100,000.00",
-    backgroundColor: "#222E2E", // Darker teal
-    features: {
-      DailyProfit: "5%",
-      WeeklyProfit: "35%",
-      MonthlyProfit: "150%",
-      ReferralBonus: "6%",
-      Duration: "20 Day(s)",
-    },
-  },
-];
+// export const StockPlans = [
+//   {
+//     id: "s1",
+//     title: "Apple Stock",
+//     Minimum: "$5,000.00",
+//     Maximum: "$50,000.00",
+//     backgroundColor: "#222E2E", // Darker teal
+//     features: {
+//       DailyProfit: "4%",
+//       WeeklyProfit: "7%",
+//       MonthlyProfit: "30%",
+//       ReferralBonus: "3%",
+//       Duration: "20 Day(s)",
+//     },
+//   },
+//   {
+//     id: "s2",
+//     title: "Google Stock",
+//     Minimum: "$50,000.00",
+//     Maximum: "$100,000.00",
+//     backgroundColor: "#1D615F", // Lighter teal
+//     features: {
+//       DailyProfit: "5%",
+//       WeeklyProfit: "14%",
+//       MonthlyProfit: "60%",
+//       ReferralBonus: "5%",
+//       Duration: "21 Day(s)",
+//     },
+//   },
+//   {
+//     id: "s3",
+//     title: "Tesla",
+//     Minimum: "$150,000.00",
+//     Maximum: "$3,000,000.00",
+//     backgroundColor: "#222E2E", // Darker teal
+//     features: {
+//       DailyProfit: "6%",
+//       WeeklyProfit: "21%",
+//       MonthlyProfit: "90%",
+//       ReferralBonus: "7%",
+//       Duration: "30 Day(s)",
+//     },
+//   },
+//   {
+//     id: "s4",
+//     title: "Amazon Stock",
+//     Minimum: "$300,000.00",
+//     Maximum: "$1,000,000.00",
+//     backgroundColor: "#1D615F", // Lighter teal
+//     features: {
+//       DailyProfit: "7.6%",
+//       WeeklyProfit: "35%",
+//       MonthlyProfit: "150%",
+//       ReferralBonus: "10%",
+//       Duration: "40 Day(s)",
+//     },
+//   },
+//   {
+//     id: "s5",
+//     title: "Amature",
+//     Minimum: "$50,000.00", // Fixed extra space
+//     Maximum: "$100,000.00",
+//     backgroundColor: "#222E2E", // Darker teal
+//     features: {
+//       DailyProfit: "5%",
+//       WeeklyProfit: "35%",
+//       MonthlyProfit: "150%",
+//       ReferralBonus: "6%",
+//       Duration: "20 Day(s)",
+//     },
+//   },
+// ];
 
 export const GoldPlans = [
   {
@@ -618,9 +595,8 @@ export const GoldPlans = [
     Maximum: "Unlimited",
     backgroundColor: "#222E2E", // Darker teal
     features: {
-      DailyProfit: "2.3%",
-      WeeklyProfit: "6%",
-      MonthlyProfit: "24%",
+      DailyROI: "2.3%",
+      WeeklyROI: "6%",
       Withdrawal: "Weekly",
       ReferralBonus: "5%",
     },
@@ -632,11 +608,10 @@ export const GoldPlans = [
     Maximum: "Unlimited",
     backgroundColor: "#1D615F", // Lighter teal
     features: {
-      DailyProfit: "2.9%",
-      WeeklyProfit: "9%",
-      MonthlyProfit: "36%",
+      DailyROI: "2.9%",
+      WeeklyROI: "9%",
       Withdrawal: "Weekly",
-      ReferralBonus: "10%", 
+      ReferralBonus: "10%",
     },
   },
   {
@@ -646,9 +621,8 @@ export const GoldPlans = [
     Maximum: "Unlimited",
     backgroundColor: "#222E2E", // Darker teal
     features: {
-      DailyProfit: "5.3%",
-      WeeklyProfit: "12%",
-      MonthlyProfit: "48%",
+      DailyROI: "5.3%",
+      WeeklyROI: "12%",
       Withdrawal: "Weekly",
       ReferralBonus: "10%",
     },
@@ -660,70 +634,69 @@ export const GoldPlans = [
     Maximum: "Unlimited",
     backgroundColor: "#1D615F", // Lighter teal
     features: {
-      DailyProfit: "6%",
-      WeeklyProfit: "18%",
-      MonthlyProfit: "72%",
+      DailyROI: "6%",
+      WeeklyROI: "18%",
       Withdrawal: "Weekly",
       ReferralBonus: "15%",
     },
   },
 ];
 
-export const SilverPlans = [
-  {
-    id: "s1", // Changed from c1 to s1 for silver-specific IDs
-    title: "Starter Plan",
-    Minimum: "$1,000.00",
-    Maximum: "$20,000.00",
-    backgroundColor: "#222E2E", // Darker teal
-    features: {
-      DailyProfit: "2.9%",
-      WeeklyProfit: "7%",
-      MonthlyProfit: "30%",
-      ReferralBonus: "5%",
-      Duration: "7 Day(s)",
-    },
-  },
-  {
-    id: "s2", // Changed from c2 to s2
-    title: "Basic Plan",
-    Minimum: "$20,000.00",
-    Maximum: "$50,000.00",
-    backgroundColor: "#1D615F", // Lighter teal
-    features: {
-      DailyProfit: "4.8%",
-      WeeklyProfit: "14%",
-      MonthlyProfit: "60%",
-      ReferralBonus: "5%",
-      Duration: "21 Day(s)",
-    },
-  },
-  {
-    id: "s3", // Changed from c3 to s3
-    title: "Advanced Plan",
-    Minimum: "$50,000.00",
-    Maximum: "$100,000.00",
-    backgroundColor: "#222E2E", // Darker teal
-    features: {
-      DailyProfit: "5.3%",
-      WeeklyProfit: "21%",
-      MonthlyProfit: "90%",
-      ReferralBonus: "7%",
-      Duration: "31 Day(s)",
-    },
-  },
-  {
-    id: "s4", // Changed from c4 to s4
-    title: "Premium Plan",
-    Minimum: "$100,000.00", // Fixed extra space
-    Maximum: "$250,000.00",
-    backgroundColor: "#1D615F", // Lighter teal
-    features: {
-      DailyProfit: "7%",
-      WeeklyProfit: "49%",
-      MonthlyProfit: "210%",
-      ReferralBonus: "10%",
-      Duration: "61 Day(s)",
-    },
-  },
-];
+// export const SilverPlans = [
+//   {
+//     id: "s1", // Changed from c1 to s1 for silver-specific IDs
+//     title: "Starter Plan",
+//     Minimum: "$1,000.00",
+//     Maximum: "$20,000.00",
+//     backgroundColor: "#222E2E", // Darker teal
+//     features: {
+//       DailyProfit: "2.9%",
+//       WeeklyProfit: "7%",
+//       MonthlyProfit: "30%",
+//       ReferralBonus: "5%",
+//       Duration: "7 Day(s)",
+//     },
+//   },
+//   {
+//     id: "s2", // Changed from c2 to s2
+//     title: "Basic Plan",
+//     Minimum: "$20,000.00",
+//     Maximum: "$50,000.00",
+//     backgroundColor: "#1D615F", // Lighter teal
+//     features: {
+//       DailyProfit: "4.8%",
+//       WeeklyProfit: "14%",
+//       MonthlyProfit: "60%",
+//       ReferralBonus: "5%",
+//       Duration: "21 Day(s)",
+//     },
+//   },
+//   {
+//     id: "s3", // Changed from c3 to s3
+//     title: "Advanced Plan",
+//     Minimum: "$50,000.00",
+//     Maximum: "$100,000.00",
+//     backgroundColor: "#222E2E", // Darker teal
+//     features: {
+//       DailyProfit: "5.3%",
+//       WeeklyProfit: "21%",
+//       MonthlyProfit: "90%",
+//       ReferralBonus: "7%",
+//       Duration: "31 Day(s)",
+//     },
+//   },
+//   {
+//     id: "s4", // Changed from c4 to s4
+//     title: "Premium Plan",
+//     Minimum: "$100,000.00", // Fixed extra space
+//     Maximum: "$250,000.00",
+//     backgroundColor: "#1D615F", // Lighter teal
+//     features: {
+//       DailyProfit: "7%",
+//       WeeklyProfit: "49%",
+//       MonthlyProfit: "210%",
+//       ReferralBonus: "10%",
+//       Duration: "61 Day(s)",
+//     },
+//   },
+// ];

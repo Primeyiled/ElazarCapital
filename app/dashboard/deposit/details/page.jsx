@@ -17,9 +17,9 @@ import { useRouter } from "next/navigation";
 import Layout from "../../Layout";
 
 const WALLET_ADDRESSES = {
-  USDT: "0x6c311B7D17F5C39f71603ABaDA2971b6d6187Eee",
-  Bitcoin: "bc1qg2wd5q96xwelwdhs8zawpkddllc3avq67x69ce",
-  Ethereum: "0x6c311B7D17F5C39f71603ABaDA2971b6d6187Eee",
+  USDT: "TVxv3muGxHAWyLrRyJe1VSqQfFonqrLnPn",
+  Bitcoin: "bc1q0adas4hlgr3u8m6kpm5ksxn0n9txhf2h6afdna",
+  Ethereum: "0x944EbB7e7Adb197857A26a09302c49A99A3489d1",
 };
 
 const formatCurrency = (amount) => {
